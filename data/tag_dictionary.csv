@@ -1,0 +1,73 @@
+tag_type,tag,meaning,example
+Symbol,BTCUSDT,比特币 USDT 交易对,BTCUSDT
+Symbol,ETHUSDT,以太坊 USDT 交易对,ETHUSDT
+Symbol,SOLUSDT,Solana USDT 交易对,SOLUSDT
+Timeframe,1H,1 小时周期,1H
+Timeframe,1D,1 日周期,1D
+Timeframe,1D+30m,日线与30分钟多周期组合,1D+30m
+Timeframe,5m+1m,5分钟与1分钟执行组合,5m+1m
+Timeframe,30m,30 分钟周期,30m
+Timeframe,15m,15 分钟周期,15m
+Timeframe,5m,5 分钟周期,5m
+Direction,LONG,多头方向,LONG
+Direction,SHORT,空头方向,SHORT
+Signal,L-ZONE,多头背离观察区,L-ZONE
+Signal,S-ZONE,空头背离观察区,S-ZONE
+Signal,LONG,严格多头突破信号,LONG
+Signal,SHORT,严格空头跌破信号,SHORT
+Signal,PB-L,多头突破后的回踩确认,PB-L
+Signal,PB-S,空头跌破后的反抽确认,PB-S
+Signal,TC-L,多头趋势延续信号,TC-L
+Signal,TC-S,空头趋势延续信号,TC-S
+Signal,EXH-L,下跌衰竭提醒,EXH-L
+Signal,EXH-S,上涨衰竭提醒,EXH-S
+Signal,E-L,多头提前观察信号,E-L
+Signal,E-S,空头提前观察信号,E-S
+Signal,LATE-L,多头 Pivot 延迟补确认,LATE-L
+Signal,LATE-S,空头 Pivot 延迟补确认,LATE-S
+Signal,C-L,多头 Zone 确认提示,C-L
+Signal,C-S,空头 Zone 确认提示,C-S
+Signal,Context Shift,多周期背景从震荡或转弱切换为趋势状态的观察信号,Context Shift
+Pattern,Reversal,背离 Zone 到 LONG/SHORT 的反转链条,L-ZONE→LONG
+Pattern,Pullback,LONG/SHORT 后的 PB 确认链条,LONG→PB-L
+Pattern,TrendPullback,趋势背景中的回踩型信号组合,L-ZONE→C-L→TC-L
+Pattern,TrendContinuation,TC-L/TC-S 趋势延续线段,TC-L
+Pattern,Exhaustion,EXH-L/EXH-S 衰竭提醒线段,EXH-S
+Pattern,FailedBreakout,突破或跌破失败线段,E-L 后失败
+Pattern,TransitionToTrendDown,高周期或执行周期从转弱过渡为空头趋势背景,Context Shift→TC-S
+Pattern,TransitionToTrendUp,高周期或执行周期从转强过渡为多头趋势背景,Context Shift→TC-L
+MarketContext,TrendUp,上涨趋势背景,EMA20 在 EMA50 上方且 EMA50 上行
+MarketContext,TrendDown,下跌趋势背景,EMA20 在 EMA50 下方且 EMA50 下行
+MarketContext,TransitionDown,从震荡或上涨结构转向空头趋势的过渡背景,TransitionDown
+MarketContext,TransitionUp,从震荡或下跌结构转向多头趋势的过渡背景,TransitionUp
+MarketContext,Range,震荡区间背景,价格在区间内反复穿越 EMA
+MarketContext,Expansion,波动扩张背景,放量突破或大实体扩张
+MarketContext,Climax,高潮或衰竭背景,冲高/杀跌后出现 EXH 或背离
+MarketContext,Unknown,暂时无法判断行情背景,Unknown
+EMAContext,AboveEMA50,价格在 EMA50 上方,AboveEMA50
+EMAContext,BelowEMA50,价格在 EMA50 下方,BelowEMA50
+EMAContext,EMAFlat,EMA20/EMA50 走平或纠缠,EMAFlat
+EMAContext,EMACross,EMA20 与 EMA50 发生交叉或接近交叉,EMACross
+EMAContext,Unknown,暂时无法判断 EMA 背景,Unknown
+Result,Success,信号后按预期方向走出有效空间,Success
+Result,Fail,信号后快速反向或触发失效,Fail
+Result,Early,方向对但信号过早,Early
+Result,Late,方向对但信号过晚,Late
+Result,NoTrade,只观察不交易,NoTrade
+Result,Unknown,暂时无法判断结果,Unknown
+Rating,Normal Case,普通但值得记录的候选案例,Normal Case
+Rating,Good Case,质量较好的候选案例,Good Case
+Rating,Gold Case,最标准的黄金案例,Gold Case
+LifecycleStatus,Open,案例已入库，等待10根K复盘,Open
+LifecycleStatus,Review10,已记录10根K表现，等待20根K复盘,Review10
+LifecycleStatus,Review20,已记录20根K表现，等待50根K复盘,Review20
+LifecycleStatus,Closed,案例已完成50根K复盘或手动关闭,Closed
+CaseState,SignalCaptured,信号已捕获，等待Outcome10,SignalCaptured
+CaseState,Outcome10Recorded,已记录Outcome10，等待Outcome20,Outcome10Recorded
+CaseState,Outcome20Recorded,已记录Outcome20，等待Outcome50,Outcome20Recorded
+CaseState,Outcome50Recorded,已记录Outcome50，案例可关闭,Outcome50Recorded
+CaseState,Closed,案例已关闭，不再参与后续等待流程,Closed
+NextExpectedState,Outcome10,下一步记录信号后10根K表现,Outcome10
+NextExpectedState,Outcome20,下一步记录信号后20根K表现,Outcome20
+NextExpectedState,Outcome50,下一步记录信号后50根K表现,Outcome50
+NextExpectedState,None,没有下一步复盘,None
