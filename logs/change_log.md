@@ -147,3 +147,89 @@
 - 改动：记录关键价位 `64,300-64,500`、`64,150-64,250`、`64,000-64,100`、`63,800-63,950`、`63,500-63,650`、`63,200-63,400`。
 - 说明：`CASE-0009` 继续保持 `Review20 / Outcome50`，`result` 保持 `Unknown`；当前属于多头突破延续，但 1m 已急拉，不追多，等待 `64,000` 或 `63,850` 回踩确认。
 - 保护：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-12 BTC CASE-0009 EXH-L Bounce / Weak Recovery
+
+- 原因：根据 2026-07-12 12:20 左右 BTCUSDT 截图更新既有 `CASE-0009`，不新建独立 Case。
+- 改动：归档 BTC 截图到 `screenshots/BTCUSDT/2026-07-12/2026-07-12_BTCUSDT_MultiTF_EXH-L_TC-L_SZONE_WeakRecovery_followup.png`。
+- 改动：在 `CASE-0009` 追加 follow-up：`15m EXH-L Bounce→5m TC-L Weak Recovery→1m S-ZONE Pullback`，记录 `15m 下跌后出现 EXH-L HMR95→1m/5m 反弹修复→5m Last=TC-L→1m 反弹到 S-ZONE HMR100→从压力区回落`。
+- 改动：记录关键价位 `64,220-64,300`、`64,150-64,220`、`64,080-64,120`、`63,950-64,000`、`63,800-63,900`、`63,650-63,750`。
+- 说明：`CASE-0009` 继续保持 `Review20 / Outcome50`，`result` 保持 `Unknown`；当前是 15m 下跌后的弱修复，重点观察 `64,000` 是否守住以及 `64,150-64,220` 反抽是否失败。
+- 保护：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-12 BTC CASE-0009 TC-L Recovery / 64k Retest
+
+- 原因：根据 2026-07-12 19:36 左右 BTCUSDT 截图更新既有 `CASE-0009`，不新建独立 Case。
+- 改动：归档 BTC 截图到 `screenshots/BTCUSDT/2026-07-12/2026-07-12_BTCUSDT_MultiTF_EXH-L_TC-L_64k_Retest_followup.png`。
+- 改动：在 `CASE-0009` 追加 follow-up：`15m EXH-L Bounce→1m TC-L Recovery→64k Retest`，记录 `15m EXH-L HMR95→1m L-ZONE/C-L 止跌→1m 多次 TC-L 反弹→5m 回到均线组→重新测试 64,000`。
+- 改动：记录关键价位 `64,150-64,220`、`64,000-64,080`、`63,900-63,950`、`63,750-63,850`、`63,650-63,700`、`64,300-64,500`。
+- 说明：`CASE-0009` 继续保持 `Review20 / Outcome50`，`result` 保持 `Unknown`；5m 仍为 `FLAT`，不追多，观察 `64,000` 是否站稳，或在站不上且 1m 转 `TC-S` 时按反抽失败处理。
+- 保护：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-12 BTC 64k Retest Conflict Watchlist
+
+- 原因：根据 2026-07-12 20:24（UTC+8）BTCUSDT 15m / 5m / 1m 状态记录周期冲突；用户明确标记为 `Watchlist only`。
+- 改动：从网页存档附带资源中提取原始 PNG，归档到 `screenshots/BTCUSDT/2026-07-12/2026-07-12_BTCUSDT_MultiTF_64k_Retest_Conflict_watchlist.png`。
+- 改动：新增 `research/observations/2026-07-12_BTC_MultiTF_64k_Retest_watchlist.md`，记录 15m `FLAT`、5m `UP / TC-L`、1m `UP / S-ZONE / C-S` 的周期冲突。
+- 改动：记录压力 `64,110-64,170`，支撑 `64,000-63,980` 与 `63,940-63,900`，并将回测 `64,000-63,980` 后的 10 根 K 线表现设为下一观察节点。
+- 说明：本条不进入 `data/case_database.csv`，不新建 Case，不更新 CASE-0009 的正式 Outcome。
+- 保护：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-13 SKYHYNIX CASE-0014 Crash Extension / Panel Conflict
+
+- 原因：根据 2026-07-13 11:09-11:10（UTC+8）SKYHYNIXUSDT 多周期截图，归档 HTF 盘整破位、瀑布下跌、延伸阶段 `TC-S` 与 `A-L HMR95/100` 面板冲突。
+- 改动：新增 `CASE-0014`，分类为 `HTF Breakdown / Crash Extension / Panel Signal Conflict`，状态为 `SignalCaptured / Open / Outcome10`，评级为 Gold Case candidate。
+- 改动：归档两张截图到 `screenshots/SKYHYNIXUSDT/2026-07-13/`。
+- 改动：新增 `research/findings/2026-07-13_SKYHYNIX_A-L_Last_TC-S_Extension_audit.md`，完成 `A-L` 语义、HUD `Last` 覆盖、HTF 反趋势过滤、显示开关与 `TC-S` 阶段分类审计。
+- 说明：`A-L` 是 HTF Zone 观察标签，不是 `LONG`；当前 HTF 模式不应用 `cleanBearCtx`，HUD `Last` 也不区分趋势信号与反趋势警告。
+- 说明：`EXTENDED / CRASH / NO CHASE`、HTF 趋势罚分和 TC Early/Mature/Extended 被记录为 DVCA 2.0 候选设计，未冒充为 v1.5.1 已实现逻辑。
+- 保护：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-13 BTC CASE-0013 Failed Breakout / Bull Trap Outcome50
+
+- 原因：根据 2026-07-12 20:24 初始截图、2026-07-12 22:54 突破跟踪、2026-07-13 10:01 Outcome50 截图，将原 BTC 64k Retest Conflict watchlist 升级为正式 Good Case。
+- 改动：新增 `cases/failed_signals/CASE-0013_BTCUSDT_MultiTF_FailedBreakout_BullTrap.md`，分类为 `FailedBreakout / Bull Trap`。
+- 改动：归档 Breakout 截图到 `screenshots/BTCUSDT/2026-07-12/2026-07-12_BTCUSDT_MultiTF_64150_Breakout_Outcome20.png`，归档 Outcome50 截图到 `screenshots/BTCUSDT/2026-07-13/2026-07-13_BTCUSDT_MultiTF_FailedBreakout_BullTrap_Outcome50.png`。
+- 改动：在 `data/case_database.csv` 新增 `CASE-0013`，`result=Fail`，`state=Outcome50Recorded`，`lifecycle_status=Closed`。
+- 改动：更新 `research/observations/2026-07-12_BTC_MultiTF_64k_Retest_watchlist.md`，补充 Outcome50 Upgrade 指向 `CASE-0013`。
+- 结论：向上突破最终确认失败，形成明确 `Failed Breakout / Bull Trap`；后续执行不追空，等待 `63,500-63,635` 或 `63,690-63,800` 反抽失败确认。
+- 保护：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-13 Cross-Market Follow-up：SKY Outcome20 / BTC Outcome50 Extension
+
+- 原因：根据 2026-07-13 17:18（UTC+8）SKYHYNIXUSDT 与 BTCUSDT 跨市场截图，验证 Pattern/HMR 高分与实际执行质量必须分开评估。
+- 改动：`CASE-0014` 更新为 `Outcome20Recorded / Review20 / Outcome50`，记录跌至约 1240 后反弹至约 1282，但15m尚未反转。
+- 改动：`CASE-0013` 保持 `Fail / Outcome50Recorded / Closed`，追加跌破 63000 并在 62600-62700 附近暂稳的 Outcome50 延伸证据。
+- 改动：新增 `research/findings/2026-07-13_Cross_Market_Pattern_vs_Execution_Quality.md`，归档 v1.5.5 候选字段 `Pattern Score`、`Context Alignment`、`Location Score`、`Execution Score`、`Extension Status`、`No-Chase Flag`。
+- 边界：本次只更新案例、截图、研究文档与数据库；不修改 Pine、Signal Manual 或 Line Patterns。
+
+## 2026-07-14 BTC Counter-Trend TC-L / HTF Conflict
+
+- 原因：归档 BTCUSDT.P 在 1H `DN / A-S HMR100`、30m `FLAT / A-L HMR100`、15m `UP / TC-L` 之间的多周期冲突，验证 15m 反弹是否能升级为确认反转。
+- 编号：用户请求 `CASE-0010`，但该编号已被 2026-07-08 BTC Context Shift 案例占用；为避免覆盖，本次分配 `CASE-0015`。
+- 改动：新增 `CASE-0015`，分类为 `CounterTrendReversalAttempt`，状态为 `SignalCaptured / Open / Outcome10`，执行状态为 `NoTrade_WaitConfirmation`。
+- 改动：归档 1m / 5m / 15m / 30m / 1H 三张截图到 `screenshots/BTCUSDT/2026-07-14/`。
+- 改动：新增 `research/questions/2026-07-14_BTC_15m_TC-L_under_HTF_resistance.md`，并关联 HTF 执行信号时效性研究。
+- 评级：Research A- / Trade C；ImprovementTag=`CounterTrendSignalDowngrade`。
+- 边界：本次不修改 Pine、Signal Manual 或 Line Patterns。
+
+## 2026-07-14 BTC CASE-0015 Outcome10 Recovery Follow-up
+
+- 原因：根据 2026-07-14 20:27（UTC+8）BTCUSDT.P 多周期截图，记录 15m / 5m / 1m 重新同步 `UP + TC-L` 后的 Outcome10。
+- 改动：`CASE-0015` 从 `SignalCaptured / Open / Outcome10` 推进为 `Outcome10Recorded / Review10 / Outcome20`。
+- 改动：归档截图 `screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_TC-L_Outcome10_2027.png`。
+- Finding：`S-ZONE` 对局部过度延伸给出警告，但基于该警告的趋势空已被支撑与结构收复否定；收复后的 `TC-L` 是更可靠的延续确认。
+- 执行：不在约 63010 追多，优先等待 62920-62850 回测；持续运行在 62800 下方为失效条件。
+- 评级：Good Case candidate，Result 保持 Unknown，继续等待 Outcome20。
+- 边界：本次不修改 Pine、Signal Manual 或 Line Patterns。
+
+## 2026-07-14 BTC CASE-0015 Outcome20 High-Level Extension
+
+- 原因：根据 2026-07-14 21:00（UTC+8）BTCUSDT.P 15m / 5m / 1m 截图，记录突破 63000 / 63250、放量加速、63500 上方接受与 63800 测试后的动能减速。
+- 并行更新处理：保留已存在的 20:48 Outcome20 / HTF Breakout Study，本次作为同一 Outcome20 的 High-Level Extension，不重复新建案例。
+- 改动：`CASE-0015` 保持 `Outcome20Recorded / Review20 / Unknown`，下一步统一为 `Outcome50PendingHTFConfirmation`。
+- 改动：归档 `screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`。
+- 改动：将 `CASE-0015` 正式归入 `gold_cases/BTC/TC/`，并更新 Signal Atlas 案例映射。
+- 执行：已有多单管理利润；不在 63800-64000 追多；未跌破 63250 并完成 bearish retest 前不做空。
+- 证据边界：21:00 截图未直接展示 1H，因此 HTF 状态保持待收盘确认，不提前判定。
+- 边界：本次不修改 Pine、Signal Manual 或 Line Patterns。
