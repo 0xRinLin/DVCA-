@@ -1,0 +1,944 @@
+//@version=5
+indicator("DVCA v1.6.6 Visible Adaptive", overlay=true, max_bars_back=2000, max_labels_count=160, max_lines_count=100)
+plot(na, title="DVCA 1.6.6 Anchor")
+
+//======================================
+// 1. Inputs
+//======================================
+
+grpMode = "00 Mode"
+signalMode = input.string("Auto", "Signal Mode", options=["Auto", "LTF Execution", "HTF Context"], group=grpMode)
+autoHTFSeconds = input.int(1800, "Auto HTF from seconds", minval=60, maxval=86400, group=grpMode)
+ltfConfirmSeconds = input.int(900, "LTF-C from seconds", minval=60, maxval=86400, group=grpMode)
+
+grpDiv = "01 Divergence Zone"
+pivotLeft = input.int(3, "LTF Pivot Left", minval=1, maxval=20, group=grpDiv)
+pivotRight = input.int(3, "LTF Pivot Right", minval=1, maxval=20, group=grpDiv)
+confirmPivotAdd = input.int(1, "LTF-C Pivot Add", minval=0, maxval=5, group=grpDiv)
+htfPivotLeft = input.int(3, "HTF Pivot Left", minval=2, maxval=20, group=grpDiv)
+htfPivotRight = input.int(3, "HTF Pivot Right", minval=2, maxval=20, group=grpDiv)
+minBars = input.int(8, "Min bars between pivots", minval=3, maxval=120, group=grpDiv)
+maxBars = input.int(160, "Max bars between pivots", minval=20, maxval=300, group=grpDiv)
+priceToleranceATR = input.float(0.45, "Price tolerance ATR", minval=0.0, maxval=3.0, step=0.05, group=grpDiv)
+minDivCount = input.int(2, "Min divergence count", minval=1, maxval=3, group=grpDiv)
+
+grpScore = "02 Score / Noise"
+zoneMinScore = input.int(82, "Zone min score", minval=50, maxval=100, group=grpScore)
+confirmScoreAdd = input.int(8, "LTF-C score add", minval=0, maxval=25, group=grpScore)
+htfMinScore = input.int(78, "HTF min score", minval=70, maxval=100, group=grpScore)
+majorScore = input.int(92, "Major score", minval=80, maxval=100, group=grpScore)
+zoneCooldownBars = input.int(34, "Zone cooldown bars", minval=0, maxval=300, group=grpScore)
+htfZoneCooldownBars = input.int(20, "HTF zone cooldown bars", minval=0, maxval=300, group=grpScore)
+sameZoneLockBars = input.int(50, "Same-zone lock bars", minval=5, maxval=300, group=grpScore)
+sameZoneATR = input.float(1.8, "Same-zone ATR distance", minval=0.2, maxval=5.0, step=0.1, group=grpScore)
+
+grpVPA = "03 VPA"
+useVPA = input.bool(true, "Use VPA filter", group=grpVPA)
+requireVPAForZone = input.bool(true, "Zone requires strong VPA", group=grpVPA)
+htfRequireVPAForZone = input.bool(false, "HTF zone requires strong VPA", group=grpVPA)
+volMaLen = input.int(20, "Volume MA length", minval=5, group=grpVPA)
+volLowRatio = input.float(0.80, "Low-volume ratio", minval=0.1, maxval=1.5, step=0.05, group=grpVPA)
+volHighMult = input.float(1.30, "High-volume multiple", minval=1.0, maxval=5.0, step=0.1, group=grpVPA)
+effortMult = input.float(1.50, "Effort/no-result multiple", minval=1.0, maxval=5.0, step=0.1, group=grpVPA)
+wickMin = input.float(0.35, "Min wick ratio", minval=0.1, maxval=0.8, step=0.05, group=grpVPA)
+
+grpFlow = "04 Irregular Flow"
+useFlow = input.bool(true, "Use SC/BC/TEST/WF/BO internally", group=grpFlow)
+scVolMult = input.float(1.8, "SC/BC volume multiple", minval=1.0, maxval=6.0, step=0.1, group=grpFlow)
+scRangeATR = input.float(1.2, "SC/BC range ATR", minval=0.3, maxval=6.0, step=0.1, group=grpFlow)
+scBcCooldownBars = input.int(18, "SC/BC internal cooldown", minval=1, maxval=100, group=grpFlow)
+testMinBars = input.int(4, "TEST min bars", minval=1, maxval=50, group=grpFlow)
+testMaxBars = input.int(80, "TEST max bars", minval=10, maxval=300, group=grpFlow)
+testNearATR = input.float(1.25, "TEST near extreme ATR", minval=0.2, maxval=5.0, step=0.05, group=grpFlow)
+testVolRatio = input.float(0.78, "TEST volume ratio", minval=0.1, maxval=1.2, step=0.05, group=grpFlow)
+reclaimMaxBars = input.int(28, "RC max bars", minval=3, maxval=120, group=grpFlow)
+flowCooldownBars = input.int(34, "RC cooldown bars", minval=5, maxval=200, group=grpFlow)
+
+grpWF = "05 Internal WF / BO"
+useWaterfall = input.bool(true, "Merge WF/BO into RC", group=grpWF)
+waterfallLookback = input.int(18, "Large move lookback", minval=6, maxval=100, group=grpWF)
+waterfallAtrMult = input.float(3.0, "Large move ATR multiple", minval=1.0, maxval=10.0, step=0.1, group=grpWF)
+waterfallHistBars = input.int(3, "MACD-H improvement bars", minval=2, maxval=6, group=grpWF)
+waterfallRsiLookback = input.int(10, "RSI improvement lookback", minval=3, maxval=40, group=grpWF)
+waterfallMinScore = input.int(80, "WF/BO internal min score", minval=60, maxval=100, group=grpWF)
+waterfallCooldownBars = input.int(50, "WF/BO internal cooldown", minval=5, maxval=200, group=grpWF)
+
+grpStructure = "06 Structure / Entry"
+donLen = input.int(50, "Donchian length", minval=10, maxval=300, group=grpStructure)
+kcLen = input.int(20, "Keltner length", minval=5, maxval=100, group=grpStructure)
+kcMult = input.float(1.5, "Keltner ATR multiple", minval=0.5, maxval=5.0, step=0.1, group=grpStructure)
+srNearATR = input.float(0.70, "Near key level ATR", minval=0.1, maxval=3.0, step=0.1, group=grpStructure)
+requireKeyLevel = input.bool(true, "Zone requires key level", group=grpStructure)
+htfRequireKeyLevel = input.bool(true, "HTF zone requires key level", group=grpStructure)
+allowNewExtremeAsKey = input.bool(true, "New extreme can be key", group=grpStructure)
+breakLookback = input.int(10, "Fast break lookback", minval=3, maxval=60, group=grpStructure)
+breakoutBufferATR = input.float(0.06, "Breakout buffer ATR", minval=0.0, maxval=1.0, step=0.01, group=grpStructure)
+maxSetupBars = input.int(70, "Max setup wait bars", minval=5, maxval=300, group=grpStructure)
+
+grpEntry = "07 Entry Quality"
+enableBEntry = input.bool(true, "Allow normal LONG/SHORT", group=grpEntry)
+requireBreakoutVolume = input.bool(true, "Strict entry requires volume", group=grpEntry)
+breakoutVolMult = input.float(0.95, "Strict volume multiple", minval=0.1, maxval=3.0, step=0.05, group=grpEntry)
+bBreakoutVolMult = input.float(0.70, "Normal volume multiple", minval=0.1, maxval=3.0, step=0.05, group=grpEntry)
+requireEMARecover = input.bool(true, "Strict entry requires EMA20 reclaim/break", group=grpEntry)
+requireMomentum = input.bool(true, "Strict entry requires MACD-H and RSI", group=grpEntry)
+
+grpPB = "08 Pullback"
+minRetestBars = input.int(3, "Min bars after entry", minval=1, maxval=20, group=grpPB)
+maxRetestBars = input.int(40, "Max bars after entry", minval=5, maxval=200, group=grpPB)
+retestToleranceATR = input.float(0.35, "Retest tolerance ATR", minval=0.05, maxval=2.0, step=0.05, group=grpPB)
+retestFailATR = input.float(0.45, "Retest fail ATR", minval=0.05, maxval=2.0, step=0.05, group=grpPB)
+pbMinPullbackATR = input.float(0.25, "PB min pullback ATR", minval=0.0, maxval=3.0, step=0.05, group=grpPB)
+allowEmaPullback = input.bool(true, "Allow EMA20 shallow pullback", group=grpPB)
+pbEmaToleranceATR = input.float(0.25, "EMA pullback tolerance ATR", minval=0.05, maxval=2.0, step=0.05, group=grpPB)
+pbMomentumConfirm = input.bool(true, "PB requires momentum", group=grpPB)
+
+grpExit = "09 Exit"
+useExitSignals = input.bool(true, "Use XL/XS exit", group=grpExit)
+exitOnOppositeSignal = input.bool(true, "Exit on opposite signal", group=grpExit)
+exitOnEMAWeak = input.bool(true, "Exit on EMA20 + momentum weakness", group=grpExit)
+exitOnStructureBreak = input.bool(true, "Exit on short structure break", group=grpExit)
+exitBreakLookback = input.int(8, "Exit structure lookback", minval=3, maxval=50, group=grpExit)
+exitCooldownBars = input.int(5, "Exit cooldown bars", minval=1, maxval=50, group=grpExit)
+
+grpRisk = "10 Risk"
+atrLen = input.int(14, "ATR length", minval=1, group=grpRisk)
+atrStopBuffer = input.float(0.7, "ATR stop buffer", minval=0.2, maxval=2.0, step=0.1, group=grpRisk)
+maxRiskATR = input.float(3.0, "Max risk ATR", minval=0.5, maxval=8.0, step=0.1, group=grpRisk)
+useRRFilter = input.bool(false, "Use RR filter", group=grpRisk)
+minRR = input.float(1.3, "Min RR", minval=0.5, maxval=5.0, step=0.1, group=grpRisk)
+
+grpTrend = "11 Trend"
+emaFastLen = input.int(20, "Fast EMA", minval=1, group=grpTrend)
+emaSlowLen = input.int(50, "Slow EMA", minval=1, group=grpTrend)
+adxLen = input.int(14, "ADX length", minval=1, group=grpTrend)
+adxSmooth = input.int(14, "ADX smoothing", minval=1, group=grpTrend)
+adxStrong = input.float(30.0, "Strong trend ADX", minval=5, maxval=60, step=1, group=grpTrend)
+trendSlopeLen = input.int(5, "Trend slope bars", minval=2, maxval=30, group=grpTrend)
+useTrendAwareFilter = input.bool(true, "Use trend-aware zone filter", group=grpTrend)
+counterTrendNeedsMajor = input.bool(true, "Counter-trend zone needs major score", group=grpTrend)
+
+grpDisplay = "12 Display"
+displayProfile = input.string("Adaptive Visible", "Display Profile", options=["Adaptive Visible", "Manual"], group=grpDisplay)
+showZoneSignal = input.bool(true, "Show L-ZONE / S-ZONE", group=grpDisplay)
+showRCSignal = input.bool(true, "Show RC-L / RC-S", group=grpDisplay)
+showEntrySignal = input.bool(true, "Show LONG / SHORT", group=grpDisplay)
+showPullbackSignal = input.bool(true, "Show PB-L / PB-S", group=grpDisplay)
+showExitSignal = input.bool(true, "Show XL / XS", group=grpDisplay)
+showVisualContext = input.bool(true, "Adaptive: show visual context", group=grpDisplay)
+showLTFSetupSignal = input.bool(true, "Adaptive: show LTF RC/Zone", group=grpDisplay)
+showSoftSetupSignal = input.bool(true, "Adaptive: show LTF setup hints", group=grpDisplay)
+showHTFBiasSignal = input.bool(true, "Adaptive: show HTF bias", group=grpDisplay)
+showHTFKeyLevels = input.bool(true, "Adaptive: show HTF support/resistance", group=grpDisplay)
+softSignalCooldownBars = input.int(24, "Adaptive: setup hint cooldown", minval=5, maxval=200, group=grpDisplay)
+showStructureLine = input.bool(true, "Show structure trigger lines", group=grpDisplay)
+showDivLine = input.bool(true, "Show divergence lines", group=grpDisplay)
+showEMA = input.bool(false, "Show EMA", group=grpDisplay)
+showKeltner = input.bool(false, "Show Keltner", group=grpDisplay)
+hudMode = input.string("Mini", "HUD Mode", options=["Off", "Mini", "Full"], group=grpDisplay)
+maxKeepLines = input.int(50, "Max kept lines", minval=10, maxval=120, group=grpDisplay)
+
+//======================================
+// 2. Core calculation
+//======================================
+
+tfSec = timeframe.in_seconds(timeframe.period)
+isHTFMode = signalMode == "HTF Context" or (signalMode == "Auto" and tfSec >= autoHTFSeconds)
+isLTFMode = not isHTFMode
+isLTFConfirm = isLTFMode and tfSec >= ltfConfirmSeconds
+
+pL = isHTFMode ? htfPivotLeft : isLTFConfirm ? pivotLeft + confirmPivotAdd : pivotLeft
+pR = isHTFMode ? htfPivotRight : isLTFConfirm ? pivotRight + confirmPivotAdd : pivotRight
+effMinScore = isHTFMode ? htfMinScore : zoneMinScore + (isLTFConfirm ? confirmScoreAdd : 0)
+effCooldown = isHTFMode ? htfZoneCooldownBars : zoneCooldownBars + (isLTFConfirm ? 20 : 0)
+effSameZoneLockBars = isHTFMode ? math.max(10, math.round(sameZoneLockBars * 0.5)) : sameZoneLockBars
+effSameZoneATR = isHTFMode ? sameZoneATR * 1.25 : sameZoneATR
+effRequireVPAForZone = isHTFMode ? htfRequireVPAForZone : requireVPAForZone
+effRequireKeyLevel = isHTFMode ? htfRequireKeyLevel : requireKeyLevel
+
+[macdLine, macdSignalLine, macdHist] = ta.macd(close, 12, 26, 9)
+rsi = ta.rsi(close, 14)
+atr = ta.atr(atrLen)
+emaFast = ta.ema(close, emaFastLen)
+emaSlow = ta.ema(close, emaSlowLen)
+[plusDI, minusDI, adx] = ta.dmi(adxLen, adxSmooth)
+volMa = ta.sma(volume, volMaLen)
+
+donHigh = ta.highest(high, donLen)
+donLow = ta.lowest(low, donLen)
+kcBasis = ta.ema(close, kcLen)
+kcRange = ta.ema(ta.tr(true), kcLen)
+kcUpper = kcBasis + kcRange * kcMult
+kcLower = kcBasis - kcRange * kcMult
+
+emaSlowUp = not na(emaSlow[trendSlopeLen]) and emaSlow > emaSlow[trendSlopeLen]
+emaSlowDown = not na(emaSlow[trendSlopeLen]) and emaSlow < emaSlow[trendSlopeLen]
+ctxUp = emaFast > emaSlow and close > emaSlow and emaSlowUp
+ctxDown = emaFast < emaSlow and close < emaSlow and emaSlowDown
+strongUp = close > emaSlow and emaFast > emaSlow and adx > adxStrong
+strongDown = close < emaSlow and emaFast < emaSlow and adx > adxStrong
+
+recentHigh = ta.highest(high[1], breakLookback)
+recentLow = ta.lowest(low[1], breakLookback)
+wfHigh = ta.highest(high, waterfallLookback)
+wfLow = ta.lowest(low, waterfallLookback)
+wfRsiLow = ta.lowest(rsi, waterfallRsiLookback)
+wfRsiHigh = ta.highest(rsi, waterfallRsiLookback)
+
+barRange = high - low
+closePos = barRange > syminfo.mintick ? (close - low) / barRange : 0.5
+
+//======================================
+// 3. Helpers
+//======================================
+
+f_price(_v) =>
+    na(_v) ? "-" : str.tostring(_v, format.mintick)
+
+f_code(_h, _m, _r) =>
+    (_h ? "H" : "") + (_m ? "M" : "") + (_r ? "R" : "")
+
+f_histRiseNeg(_bars) =>
+    bool ok = macdHist < 0
+    for i = 0 to 5
+        if i < _bars - 1
+            ok := ok and macdHist[i] > macdHist[i + 1]
+    ok
+
+f_histFallPos(_bars) =>
+    bool ok = macdHist > 0
+    for i = 0 to 5
+        if i < _bars - 1
+            ok := ok and macdHist[i] < macdHist[i + 1]
+    ok
+
+//======================================
+// 4. Persistent state
+//======================================
+
+var float lastLowPrice = na
+var int lastLowIndex = na
+var float lastLowHist = na
+var float lastLowMacd = na
+var float lastLowRsi = na
+var float lastLowVol = na
+
+var float lastHighPrice = na
+var int lastHighIndex = na
+var float lastHighHist = na
+var float lastHighMacd = na
+var float lastHighRsi = na
+var float lastHighVol = na
+
+var bool bullActive = false
+var bool bearActive = false
+var float bullTrigger = na
+var float bearTrigger = na
+var float bullLow = na
+var float bearHigh = na
+var int bullIndex = na
+var int bearIndex = na
+var int bullScore = na
+var int bearScore = na
+var string bullInfo = ""
+var string bearInfo = ""
+
+var bool waitBullPB = false
+var bool waitBearPB = false
+var float bullRetestLevel = na
+var float bearRetestLevel = na
+var int bullBreakIndex = na
+var int bearBreakIndex = na
+var float bullBreakLow = na
+var float bearBreakHigh = na
+var float bullPostBreakHigh = na
+var float bearPostBreakLow = na
+
+var bool inLong = false
+var bool inShort = false
+var float longEntry = na
+var float shortEntry = na
+var float longStop = na
+var float shortStop = na
+var int longEntryIndex = na
+var int shortEntryIndex = na
+
+var int lastBullZoneIndex = na
+var int lastBearZoneIndex = na
+var float lastBullZonePrice = na
+var float lastBearZonePrice = na
+var int lastFlowBullIndex = na
+var int lastFlowBearIndex = na
+var int lastWaterfallBullIndex = na
+var int lastWaterfallBearIndex = na
+var int lastScSignalIndex = na
+var int lastBcSignalIndex = na
+var int lastExitLongIndex = na
+var int lastExitShortIndex = na
+
+var float scLow = na
+var float scHigh = na
+var float scVol = na
+var float scHist = na
+var float scMacd = na
+var float scRsi = na
+var int scIndex = na
+
+var float bcHigh = na
+var float bcLow = na
+var float bcVol = na
+var float bcHist = na
+var float bcMacd = na
+var float bcRsi = na
+var int bcIndex = na
+
+var line bullLine = na
+var line bearLine = na
+var array<line> managedLines = array.new_line()
+
+var string lastSignal = ""
+var string lastReject = ""
+var string flowReason = "-"
+var string entryReason = "-"
+var string setupReason = "-"
+
+//======================================
+// 5. Per-bar signals and snapshots
+//======================================
+
+zoneLongSignal = false
+zoneShortSignal = false
+rcLongSignal = false
+rcShortSignal = false
+longSignal = false
+shortSignal = false
+pbLongSignal = false
+pbShortSignal = false
+exitLongSignal = false
+exitShortSignal = false
+
+prevInLong = inLong
+prevInShort = inShort
+prevLongEntryIndex = longEntryIndex
+prevShortEntryIndex = shortEntryIndex
+prevLongStop = longStop
+prevShortStop = shortStop
+
+//======================================
+// 6. Internal SC / BC baseline
+//======================================
+
+scCandidate = barstate.isconfirmed and useFlow and not na(volMa) and volume >= volMa * scVolMult and barRange >= atr * scRangeATR and (close < open or closePos <= 0.35)
+bcCandidate = barstate.isconfirmed and useFlow and not na(volMa) and volume >= volMa * scVolMult and barRange >= atr * scRangeATR and (close > open or closePos >= 0.65)
+
+scReplace = scCandidate and not na(scIndex) and (volume > scVol * 1.15 or low < scLow - atr * 0.25)
+bcReplace = bcCandidate and not na(bcIndex) and (volume > bcVol * 1.15 or high > bcHigh + atr * 0.25)
+scCanUpdate = scCandidate and (na(lastScSignalIndex) or bar_index - lastScSignalIndex > scBcCooldownBars or scReplace)
+bcCanUpdate = bcCandidate and (na(lastBcSignalIndex) or bar_index - lastBcSignalIndex > scBcCooldownBars or bcReplace)
+
+if scCanUpdate
+    scLow := low
+    scHigh := high
+    scVol := volume
+    scHist := macdHist
+    scMacd := macdLine
+    scRsi := rsi
+    scIndex := bar_index
+    lastScSignalIndex := bar_index
+
+if bcCanUpdate
+    bcHigh := high
+    bcLow := low
+    bcVol := volume
+    bcHist := macdHist
+    bcMacd := macdLine
+    bcRsi := rsi
+    bcIndex := bar_index
+    lastBcSignalIndex := bar_index
+
+//======================================
+// 7. Irregular confirmation as RC
+//======================================
+
+scBarsNow = not na(scIndex) ? bar_index - scIndex : na
+bcBarsNow = not na(bcIndex) ? bar_index - bcIndex : na
+
+flowLongCooldownOk = na(lastFlowBullIndex) or bar_index - lastFlowBullIndex > flowCooldownBars
+flowShortCooldownOk = na(lastFlowBearIndex) or bar_index - lastFlowBearIndex > flowCooldownBars
+wfLongCooldownOk = na(lastWaterfallBullIndex) or bar_index - lastWaterfallBullIndex > waterfallCooldownBars
+wfShortCooldownOk = na(lastWaterfallBearIndex) or bar_index - lastWaterfallBearIndex > waterfallCooldownBars
+
+reclaimLongOk = isLTFMode and useFlow and not na(scIndex) and scBarsNow >= 1 and scBarsNow <= reclaimMaxBars and (close > scHigh or close > emaFast or close > recentHigh) and macdHist > macdHist[1] and rsi > rsi[1] and (macdHist > scHist or rsi > scRsi)
+reclaimShortOk = isLTFMode and useFlow and not na(bcIndex) and bcBarsNow >= 1 and bcBarsNow <= reclaimMaxBars and (close < bcLow or close < emaFast or close < recentLow) and macdHist < macdHist[1] and rsi < rsi[1] and (macdHist < bcHist or rsi < bcRsi)
+
+wfDropOk = useWaterfall and isLTFMode and wfHigh - low >= atr * waterfallAtrMult
+wfOk = wfDropOk and f_histRiseNeg(waterfallHistBars) and (rsi > rsi[1] or rsi >= wfRsiLow[1] + 3) and (low <= wfLow + atr or low <= kcLower + atr or close > open)
+boRiseOk = useWaterfall and isLTFMode and high - wfLow >= atr * waterfallAtrMult
+boOk = boRiseOk and f_histFallPos(waterfallHistBars) and (rsi < rsi[1] or rsi <= wfRsiHigh[1] - 3) and (high >= wfHigh - atr or high >= kcUpper - atr or close < open)
+
+if barstate.isconfirmed and reclaimLongOk and flowLongCooldownOk
+    rcLongSignal := true
+    flowReason := "RC"
+    setupReason := "RC"
+    lastFlowBullIndex := bar_index
+    bullActive := true
+    bearActive := false
+    bullLow := scLow
+    bullIndex := bar_index
+    bullScore := majorScore
+    bullInfo := "RC"
+    bullTrigger := high
+    waitBearPB := false
+    lastSignal := "RC-L"
+
+if barstate.isconfirmed and reclaimShortOk and flowShortCooldownOk
+    rcShortSignal := true
+    flowReason := "RC"
+    setupReason := "RC"
+    lastFlowBearIndex := bar_index
+    bearActive := true
+    bullActive := false
+    bearHigh := bcHigh
+    bearIndex := bar_index
+    bearScore := majorScore
+    bearInfo := "RC"
+    bearTrigger := low
+    waitBullPB := false
+    lastSignal := "RC-S"
+
+if barstate.isconfirmed and wfOk and wfLongCooldownOk and flowLongCooldownOk
+    rcLongSignal := true
+    flowReason := "WF"
+    setupReason := "WF"
+    lastWaterfallBullIndex := bar_index
+    lastFlowBullIndex := bar_index
+    bullActive := true
+    bearActive := false
+    bullLow := low
+    bullIndex := bar_index
+    bullScore := majorScore
+    bullInfo := "WF"
+    bullTrigger := high
+    waitBearPB := false
+    lastSignal := "RC-L"
+
+if barstate.isconfirmed and boOk and wfShortCooldownOk and flowShortCooldownOk
+    rcShortSignal := true
+    flowReason := "BO"
+    setupReason := "BO"
+    lastWaterfallBearIndex := bar_index
+    lastFlowBearIndex := bar_index
+    bearActive := true
+    bullActive := false
+    bearHigh := high
+    bearIndex := bar_index
+    bearScore := majorScore
+    bearInfo := "BO"
+    bearTrigger := low
+    waitBullPB := false
+    lastSignal := "RC-S"
+
+//======================================
+// 8. Standard divergence zone + TEST
+//======================================
+
+pl = ta.pivotlow(low, pL, pR)
+ph = ta.pivothigh(high, pL, pR)
+newPL = not na(pl)
+newPH = not na(ph)
+
+if barstate.isconfirmed and newPL
+    currLow = pl
+    currIndex = bar_index - pR
+    currHist = macdHist[pR]
+    currMacd = macdLine[pR]
+    currRsi = rsi[pR]
+    currVol = volume[pR]
+    barsOk = not na(lastLowIndex) and currIndex - lastLowIndex >= minBars and currIndex - lastLowIndex <= maxBars
+    priceOk = not na(lastLowPrice) and currLow <= lastLowPrice + atr[pR] * priceToleranceATR
+    hDiv = not na(lastLowHist) and currHist > lastLowHist
+    mDiv = not na(lastLowMacd) and currMacd > lastLowMacd
+    rDiv = not na(lastLowRsi) and currRsi > lastLowRsi
+    divCount = (hDiv ? 1 : 0) + (mDiv ? 1 : 0) + (rDiv ? 1 : 0)
+    divCode = f_code(hDiv, mDiv, rDiv)
+    rangeP = high[pR] - low[pR]
+    lowerWick = math.min(open[pR], close[pR]) - low[pR]
+    nearSupport = math.abs(currLow - donLow[pR]) <= atr[pR] * srNearATR or math.abs(currLow - kcLower[pR]) <= atr[pR] * srNearATR
+    wickSupport = rangeP > syminfo.mintick and lowerWick / rangeP >= wickMin and close[pR] > low[pR] + rangeP * 0.5 and volume[pR] > volMa[pR] * volHighMult
+    volExhaust = not na(lastLowVol) and currVol < lastLowVol * volLowRatio
+    effortNoResult = not na(lastLowPrice) and volume[pR] > volMa[pR] * effortMult and math.abs(currLow - lastLowPrice) < atr[pR] * 0.8
+    fakeBreak = not na(lastLowPrice) and currLow < lastLowPrice and close[pR] > lastLowPrice
+    strongVPA = wickSupport or effortNoResult or fakeBreak
+    keyOk = not effRequireKeyLevel or nearSupport or fakeBreak or (allowNewExtremeAsKey and priceOk and (strongVPA or divCount == 3))
+    vpaOk = not useVPA or not effRequireVPAForZone or strongVPA
+    majorOk = divCount == 3 and strongVPA and (nearSupport or currLow <= kcLower[pR] or fakeBreak)
+    trendOk = not useTrendAwareFilter or not ctxDown or not counterTrendNeedsMajor or majorOk
+    score = 0
+    score += divCount == 3 ? 45 : divCount == 2 ? 35 : divCount == 1 ? 20 : 0
+    score += strongVPA ? 25 : volExhaust ? 12 : 0
+    score += keyOk ? 15 : 0
+    score += not na(lastLowPrice) and currLow < lastLowPrice and hDiv ? 10 : 0
+    score += majorOk ? 10 : 0
+    score += isHTFMode and divCount >= 2 and keyOk ? 8 : 0
+    score := math.min(score, 100)
+    scBars = not na(scIndex) ? currIndex - scIndex : na
+    scTestOk = useFlow and not na(scIndex) and scBars >= testMinBars and scBars <= testMaxBars and currLow >= scLow - atr[pR] * testNearATR and currLow <= scLow + atr[pR] * testNearATR and currVol <= scVol * testVolRatio and (currHist > scHist or currMacd > scMacd or currRsi > scRsi)
+    sameZone = not na(lastBullZoneIndex) and currIndex - lastBullZoneIndex <= effSameZoneLockBars and math.abs(currLow - lastBullZonePrice) <= atr[pR] * effSameZoneATR
+    cooldownOk = na(lastBullZoneIndex) or currIndex - lastBullZoneIndex > effCooldown
+    zoneOk = barsOk and priceOk and divCount >= minDivCount and vpaOk and keyOk and trendOk and score >= effMinScore
+    if scTestOk and flowLongCooldownOk
+        rcLongSignal := true
+        flowReason := "TEST"
+        setupReason := "TEST"
+        lastFlowBullIndex := bar_index
+        bullActive := isLTFMode
+        bearActive := false
+        bullLow := currLow
+        bullIndex := currIndex
+        bullScore := math.max(score, 85)
+        bullInfo := "TEST"
+        bullTrigger := recentHigh
+        waitBearPB := false
+        lastSignal := "RC-L"
+    if zoneOk and cooldownOk and not sameZone
+        zoneLongSignal := true
+        bullActive := isLTFMode
+        bearActive := false
+        bullLow := currLow
+        bullIndex := currIndex
+        bullScore := score
+        bullInfo := divCode
+        bullTrigger := recentHigh
+        setupReason := "ZONE"
+        lastBullZoneIndex := currIndex
+        lastBullZonePrice := currLow
+        waitBearPB := false
+        lastSignal := isHTFMode ? "HTF-L-ZONE" : "L-ZONE"
+        if showDivLine and not na(lastLowIndex)
+            ln = line.new(lastLowIndex, lastLowPrice, currIndex, currLow, extend=extend.none, color=color.new(color.green, 35), width=1)
+            array.unshift(managedLines, ln)
+        if showStructureLine and isLTFMode
+            if not na(bullLine)
+                line.delete(bullLine)
+            bullLine := line.new(currIndex, bullTrigger, bar_index, bullTrigger, extend=extend.right, color=color.new(color.green, 68), width=1)
+    lastLowPrice := currLow
+    lastLowIndex := currIndex
+    lastLowHist := currHist
+    lastLowMacd := currMacd
+    lastLowRsi := currRsi
+    lastLowVol := currVol
+
+if barstate.isconfirmed and newPH
+    currHigh = ph
+    currIndex = bar_index - pR
+    currHist = macdHist[pR]
+    currMacd = macdLine[pR]
+    currRsi = rsi[pR]
+    currVol = volume[pR]
+    barsOk = not na(lastHighIndex) and currIndex - lastHighIndex >= minBars and currIndex - lastHighIndex <= maxBars
+    priceOk = not na(lastHighPrice) and currHigh >= lastHighPrice - atr[pR] * priceToleranceATR
+    hDiv = not na(lastHighHist) and currHist < lastHighHist
+    mDiv = not na(lastHighMacd) and currMacd < lastHighMacd
+    rDiv = not na(lastHighRsi) and currRsi < lastHighRsi
+    divCount = (hDiv ? 1 : 0) + (mDiv ? 1 : 0) + (rDiv ? 1 : 0)
+    divCode = f_code(hDiv, mDiv, rDiv)
+    rangeP = high[pR] - low[pR]
+    upperWick = high[pR] - math.max(open[pR], close[pR])
+    nearResistance = math.abs(currHigh - donHigh[pR]) <= atr[pR] * srNearATR or math.abs(currHigh - kcUpper[pR]) <= atr[pR] * srNearATR
+    wickSupply = rangeP > syminfo.mintick and upperWick / rangeP >= wickMin and close[pR] < low[pR] + rangeP * 0.5 and volume[pR] > volMa[pR] * volHighMult
+    volExhaust = not na(lastHighVol) and currVol < lastHighVol * volLowRatio
+    effortNoResult = not na(lastHighPrice) and volume[pR] > volMa[pR] * effortMult and math.abs(currHigh - lastHighPrice) < atr[pR] * 0.8
+    fakeBreak = not na(lastHighPrice) and currHigh > lastHighPrice and close[pR] < lastHighPrice
+    strongVPA = wickSupply or effortNoResult or fakeBreak
+    keyOk = not effRequireKeyLevel or nearResistance or fakeBreak or (allowNewExtremeAsKey and priceOk and (strongVPA or divCount == 3))
+    vpaOk = not useVPA or not effRequireVPAForZone or strongVPA
+    majorOk = divCount == 3 and strongVPA and (nearResistance or currHigh >= kcUpper[pR] or fakeBreak)
+    trendOk = not useTrendAwareFilter or not ctxUp or not counterTrendNeedsMajor or majorOk
+    score = 0
+    score += divCount == 3 ? 45 : divCount == 2 ? 35 : divCount == 1 ? 20 : 0
+    score += strongVPA ? 25 : volExhaust ? 12 : 0
+    score += keyOk ? 15 : 0
+    score += not na(lastHighPrice) and currHigh > lastHighPrice and hDiv ? 10 : 0
+    score += majorOk ? 10 : 0
+    score += isHTFMode and divCount >= 2 and keyOk ? 8 : 0
+    score := math.min(score, 100)
+    bcBars = not na(bcIndex) ? currIndex - bcIndex : na
+    bcTestOk = useFlow and not na(bcIndex) and bcBars >= testMinBars and bcBars <= testMaxBars and currHigh >= bcHigh - atr[pR] * testNearATR and currHigh <= bcHigh + atr[pR] * testNearATR and currVol <= bcVol * testVolRatio and (currHist < bcHist or currMacd < bcMacd or currRsi < bcRsi)
+    sameZone = not na(lastBearZoneIndex) and currIndex - lastBearZoneIndex <= effSameZoneLockBars and math.abs(currHigh - lastBearZonePrice) <= atr[pR] * effSameZoneATR
+    cooldownOk = na(lastBearZoneIndex) or currIndex - lastBearZoneIndex > effCooldown
+    zoneOk = barsOk and priceOk and divCount >= minDivCount and vpaOk and keyOk and trendOk and score >= effMinScore
+    if bcTestOk and flowShortCooldownOk
+        rcShortSignal := true
+        flowReason := "TEST"
+        setupReason := "TEST"
+        lastFlowBearIndex := bar_index
+        bearActive := isLTFMode
+        bullActive := false
+        bearHigh := currHigh
+        bearIndex := currIndex
+        bearScore := math.max(score, 85)
+        bearInfo := "TEST"
+        bearTrigger := recentLow
+        waitBullPB := false
+        lastSignal := "RC-S"
+    if zoneOk and cooldownOk and not sameZone
+        zoneShortSignal := true
+        bearActive := isLTFMode
+        bullActive := false
+        bearHigh := currHigh
+        bearIndex := currIndex
+        bearScore := score
+        bearInfo := divCode
+        bearTrigger := recentLow
+        setupReason := "ZONE"
+        lastBearZoneIndex := currIndex
+        lastBearZonePrice := currHigh
+        waitBullPB := false
+        lastSignal := isHTFMode ? "HTF-S-ZONE" : "S-ZONE"
+        if showDivLine and not na(lastHighIndex)
+            ln = line.new(lastHighIndex, lastHighPrice, currIndex, currHigh, extend=extend.none, color=color.new(color.red, 35), width=1)
+            array.unshift(managedLines, ln)
+        if showStructureLine and isLTFMode
+            if not na(bearLine)
+                line.delete(bearLine)
+            bearLine := line.new(currIndex, bearTrigger, bar_index, bearTrigger, extend=extend.right, color=color.new(color.red, 68), width=1)
+    lastHighPrice := currHigh
+    lastHighIndex := currIndex
+    lastHighHist := currHist
+    lastHighMacd := currMacd
+    lastHighRsi := currRsi
+    lastHighVol := currVol
+
+//======================================
+// 9. Entry LONG / SHORT
+//======================================
+
+if barstate.isconfirmed and bullActive and isLTFMode
+    expired = not na(bullIndex) and bar_index - bullIndex > maxSetupBars
+    invalid = not na(bullLow) and low < bullLow - atr * 0.05
+    breakout = not na(bullTrigger) and close > bullTrigger + atr * breakoutBufferATR
+    if expired
+        bullActive := false
+        lastReject := "B expired"
+        if not na(bullLine)
+            line.delete(bullLine)
+            bullLine := na
+    else if invalid
+        bullActive := false
+        lastReject := "B invalid"
+        if not na(bullLine)
+            line.delete(bullLine)
+            bullLine := na
+    else if breakout
+        entry = close
+        stop = bullLow - atr * atrStopBuffer
+        risk = entry - stop
+        riskOk = risk > syminfo.mintick and risk <= atr * maxRiskATR
+        volAOk = not requireBreakoutVolume or volume >= volMa * breakoutVolMult
+        volBOk = volume >= volMa * bBreakoutVolMult
+        emaOk = not requireEMARecover or close > emaFast
+        momAOk = not requireMomentum or (macdHist > macdHist[1] and rsi > rsi[1])
+        momBOk = macdHist >= macdHist[1] or rsi > rsi[1]
+        strictOk = volAOk and emaOk and momAOk and riskOk and (not strongDown or bullScore >= majorScore or close > emaFast)
+        bOk = enableBEntry and volBOk and momBOk and riskOk and (close > emaFast or bullScore >= majorScore)
+        nearestRes = math.min(donHigh[1] > entry ? donHigh[1] : 10e10, kcUpper > entry ? kcUpper : 10e10)
+        rrOk = not useRRFilter or nearestRes == 10e10 or nearestRes >= entry + risk * minRR
+        if (strictOk or bOk) and rrOk
+            longSignal := true
+            bullActive := false
+            bearActive := false
+            inLong := true
+            inShort := false
+            longEntry := close
+            longStop := stop
+            longEntryIndex := bar_index
+            waitBullPB := true
+            waitBearPB := false
+            bullRetestLevel := bullTrigger
+            bullBreakIndex := bar_index
+            bullBreakLow := low
+            bullPostBreakHigh := high
+            entryReason := strictOk ? "A" : "B"
+            lastSignal := "LONG"
+            if not na(bullLine)
+                line.delete(bullLine)
+                bullLine := na
+            if not na(bearLine)
+                line.delete(bearLine)
+                bearLine := na
+
+if barstate.isconfirmed and bearActive and isLTFMode
+    expired = not na(bearIndex) and bar_index - bearIndex > maxSetupBars
+    invalid = not na(bearHigh) and high > bearHigh + atr * 0.05
+    breakout = not na(bearTrigger) and close < bearTrigger - atr * breakoutBufferATR
+    if expired
+        bearActive := false
+        lastReject := "S expired"
+        if not na(bearLine)
+            line.delete(bearLine)
+            bearLine := na
+    else if invalid
+        bearActive := false
+        lastReject := "S invalid"
+        if not na(bearLine)
+            line.delete(bearLine)
+            bearLine := na
+    else if breakout
+        entry = close
+        stop = bearHigh + atr * atrStopBuffer
+        risk = stop - entry
+        riskOk = risk > syminfo.mintick and risk <= atr * maxRiskATR
+        volAOk = not requireBreakoutVolume or volume >= volMa * breakoutVolMult
+        volBOk = volume >= volMa * bBreakoutVolMult
+        emaOk = not requireEMARecover or close < emaFast
+        momAOk = not requireMomentum or (macdHist < macdHist[1] and rsi < rsi[1])
+        momBOk = macdHist <= macdHist[1] or rsi < rsi[1]
+        strictOk = volAOk and emaOk and momAOk and riskOk and (not strongUp or bearScore >= majorScore or close < emaFast)
+        bOk = enableBEntry and volBOk and momBOk and riskOk and (close < emaFast or bearScore >= majorScore)
+        nearestSup = math.max(donLow[1] < entry ? donLow[1] : -10e10, kcLower < entry ? kcLower : -10e10)
+        rrOk = not useRRFilter or nearestSup == -10e10 or nearestSup <= entry - risk * minRR
+        if (strictOk or bOk) and rrOk
+            shortSignal := true
+            bearActive := false
+            bullActive := false
+            inShort := true
+            inLong := false
+            shortEntry := close
+            shortStop := stop
+            shortEntryIndex := bar_index
+            waitBearPB := true
+            waitBullPB := false
+            bearRetestLevel := bearTrigger
+            bearBreakIndex := bar_index
+            bearBreakHigh := high
+            bearPostBreakLow := low
+            entryReason := strictOk ? "A" : "B"
+            lastSignal := "SHORT"
+            if not na(bearLine)
+                line.delete(bearLine)
+                bearLine := na
+            if not na(bullLine)
+                line.delete(bullLine)
+                bullLine := na
+
+//======================================
+// 10. Pullback PB
+//======================================
+
+if barstate.isconfirmed and waitBullPB
+    afterBreak = bar_index > bullBreakIndex
+    enoughBars = afterBreak and bar_index - bullBreakIndex >= minRetestBars
+    expiredPB = afterBreak and bar_index - bullBreakIndex > maxRetestBars
+    bullPostBreakHigh := afterBreak ? (na(bullPostBreakHigh) ? high : math.max(bullPostBreakHigh, high)) : bullPostBreakHigh
+    pullbackDepthOk = pbMinPullbackATR <= 0 ? true : not na(bullPostBreakHigh) and bullPostBreakHigh - low >= atr * pbMinPullbackATR
+    failedPB = afterBreak and (close < bullRetestLevel - atr * retestFailATR or close < bullBreakLow)
+    levelTouch = enoughBars and low <= bullRetestLevel + atr * retestToleranceATR and close > bullRetestLevel
+    emaTouch = enoughBars and allowEmaPullback and low <= emaFast + atr * pbEmaToleranceATR and close >= emaFast
+    momentumOk = not pbMomentumConfirm or macdHist >= macdHist[1]
+    validPB = pullbackDepthOk and (levelTouch or emaTouch) and close > open and momentumOk
+    if failedPB
+        waitBullPB := false
+        bullPostBreakHigh := na
+        lastReject := "PB-L fail"
+    else if validPB
+        pbLongSignal := true
+        waitBullPB := false
+        bullPostBreakHigh := na
+        lastSignal := "PB-L"
+    else if expiredPB
+        waitBullPB := false
+        bullPostBreakHigh := na
+
+if barstate.isconfirmed and waitBearPB
+    afterBreak = bar_index > bearBreakIndex
+    enoughBars = afterBreak and bar_index - bearBreakIndex >= minRetestBars
+    expiredPB = afterBreak and bar_index - bearBreakIndex > maxRetestBars
+    bearPostBreakLow := afterBreak ? (na(bearPostBreakLow) ? low : math.min(bearPostBreakLow, low)) : bearPostBreakLow
+    pullbackDepthOk = pbMinPullbackATR <= 0 ? true : not na(bearPostBreakLow) and high - bearPostBreakLow >= atr * pbMinPullbackATR
+    failedPB = afterBreak and (close > bearRetestLevel + atr * retestFailATR or close > bearBreakHigh)
+    levelTouch = enoughBars and high >= bearRetestLevel - atr * retestToleranceATR and close < bearRetestLevel
+    emaTouch = enoughBars and allowEmaPullback and high >= emaFast - atr * pbEmaToleranceATR and close <= emaFast
+    momentumOk = not pbMomentumConfirm or macdHist <= macdHist[1]
+    validPB = pullbackDepthOk and (levelTouch or emaTouch) and close < open and momentumOk
+    if failedPB
+        waitBearPB := false
+        bearPostBreakLow := na
+        lastReject := "PB-S fail"
+    else if validPB
+        pbShortSignal := true
+        waitBearPB := false
+        bearPostBreakLow := na
+        lastSignal := "PB-S"
+    else if expiredPB
+        waitBearPB := false
+        bearPostBreakLow := na
+
+//======================================
+// 11. Exit XL / XS
+//======================================
+
+exitLongCooldownOk = na(lastExitLongIndex) or bar_index - lastExitLongIndex > exitCooldownBars
+exitShortCooldownOk = na(lastExitShortIndex) or bar_index - lastExitShortIndex > exitCooldownBars
+longHeld = prevInLong and not na(prevLongEntryIndex) and bar_index > prevLongEntryIndex
+shortHeld = prevInShort and not na(prevShortEntryIndex) and bar_index > prevShortEntryIndex
+
+longStopHit = longHeld and not na(prevLongStop) and low <= prevLongStop
+longOpposite = longHeld and exitOnOppositeSignal and (zoneShortSignal or rcShortSignal or shortSignal)
+longEMAWeak = longHeld and exitOnEMAWeak and close < emaFast and macdHist < macdHist[1] and rsi < rsi[1]
+longStructureBreak = longHeld and exitOnStructureBreak and close < ta.lowest(low[1], exitBreakLookback)
+
+if barstate.isconfirmed and useExitSignals and longHeld and exitLongCooldownOk and (longStopHit or longOpposite or longEMAWeak or longStructureBreak)
+    exitLongSignal := true
+    inLong := false
+    waitBullPB := false
+    lastExitLongIndex := bar_index
+    lastSignal := longOpposite and shortSignal ? "XL+SHORT" : longStopHit ? "XL SL" : longOpposite ? "XL REV" : longStructureBreak ? "XL BRK" : "XL MOM"
+
+shortStopHit = shortHeld and not na(prevShortStop) and high >= prevShortStop
+shortOpposite = shortHeld and exitOnOppositeSignal and (zoneLongSignal or rcLongSignal or longSignal)
+shortEMAWeak = shortHeld and exitOnEMAWeak and close > emaFast and macdHist > macdHist[1] and rsi > rsi[1]
+shortStructureBreak = shortHeld and exitOnStructureBreak and close > ta.highest(high[1], exitBreakLookback)
+
+if barstate.isconfirmed and useExitSignals and shortHeld and exitShortCooldownOk and (shortStopHit or shortOpposite or shortEMAWeak or shortStructureBreak)
+    exitShortSignal := true
+    inShort := false
+    waitBearPB := false
+    lastExitShortIndex := bar_index
+    lastSignal := shortOpposite and longSignal ? "XS+LONG" : shortStopHit ? "XS SL" : shortOpposite ? "XS REV" : shortStructureBreak ? "XS BRK" : "XS MOM"
+
+//======================================
+// 12. Display, HUD, alerts
+//======================================
+
+if array.size(managedLines) > maxKeepLines
+    oldLine = array.pop(managedLines)
+    line.delete(oldLine)
+
+isAdaptiveDisplay = displayProfile == "Adaptive Visible"
+effShowEntrySignal = isAdaptiveDisplay ? isLTFMode and showEntrySignal : showEntrySignal
+effShowPullbackSignal = isAdaptiveDisplay ? isLTFMode and showPullbackSignal : showPullbackSignal
+effShowExitSignal = isAdaptiveDisplay ? isLTFMode and showExitSignal : showExitSignal
+effShowRCSignal = isAdaptiveDisplay ? isLTFMode and showLTFSetupSignal and showRCSignal : showRCSignal
+effShowZoneSignal = isAdaptiveDisplay ? (isHTFMode or showLTFSetupSignal) and showZoneSignal : showZoneSignal
+effShowHTFBiasSignal = isAdaptiveDisplay and isHTFMode and showHTFBiasSignal
+effShowHTFKeyLevels = isAdaptiveDisplay and isHTFMode and showHTFKeyLevels
+effShowVisualContext = isAdaptiveDisplay and showVisualContext
+effShowSoftSetupSignal = isAdaptiveDisplay and isLTFMode and showSoftSetupSignal
+
+ltfBiasUp = isLTFMode and (ctxUp or close > emaFast and emaFast >= emaSlow and macdHist >= macdHist[1] and rsi >= 50)
+ltfBiasDown = isLTFMode and (ctxDown or close < emaFast and emaFast <= emaSlow and macdHist <= macdHist[1] and rsi <= 50)
+softLongRaw = effShowSoftSetupSignal and ltfBiasUp and close > emaFast and macdHist > macdHist[1] and rsi > rsi[1]
+softShortRaw = effShowSoftSetupSignal and ltfBiasDown and close < emaFast and macdHist < macdHist[1] and rsi < rsi[1]
+
+var int lastSoftLongIndex = na
+var int lastSoftShortIndex = na
+softLongCooldownOk = na(lastSoftLongIndex) or bar_index - lastSoftLongIndex > softSignalCooldownBars
+softShortCooldownOk = na(lastSoftShortIndex) or bar_index - lastSoftShortIndex > softSignalCooldownBars
+softLongSignal = barstate.isconfirmed and softLongRaw and softLongCooldownOk
+softShortSignal = barstate.isconfirmed and softShortRaw and softShortCooldownOk
+if softLongSignal
+    lastSoftLongIndex := bar_index
+if softShortSignal
+    lastSoftShortIndex := bar_index
+
+bgcolor(effShowVisualContext ? ctxUp ? color.new(color.green, 94) : ctxDown ? color.new(color.red, 94) : color.new(color.gray, 96) : na)
+
+plot(showEMA or effShowVisualContext ? emaFast : na, "EMA20", color=color.new(color.teal, 0))
+plot(showEMA or effShowVisualContext ? emaSlow : na, "EMA50", color=color.new(color.orange, 0))
+plot(showKeltner ? kcUpper : na, "KC Upper", color=color.new(color.gray, 85))
+plot(showKeltner ? kcLower : na, "KC Lower", color=color.new(color.gray, 85))
+plot(effShowHTFKeyLevels or effShowVisualContext ? donHigh : na, "Key Resistance", color=color.new(color.red, 58), style=plot.style_linebr)
+plot(effShowHTFKeyLevels or effShowVisualContext ? donLow : na, "Key Support", color=color.new(color.green, 58), style=plot.style_linebr)
+
+dXL = effShowExitSignal and exitLongSignal
+dXS = effShowExitSignal and not dXL and exitShortSignal
+dLong = effShowEntrySignal and not (dXL or dXS) and longSignal
+dShort = effShowEntrySignal and not (dXL or dXS or dLong) and shortSignal
+dPBL = effShowPullbackSignal and not (dXL or dXS or dLong or dShort) and pbLongSignal
+dPBS = effShowPullbackSignal and not (dXL or dXS or dLong or dShort or dPBL) and pbShortSignal
+dRCL = effShowRCSignal and not (dXL or dXS or dLong or dShort or dPBL or dPBS) and rcLongSignal
+dRCS = effShowRCSignal and not (dXL or dXS or dLong or dShort or dPBL or dPBS or dRCL) and rcShortSignal
+dLZoneRaw = effShowZoneSignal and not (dXL or dXS or dLong or dShort or dPBL or dPBS or dRCL or dRCS) and zoneLongSignal
+dSZoneRaw = effShowZoneSignal and not (dXL or dXS or dLong or dShort or dPBL or dPBS or dRCL or dRCS or dLZoneRaw) and zoneShortSignal
+dHTFLZone = dLZoneRaw and isHTFMode
+dHTFSZone = dSZoneRaw and isHTFMode
+dLZone = dLZoneRaw and not isHTFMode
+dSZone = dSZoneRaw and not isHTFMode
+dBiasUp = effShowHTFBiasSignal and ctxUp and not (ctxUp[1] == true)
+dBiasDown = effShowHTFBiasSignal and ctxDown and not (ctxDown[1] == true)
+
+plotshape(dLong, title="LONG", style=shape.labelup, location=location.belowbar, size=size.tiny, color=color.new(color.lime, 0), text="LONG", textcolor=color.white)
+plotshape(dShort, title="SHORT", style=shape.labeldown, location=location.abovebar, size=size.tiny, color=color.new(color.maroon, 0), text="SHORT", textcolor=color.white)
+plotshape(dPBL, title="PB-L", style=shape.labelup, location=location.belowbar, size=size.tiny, color=color.new(color.blue, 12), text="PB-L", textcolor=color.white)
+plotshape(dPBS, title="PB-S", style=shape.labeldown, location=location.abovebar, size=size.tiny, color=color.new(color.purple, 12), text="PB-S", textcolor=color.white)
+plotshape(dXL, title="XL", style=shape.labeldown, location=location.abovebar, size=size.tiny, color=color.new(color.orange, 0), text="XL", textcolor=color.white)
+plotshape(dXS, title="XS", style=shape.labelup, location=location.belowbar, size=size.tiny, color=color.new(color.orange, 0), text="XS", textcolor=color.white)
+plotshape(dRCL, title="RC-L", style=shape.labelup, location=location.belowbar, size=size.tiny, color=color.new(color.green, 25), text="RC-L", textcolor=color.white)
+plotshape(dRCS, title="RC-S", style=shape.labeldown, location=location.abovebar, size=size.tiny, color=color.new(color.red, 25), text="RC-S", textcolor=color.white)
+plotshape(dLZone, title="L-ZONE", style=shape.labelup, location=location.belowbar, offset=-pR, size=size.tiny, color=color.new(color.green, 18), text="L-ZONE", textcolor=color.white)
+plotshape(dSZone, title="S-ZONE", style=shape.labeldown, location=location.abovebar, offset=-pR, size=size.tiny, color=color.new(color.red, 18), text="S-ZONE", textcolor=color.white)
+plotshape(dHTFLZone, title="HTF-L-ZONE", style=shape.labelup, location=location.belowbar, offset=-pR, size=size.tiny, color=color.new(color.green, 8), text="HTF-L-ZONE", textcolor=color.white)
+plotshape(dHTFSZone, title="HTF-S-ZONE", style=shape.labeldown, location=location.abovebar, offset=-pR, size=size.tiny, color=color.new(color.red, 8), text="HTF-S-ZONE", textcolor=color.white)
+plotshape(dBiasUp, title="BIAS-UP", style=shape.labelup, location=location.belowbar, size=size.tiny, color=color.new(color.teal, 0), text="BIAS-UP", textcolor=color.white)
+plotshape(dBiasDown, title="BIAS-DOWN", style=shape.labeldown, location=location.abovebar, size=size.tiny, color=color.new(color.orange, 0), text="BIAS-DOWN", textcolor=color.white)
+plotshape(softLongSignal and not (dLong or dPBL), title="L-SET", style=shape.triangleup, location=location.belowbar, size=size.tiny, color=color.new(color.teal, 0), text="L-SET", textcolor=color.white)
+plotshape(softShortSignal and not (dShort or dPBS), title="S-SET", style=shape.triangledown, location=location.abovebar, size=size.tiny, color=color.new(color.orange, 0), text="S-SET", textcolor=color.white)
+
+var label contextLabel = na
+if barstate.islast
+    if not na(contextLabel)
+        label.delete(contextLabel)
+        contextLabel := na
+    if effShowVisualContext
+        contextUp = isHTFMode ? ctxUp : ltfBiasUp
+        contextDown = isHTFMode ? ctxDown : ltfBiasDown
+        contextY = contextUp ? low - atr * 0.8 : high + atr * 0.8
+        contextText = isHTFMode ? (contextUp ? "HTF BIAS-UP" : contextDown ? "HTF BIAS-DOWN" : "HTF RANGE") : (contextUp ? "LTF LOOK-LONG" : contextDown ? "LTF LOOK-SHORT" : "LTF WAIT")
+        contextStyle = contextUp ? label.style_label_up : label.style_label_down
+        contextColor = contextUp ? color.new(color.teal, 0) : contextDown ? color.new(color.orange, 0) : color.new(color.gray, 15)
+        contextLabel := label.new(bar_index, contextY, contextText, style=contextStyle, color=contextColor, textcolor=color.white, size=size.small)
+
+var table hud = table.new(position.top_right, 2, 9, border_width=0)
+modeText = isHTFMode ? "HTF" : isLTFConfirm ? "LTF-C" : "LTF"
+ctxText = ctxUp ? "UP" : ctxDown ? "DN" : "FLAT"
+actText = isHTFMode ? (ctxUp ? "BIAS-UP" : ctxDown ? "BIAS-DN" : "RANGE") : inLong ? "LONG" : inShort ? "SHORT" : bullActive ? "B " + str.tostring(bullScore) : bearActive ? "S " + str.tostring(bearScore) : ltfBiasUp ? "LOOK-L" : ltfBiasDown ? "LOOK-S" : "WAIT"
+posText = inLong ? "L@" + f_price(longEntry) : inShort ? "S@" + f_price(shortEntry) : "-"
+waitText = waitBullPB ? "PB+" : waitBearPB ? "PB-" : "-"
+hudOn = hudMode != "Off"
+
+if barstate.islast
+    table.cell(hud, 0, 0, hudOn ? "DVCA 1.6.6" : "", text_color=color.white, bgcolor=color.new(color.black, 0))
+    table.cell(hud, 1, 0, hudOn ? modeText : "", text_color=color.white, bgcolor=color.new(color.black, 0))
+    table.cell(hud, 0, 1, hudOn ? "Act" : "")
+    table.cell(hud, 1, 1, hudOn ? actText : "")
+    table.cell(hud, 0, 2, hudOn ? "Pos" : "")
+    table.cell(hud, 1, 2, hudOn ? posText : "")
+    table.cell(hud, 0, 3, hudOn ? "Wait" : "")
+    table.cell(hud, 1, 3, hudOn ? waitText : "")
+    table.cell(hud, 0, 4, hudOn ? "Ctx" : "")
+    table.cell(hud, 1, 4, hudOn ? ctxText : "")
+    table.cell(hud, 0, 5, hudOn ? "Last" : "")
+    table.cell(hud, 1, 5, hudOn ? lastSignal : "")
+    table.cell(hud, 0, 6, hudOn ? "Flow" : "")
+    table.cell(hud, 1, 6, hudOn ? flowReason : "")
+    table.cell(hud, 0, 7, hudOn and hudMode == "Full" ? "Entry" : "")
+    table.cell(hud, 1, 7, hudOn and hudMode == "Full" ? entryReason : "")
+    table.cell(hud, 0, 8, hudOn and hudMode == "Full" ? "Setup" : "")
+    table.cell(hud, 1, 8, hudOn and hudMode == "Full" ? setupReason : "")
+
+alertcondition(dLong, "LONG", "DVCA Lean LONG.")
+alertcondition(dShort, "SHORT", "DVCA Lean SHORT.")
+alertcondition(dPBL, "PB-L", "DVCA Lean bullish pullback confirmation.")
+alertcondition(dPBS, "PB-S", "DVCA Lean bearish pullback confirmation.")
+alertcondition(dXL, "XL", "DVCA Lean long exit.")
+alertcondition(dXS, "XS", "DVCA Lean short exit.")
+alertcondition(dRCL, "RC-L", "DVCA Lean bullish irregular confirmation.")
+alertcondition(dRCS, "RC-S", "DVCA Lean bearish irregular confirmation.")
+alertcondition(dLZone, "L-ZONE", "DVCA Lean bullish divergence zone.")
+alertcondition(dSZone, "S-ZONE", "DVCA Lean bearish divergence zone.")
+alertcondition(dHTFLZone, "HTF-L-ZONE", "DVCA Adaptive Lean bullish HTF zone.")
+alertcondition(dHTFSZone, "HTF-S-ZONE", "DVCA Adaptive Lean bearish HTF zone.")
+alertcondition(dBiasUp, "BIAS-UP", "DVCA Adaptive Lean HTF bias turned up.")
+alertcondition(dBiasDown, "BIAS-DOWN", "DVCA Adaptive Lean HTF bias turned down.")
+alertcondition(softLongSignal, "L-SET", "DVCA Visible Adaptive bullish setup hint.")
+alertcondition(softShortSignal, "S-SET", "DVCA Visible Adaptive bearish setup hint.")
