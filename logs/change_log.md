@@ -243,3 +243,13 @@
 - 候选分类：`LTF TC-S + HTF UP = PULLBACK-S`；`LTF TC-S + HTF DN = TREND-S`。该分类仅写入 Suggested Rule Update，不修改 v1.5.1 代码语义。
 - 关键价位：反抽 `63640-63700`；支撑 `63500-63450`；下一观察 `63390-63300`；核心结构 `63250-63200`。
 - 边界：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-14 BTC CASE-0015 Outcome50 Pullback Recovery
+
+- 原因：根据 2026-07-14 22:18（UTC+8）BTCUSDT.P LTF 与 HTF 截图，完成 `CASE-0015` 的 Outcome50 复盘。
+- 去重：两张 LTF 附件哈希相同，只归档一份；另归档一张 30m / 1H HTF 图。
+- 结果：63550 附近支撑守住，未跌破 63300 / 63250；1m 收复约 63787 Trigger，从 `DN / TC-S` 恢复为 `UP / LATE-L HR85`。
+- 生命周期：`Outcome50Recorded / Closed`；主信号结果：`Success`；Gold Case 保留。
+- Finding：HTF `UP` 背景下的 LTF `TC-S` 被验证为 `PULLBACK-S`；`LATE-L` 方向正确但执行偏晚。
+- 研究：新增 `MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG` 标签，并继续观察 `FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED` 候选状态链。
+- 边界：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。

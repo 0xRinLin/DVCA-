@@ -13,7 +13,7 @@
 - 方向观察：LONG
 - 主信号：15m TC-L after L-ZONE
 - 模式：CounterTrendReversalAttempt
-- 结果：Unknown
+- 结果：Success
 - 初始评级：Research A- / Trade C
 - 改进标签：CounterTrendSignalDowngrade
 
@@ -27,13 +27,15 @@
 - Outcome20 High-Level Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
 - Outcome50 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
 - Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
+- Outcome50 Pullback Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
+- Outcome50 HTF State Lag：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
 
 ## Case Lifecycle
 
-- 当前状态：Outcome50DeepPullback
-- 下一步预期：Outcome50HTFResolution
-- 生命周期状态：Review20
-- 执行状态：PULLBACK-S / WaitHTFConfirmation
+- 当前状态：Outcome50Recorded
+- 下一步预期：Closed
+- 生命周期状态：Closed
+- 执行状态：RecoveryConfirmed / NoChase
 - 当前评级：Gold Case
 
 ## 多周期背景
@@ -149,10 +151,10 @@ HTF bearish
 
 - 信号后 10 根 K 线：回踩 62760 附近后支撑守住，1m 从临时 DN 恢复为 UP / TC-L，随后放量突破 62920 与 63000；LTF 多头延续确认，等待 Outcome20 验证 HTF 压力。
 - 信号后 20 根 K 线：Unknown
-- 信号后 50 根 K 线：观察进行中；22:02 记录 LTF Pullback Active，22:05 记录 1m `DN / TC-S` Deep Pullback，但 15m / 5m 仍为 `UP / TC-L`，等待 HTF Resolution。
+- 信号后 50 根 K 线：22:02 记录 LTF Pullback Active，22:05 记录 1m `DN / TC-S` Deep Pullback；支撑在约 63550 守住，未跌破 63300/63250，随后 1m 收复约 63787 Trigger、恢复 `UP` 并出现 `LATE-L HR85`。低周期回踩恢复完成。
 - 最大顺向空间：NA
 - 最大反向回撤：NA
-- 是否成功：Unknown
+- 是否成功：Yes；主信号方向验证成功，1m `LATE-L` 执行确认偏晚。
 
 ## 总结
 
@@ -350,3 +352,49 @@ LTF TC-S + HTF DN = TREND-S
 - 高周期趋势空尚未确认；只有 HTF 同步转 `DN` 后，研究分类才可从 `PULLBACK-S` 升级为 `TREND-S`。
 - `Result` 保持 `Unknown`，等待回踩止稳或 HTF 结构破坏后再确定 `Success / Fail / Late / NoTrade`。
 - 生命周期保持 `Review20`，下一节点为 `Outcome50HTFResolution`。
+
+## Outcome50 Pullback Recovery（2026-07-14 22:18 UTC+8）
+
+- 价格：约 `63829`。
+- LTF 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`。
+- HTF 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`。
+- 标签：`MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG`。
+
+### 多周期状态
+
+| 周期 | 状态 | 观察 |
+| --- | --- | --- |
+| 1H | `FLAT / A-S HMR100 / B95` | RSI 约 `68.6`；价格已在主要均线上方，存在 HTF 状态滞后候选 |
+| 30m | `UP / A-L HMR100 / B100` | RSI 约 `76`；多头恢复确认，但位置已过度延伸 |
+| 15m | `UP / TC-L` | RSI 约 `72.8`；主信号方向延续 |
+| 5m | `UP / TC-L` | RSI 约 `64.5`；低周期回踩已恢复 |
+| 1m | `UP / LATE-L HR85` | Trigger 约 `63787`，RSI 约 `56.5`；此前 `DN / TC-S` 回踩被收复 |
+
+### 完整路径
+
+```text
+HTF UP
+→ LTF FLAT
+→ LTF DN / TC-S
+→ 63550 附近支撑守住
+→ 未跌破 63300 / 63250
+→ LTF 收复约 63787 Trigger
+→ LTF 返回 UP
+→ LATE-L HR85
+```
+
+### 研究结论
+
+1. HTF 为 `UP` 时出现的 LTF `TC-S`，本案例验证为回踩阶段，而不是 HTF 趋势空。
+2. 1m `LATE-L` 的方向正确，但由于 Pivot 确认延迟，执行确认偏晚，不应用作追单授权。
+3. 1H 在结构收复、价格站上主要均线且动能偏多时仍显示 `FLAT / A-S HMR100`，继续支持 HTF state lag 审计。
+4. 候选 HTF 状态链继续保留：`FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED`。
+
+### 最终判定
+
+- 主信号 `15m L-ZONE → TC-L`：方向验证成功。
+- Pullback 分类：`PULLBACK-S` 得到恢复路径验证，没有升级成 `TREND-S`。
+- `LATE-L`：方向正确、执行偏晚；按说明书边界不作为追单信号。
+- 案例状态：`Outcome50Recorded / Closed`。
+- 最终结果：`Success`。
+- Gold Case：Yes。

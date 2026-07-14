@@ -168,3 +168,46 @@ Execution: WAIT
 - `PULLBACK-S / TREND-S` 是 v1.5.5 研究候选分类，不是 DVCA v1.5.1 的现有标签。
 - 不改变 `TC-S` 的代码触发逻辑，只建议增加 HTF 角色解释层。
 - 当前证据只有单个 Gold Case，仍不足以进入正式规则或 Pine 实现。
+
+## Outcome50 Validation：Pullback Recovery / HTF State Lag
+
+- 日期：2026-07-14 22:18 UTC+8
+- 案例：`CASE-0015`
+- 标签：`MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG`
+
+### 验证结果
+
+```text
+HTF UP
+→ LTF FLAT
+→ LTF DN / TC-S
+→ support held near 63550
+→ no loss of 63300 / 63250
+→ reclaim Trigger near 63787
+→ LTF UP
+→ LATE-L HR85
+```
+
+该路径支持：HTF 为 `UP` 时，LTF `TC-S` 应先解释为 `PULLBACK-S`。只有 HTF 同步转 `DN`，才升级为 `TREND-S`。
+
+### HTF 状态滞后证据
+
+- 30m 已为 `UP / A-L HMR100 / B100`。
+- 15m / 5m 均为 `UP / TC-L`。
+- 1H 价格已在主要均线上方、RSI 约 68.6，但仍为 `FLAT / A-S HMR100 / B95`。
+
+因此继续建议增加：
+
+```text
+FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED
+```
+
+### LATE-L 执行边界
+
+- 本例 `LATE-L HR85` 的方向正确。
+- Trigger 收复已经先发生，`LATE-L` 后出现，执行确认存在延迟。
+- 这支持保留 `LATE-L` 为补确认 / 复盘标签，不将其升级为追单授权。
+
+### 状态
+
+本条由 Pending Observation 升级为 Single Gold Case Validation；仍需达到最少案例门槛后，才能修改 Pine。

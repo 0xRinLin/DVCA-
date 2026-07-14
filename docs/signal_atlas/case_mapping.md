@@ -162,5 +162,7 @@ LATE-L / LATE-S 是 Pivot 延迟确认后的补确认，不是追单信号。
   - 执行原则：不追 `63800-64000`；未跌破 `63250` 并完成 bearish retest 前不做空；HMR100 不等于执行授权。
   - Outcome50 路径：`LTF UP -> FLAT -> DN / TC-S`，但 15m / 5m 仍为 `UP / TC-L`，因此暂归类为 `PULLBACK-S`，不是 `TREND-S`。
   - 候选角色规则：`LTF TC-S + HTF UP = PULLBACK-S`；`LTF TC-S + HTF DN = TREND-S`。
+  - Outcome50 Final：63550 附近支撑守住，未跌破 63300 / 63250；1m 收复约 63787 Trigger 后恢复 `UP / LATE-L HR85`，验证此前 `TC-S` 属于 `PULLBACK-S`。
+  - 最终结果：`Success / Outcome50Recorded / Closed`；标签：`MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG`。
 
 该引用只用于 Atlas 研究映射，不改变 Signal Manual 原则。

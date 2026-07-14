@@ -7,7 +7,7 @@
 - 指标：DVCA 1.5.1
 - 关联案例：`CASE-0015`
 - 关联主题：`research/questions/2026-07-14_DVCA_HTF_execution_signal_lag.md`
-- 状态：Outcome50DeepPullback / Outcome50HTFResolution Pending
+- 状态：Outcome50Recorded / Closed / Success
 - 改进标签：CounterTrendSignalDowngrade
 
 ## 问题
@@ -131,4 +131,23 @@ LTF TC-S + HTF DN = TREND-S
 - `63500-63450` 是否止稳并恢复多头结构。
 - `63390-63300` 与 `63250-63200` 是否被有效跌破。
 - HTF 是否同步转为 `DN`，从而使 `PULLBACK-S` 升级为 `TREND-S`。
-- 最终结果继续保持 `Unknown`。
+- 在 22:05 深度回踩阶段结果保持 `Unknown`；最终结果由 22:18 的恢复证据确认。
+
+## Outcome50 Final：MTF Pullback Recovery（2026-07-14 22:18 UTC+8）
+
+- 63550 附近支撑守住，价格没有跌破 63300 / 63250 核心结构。
+- 1m 收复约 63787 Trigger，从 `DN / TC-S` 恢复为 `UP`，并出现 `LATE-L HR85`。
+- 5m / 15m 继续保持 `UP / TC-L`，30m 为 `UP / A-L HMR100`。
+- 1H 仍为 `FLAT / A-S HMR100 / B95`，但价格已在主要均线上方，形成独立的 `HTF_STATE_LAG` 研究证据。
+
+### 最终回答
+
+本次 15m `L-ZONE → TC-L` 没有在 HTF 压力下失败，而是完成突破、深度回踩和低周期结构恢复。主信号结果记为 `Success`。
+
+同时，1m `LATE-L` 虽然方向正确，但确认发生在结构已经收复之后，仍应按照现有说明解释为延迟补确认，而不是追单信号。
+
+### 标签
+
+- `MTF_PULLBACK_RECOVERY`
+- `HTF_STATE_LAG`
+- `CounterTrendSignalDowngrade`

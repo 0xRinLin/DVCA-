@@ -9,9 +9,9 @@
 - 交易所：Binance
 - 指标：DVCA 1.5.1
 - 主信号：15m / 5m TC-L
-- 当前结果：Unknown
-- 生命周期：Outcome50DeepPullback / Review20
-- 下一步：Outcome50HTFResolution
+- 当前结果：Success
+- 生命周期：Outcome50Recorded / Closed
+- 下一步：Completed
 - 完整案例：`cases/CASE-0015_BTCUSDT.P_MultiTF_15m_TC-L_HTF_A-S-A-L_Conflict.md`
 
 ## 核心信号链
@@ -29,7 +29,10 @@
 → 1m UP 转 FLAT / Pullback Active
 → 跌破 63800 / 63600
 → 1m DN / TC-S / Deep Pullback
-→ 等待 HTF Resolution
+→ 63550 附近支撑守住
+→ 收复 63787 Trigger
+→ 1m 返回 UP / LATE-L HR85
+→ Pullback Recovery Confirmed
 ```
 
 ## Gold 标记原因
@@ -48,6 +51,8 @@
 - Outcome20 Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
 - Outcome50 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
 - Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
+- Outcome50 Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
+- Outcome50 HTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
 
 ## 执行原则
 
@@ -63,4 +68,5 @@
 - 1H `A-S HMR100` 是否仍覆盖 recovery state。
 - 深度回踩后，`63500-63450` 与 `63300-63200` 是否守住。
 - HTF 是否同步转 `DN`；未同步前保持 `PULLBACK-S` 研究分类。
-- Outcome50 确认后，再决定最终 `Success / Late / NoTrade / Fail`。
+- 本次 Outcome50 已确认主信号方向为 `Success`；1m `LATE-L` 单独记录为执行确认偏晚。
+- 继续将 1H `FLAT / A-S HMR100` 与已收复结构之间的差异作为 `HTF_STATE_LAG` 研究问题，不再阻止本案例关闭。
