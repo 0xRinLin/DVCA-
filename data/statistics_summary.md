@@ -40,7 +40,7 @@
 - None: 1
 - Outcome10: 11
 - Outcome50: 2
-- Outcome50PendingHTFConfirmation: 1
+- Outcome50HTFResolution: 1
 
 ## 各 main_signal 成功率
 

@@ -127,3 +127,44 @@ WATCH -> CANDIDATE -> CONFIRMED -> EXECUTABLE -> INVALID / EXPIRED
 ### 状态
 
 仍为 Pending Evidence，等待更多案例和 CASE-0015 Outcome50。
+
+## Evidence Update：CASE-0015 Pullback Role Classification
+
+- 日期：2026-07-14 22:02-22:05 UTC+8
+- 案例：`CASE-0015`
+- 状态：`Outcome50DeepPullback / HTFResolutionPending`
+
+### 观察
+
+价格在 64000 附近受阻后，1m 先从 `UP` 转为 `FLAT`，随后跌破 63800 与 63600 并转为 `DN / TC-S`。同期 15m / 5m 仍为 `UP / TC-L`，说明相同的 `TC-S` 在不同 HTF 背景下承担不同角色。
+
+### 候选角色分类
+
+```text
+LTF TC-S + HTF UP = PULLBACK-S
+LTF TC-S + HTF DN = TREND-S
+```
+
+候选显示字段：
+
+```text
+HTF Trend
+LTF Phase
+LTF State
+Execution
+```
+
+在 22:02 的状态中，建议显示：
+
+```text
+HTF Trend: UP
+LTF Phase: PULLBACK
+LTF State: FLAT
+Execution: WAIT
+```
+
+### 边界
+
+- `PULLBACK-S / TREND-S` 是 v1.5.5 研究候选分类，不是 DVCA v1.5.1 的现有标签。
+- 不改变 `TC-S` 的代码触发逻辑，只建议增加 HTF 角色解释层。
+- 当前证据只有单个 Gold Case，仍不足以进入正式规则或 Pine 实现。

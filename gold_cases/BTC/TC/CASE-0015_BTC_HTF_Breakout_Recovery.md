@@ -10,8 +10,8 @@
 - 指标：DVCA 1.5.1
 - 主信号：15m / 5m TC-L
 - 当前结果：Unknown
-- 生命周期：Outcome20Recorded / Review20
-- 下一步：Outcome50PendingHTFConfirmation
+- 生命周期：Outcome50DeepPullback / Review20
+- 下一步：Outcome50HTFResolution
 - 完整案例：`cases/CASE-0015_BTCUSDT.P_MultiTF_15m_TC-L_HTF_A-S-A-L_Conflict.md`
 
 ## 核心信号链
@@ -26,7 +26,10 @@
 → 放量加速并接受 63500
 → 测试 63800
 → LTF 过度延伸 / 动能减速
-→ 等待 1H 收盘确认
+→ 1m UP 转 FLAT / Pullback Active
+→ 跌破 63800 / 63600
+→ 1m DN / TC-S / Deep Pullback
+→ 等待 HTF Resolution
 ```
 
 ## Gold 标记原因
@@ -43,6 +46,8 @@
 - Outcome10：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_TC-L_Outcome10_2027.png`
 - Outcome20 HTF Study：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_HTF_Breakout_Study_2048.png`
 - Outcome20 Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
+- Outcome50 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
+- Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
 
 ## 执行原则
 
@@ -50,10 +55,12 @@
 - 不在 `63800-64000` 过度延伸区追多。
 - 不因 1m `S-ZONE HMR100` 和动能减速直接做空。
 - 只有跌破 `63250` 并完成 bearish retest，才重新评估空头执行。
+- 15m / 5m 仍为 `UP` 时，1m `TC-S` 只归类为候选 `PULLBACK-S`；不得当作 `TREND-S`。
 
 ## 待验证项
 
 - 21:00 的 1H K 线收盘后，Context 是否从 `FLAT` 升级为 `UP`。
 - 1H `A-S HMR100` 是否仍覆盖 recovery state。
-- 高位动能减速后，回踩是否保持 `63500 / 63250`结构。
+- 深度回踩后，`63500-63450` 与 `63300-63200` 是否守住。
+- HTF 是否同步转 `DN`；未同步前保持 `PULLBACK-S` 研究分类。
 - Outcome50 确认后，再决定最终 `Success / Late / NoTrade / Fail`。

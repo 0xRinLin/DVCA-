@@ -25,13 +25,15 @@
 - Outcome10：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_TC-L_Outcome10_2027.png`
 - Outcome20 HTF Study：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_HTF_Breakout_Study_2048.png`
 - Outcome20 High-Level Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
+- Outcome50 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
+- Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
 
 ## Case Lifecycle
 
-- 当前状态：Outcome20Recorded
-- 下一步预期：Outcome50PendingHTFConfirmation
+- 当前状态：Outcome50DeepPullback
+- 下一步预期：Outcome50HTFResolution
 - 生命周期状态：Review20
-- 执行状态：ManageProfit / NoChase / WaitHTFConfirmation
+- 执行状态：PULLBACK-S / WaitHTFConfirmation
 - 当前评级：Gold Case
 
 ## 多周期背景
@@ -147,7 +149,7 @@ HTF bearish
 
 - 信号后 10 根 K 线：回踩 62760 附近后支撑守住，1m 从临时 DN 恢复为 UP / TC-L，随后放量突破 62920 与 63000；LTF 多头延续确认，等待 Outcome20 验证 HTF 压力。
 - 信号后 20 根 K 线：Unknown
-- 信号后 50 根 K 线：Unknown
+- 信号后 50 根 K 线：观察进行中；22:02 记录 LTF Pullback Active，22:05 记录 1m `DN / TC-S` Deep Pullback，但 15m / 5m 仍为 `UP / TC-L`，等待 HTF Resolution。
 - 最大顺向空间：NA
 - 最大反向回撤：NA
 - 是否成功：Unknown
@@ -254,3 +256,97 @@ FLAT
 - 等待 21:00 的 1H K 线收盘后确认 HTF 状态。
 - 当前保持 `Result=Unknown`，不在 HTF 收盘前提前关闭为 Success。
 - 下一生命周期节点：`Outcome50PendingHTFConfirmation`。
+
+## Outcome50 Pullback Active（2026-07-14 22:02 UTC+8）
+
+- 价格：约 `63715`。
+- 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`。
+
+### 多周期状态
+
+| 周期 | 状态 | 观察 |
+| --- | --- | --- |
+| 15m | `UP / TC-L` | RSI 约 `69`，高周期多头结构仍完整 |
+| 5m | `UP / TC-L` | RSI 约 `57`，MACD Histogram 转负，回踩进行中 |
+| 1m | `FLAT / S-ZONE HMR100 / S invalid` | RSI 约 `42`，MACD 为负，短周期从 UP 降为 FLAT |
+
+### 状态路径
+
+```text
+64000 附近受阻
+→ 跌破 63800
+→ 1m UP 转 FLAT
+→ 15m / 5m 仍保持 UP
+→ LTF Pullback Active
+```
+
+### Display Study
+
+```text
+HTF Trend: UP
+LTF Phase: PULLBACK
+LTF State: FLAT
+Execution: WAIT
+```
+
+### 关键价位
+
+- 重新收复：`63780-63850`
+- 第一支撑：`63650-63600`
+- 下一支撑：`63450-63380`
+- 核心结构：`63300-63250`
+
+### 结论
+
+- 1m 动能转弱，但尚未出现可执行的空头趋势确认。
+- 图中没有 `PB-L`，因此也没有形成回踩多头执行信号。
+- 该阶段记录为 `Outcome50PullbackActive / WAIT`，不因 1m 压力警告提前关闭案例。
+
+## Outcome50 Deep Pullback（2026-07-14 22:05 UTC+8）
+
+- 价格：约 `63590`。
+- 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`。
+
+### 多周期状态
+
+| 周期 | 状态 | 观察 |
+| --- | --- | --- |
+| 15m | `UP / TC-L` | RSI 约 `64`，趋势仍多但动能减弱 |
+| 5m | `UP / TC-L` | RSI 约 `53`，MACD Histogram 为负 |
+| 1m | `DN / TC-S` | RSI 约 `35`，MACD 负向扩张，低周期回踩空确认 |
+
+### 状态路径
+
+```text
+64000 附近受阻
+→ 1m 动能减弱
+→ 1m UP 转 FLAT
+→ 跌破 63800
+→ 跌破 63600
+→ 1m FLAT 转 DN
+→ 1m TC-S
+```
+
+### 研究分类
+
+```text
+LTF TC-S + HTF UP = PULLBACK-S
+LTF TC-S + HTF DN = TREND-S
+```
+
+- `PULLBACK-S / TREND-S` 是本案例提出的研究分类，不是 DVCA v1.5.1 的原始标签。
+- 当前 15m / 5m 仍为 `UP`，所以 1m `TC-S` 只确认低周期回踩空，不能解释为 HTF 趋势空。
+
+### 关键价位
+
+- 反抽压力：`63640-63700`
+- 第一支撑：`63500-63450`
+- 下一支撑：`63390-63300`
+- 核心结构：`63250-63200`
+
+### Outcome50 当前结论
+
+- 低周期回踩已从 `FLAT` 升级为 `DN / TC-S`，状态记为 `Outcome50DeepPullback`。
+- 高周期趋势空尚未确认；只有 HTF 同步转 `DN` 后，研究分类才可从 `PULLBACK-S` 升级为 `TREND-S`。
+- `Result` 保持 `Unknown`，等待回踩止稳或 HTF 结构破坏后再确定 `Success / Fail / Late / NoTrade`。
+- 生命周期保持 `Review20`，下一节点为 `Outcome50HTFResolution`。

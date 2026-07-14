@@ -160,5 +160,7 @@ LATE-L / LATE-S 是 Pivot 延迟确认后的补确认，不是追单信号。
   - 重点：15m / 30m 恢复并突破，21:00 前 1H 仍等待收盘确认；1m 高位动能减速不等于反向执行。
   - 候选状态链：`FLAT -> RECOVERY-L -> UP-PENDING -> UP-CONFIRMED`。
   - 执行原则：不追 `63800-64000`；未跌破 `63250` 并完成 bearish retest 前不做空；HMR100 不等于执行授权。
+  - Outcome50 路径：`LTF UP -> FLAT -> DN / TC-S`，但 15m / 5m 仍为 `UP / TC-L`，因此暂归类为 `PULLBACK-S`，不是 `TREND-S`。
+  - 候选角色规则：`LTF TC-S + HTF UP = PULLBACK-S`；`LTF TC-S + HTF DN = TREND-S`。
 
 该引用只用于 Atlas 研究映射，不改变 Signal Manual 原则。

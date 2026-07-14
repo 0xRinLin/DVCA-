@@ -233,3 +233,13 @@
 - 执行：已有多单管理利润；不在 63800-64000 追多；未跌破 63250 并完成 bearish retest 前不做空。
 - 证据边界：21:00 截图未直接展示 1H，因此 HTF 状态保持待收盘确认，不提前判定。
 - 边界：本次不修改 Pine、Signal Manual 或 Line Patterns。
+
+## 2026-07-14 BTC CASE-0015 Outcome50 Pullback Active / Deep Pullback
+
+- 原因：根据 2026-07-14 22:02 与 22:05（UTC+8）BTCUSDT.P 多周期截图，记录 64000 附近受阻后从 LTF 动能减弱到 1m `DN / TC-S` 的连续回踩过程。
+- 改动：归档 `2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png` 与 `2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`。
+- 改动：`CASE-0015` 更新为 `Outcome50DeepPullback / Review20 / Outcome50HTFResolution`，`Result` 保持 `Unknown`。
+- 研究结论：15m / 5m 仍为 `UP / TC-L` 时，1m `TC-S` 只确认低周期回踩空，不确认 HTF 趋势空。
+- 候选分类：`LTF TC-S + HTF UP = PULLBACK-S`；`LTF TC-S + HTF DN = TREND-S`。该分类仅写入 Suggested Rule Update，不修改 v1.5.1 代码语义。
+- 关键价位：反抽 `63640-63700`；支撑 `63500-63450`；下一观察 `63390-63300`；核心结构 `63250-63200`。
+- 边界：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。

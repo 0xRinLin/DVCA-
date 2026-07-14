@@ -7,7 +7,7 @@
 - 指标：DVCA 1.5.1
 - 关联案例：`CASE-0015`
 - 关联主题：`research/questions/2026-07-14_DVCA_HTF_execution_signal_lag.md`
-- 状态：Outcome20Recorded / Outcome50PendingHTFConfirmation
+- 状态：Outcome50DeepPullback / Outcome50HTFResolution Pending
 - 改进标签：CounterTrendSignalDowngrade
 
 ## 问题
@@ -103,3 +103,32 @@ FLAT -> RECOVERY-L -> UP-PENDING -> UP-CONFIRMED
 - 1m 仍为 `UP`，最新 `S-ZONE HMR100 / S invalid`，RSI 约 `70.6`，MACD Histogram 转负，只确认短线动能减速。
 - 当前不追多，也不在多头结构未破坏时仅凭 1m 警告做空。
 - 下一步：等待 21:00 的 1H K 线收盘后确认 HTF 状态，再记录 Outcome50。
+
+## Outcome50 Pullback Study（2026-07-14 22:02-22:05 UTC+8）
+
+### 22:02 Pullback Active
+
+- 15m / 5m 仍为 `UP / TC-L`，1m 从 `UP` 转为 `FLAT`。
+- 1m 最新为 `S-ZONE HMR100 / S invalid`，只构成短周期压力警告。
+- 研究显示建议：`HTF Trend=UP / LTF Phase=PULLBACK / LTF State=FLAT / Execution=WAIT`。
+
+### 22:05 Deep Pullback
+
+- 价格继续跌破 `63800` 与 `63600`，1m 从 `FLAT` 转为 `DN` 并出现 `TC-S`。
+- 15m / 5m 仍保持 `UP / TC-L`，因此只确认低周期回踩空，没有确认 HTF 趋势空。
+
+### 新增候选分类
+
+```text
+LTF TC-S + HTF UP = PULLBACK-S
+LTF TC-S + HTF DN = TREND-S
+```
+
+该分类用于区分低周期回踩与高周期趋势反转，属于研究建议，不是 DVCA v1.5.1 已实现的信号名称。
+
+### 下一验证点
+
+- `63500-63450` 是否止稳并恢复多头结构。
+- `63390-63300` 与 `63250-63200` 是否被有效跌破。
+- HTF 是否同步转为 `DN`，从而使 `PULLBACK-S` 升级为 `TREND-S`。
+- 最终结果继续保持 `Unknown`。
