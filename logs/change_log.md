@@ -253,3 +253,12 @@
 - Finding：HTF `UP` 背景下的 LTF `TC-S` 被验证为 `PULLBACK-S`；`LATE-L` 方向正确但执行偏晚。
 - 研究：新增 `MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG` 标签，并继续观察 `FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED` 候选状态链。
 - 边界：未修改 `indicator/dvca_v1_5_1.pine`、`docs/signal_manual.md`、`docs/line_patterns.md`。
+
+## 2026-07-14 BTC CASE-0015 Post-Close Breakout Retest
+
+- 原因：根据 2026-07-14 22:58 与 23:07（UTC+8）BTCUSDT.P 截图，为已关闭的 `CASE-0015` 增加突破回测与 HTF 延伸证据。
+- 改动：归档 `2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png` 和 `2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`。
+- 状态：主案例保持 `Outcome50Recorded / Closed / Success`；关闭后跟踪状态为 `BreakoutRetestActive / NoChase`。
+- 关键位：Trigger `64010-64090`；压力 `64100-64250`；支撑 `63920-63850`；核心恢复支撑 `63820-63780`。
+- 研究：23:07 图中 30m / 1H 均为 `Ctx=UP`，为 `FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED` 候选状态链提供后续证据。
+- 边界：5m / 1m `L-ZONE HMR95` 仍是观察区，不等于正式 `LONG`；未修改 Pine、Signal Manual 或 Line Patterns。

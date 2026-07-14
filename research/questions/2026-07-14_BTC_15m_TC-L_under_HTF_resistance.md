@@ -151,3 +151,10 @@ LTF TC-S + HTF DN = TREND-S
 - `MTF_PULLBACK_RECOVERY`
 - `HTF_STATE_LAG`
 - `CounterTrendSignalDowngrade`
+
+## Post-Close Breakout Retest（2026-07-14 22:58-23:07 UTC+8）
+
+- 22:58 价格重新测试 64000，15m 保持 `UP / TC-L`，5m 与 1m 出现 `L-ZONE HMR95`，Trigger 分别约为 64086 与 64010。
+- Pullback Recovery 已确认，但当前只是 Breakout Test，执行分类保持 `NoChase`。
+- 23:07 HTF 截图中 30m 与 1H 均显示 `Ctx=UP`，为此前 `FLAT / HTF_STATE_LAG` 提供了后续转换证据。
+- 本段作为已关闭 Gold Case 的延伸验证，不改变 `Outcome50Recorded / Closed / Success`。

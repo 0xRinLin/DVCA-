@@ -211,3 +211,32 @@ FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED
 ### 状态
 
 本条由 Pending Observation 升级为 Single Gold Case Validation；仍需达到最少案例门槛后，才能修改 Pine。
+
+## Post-Close Validation：Breakout Retest / HTF Transition
+
+- 日期：2026-07-14 22:58-23:07 UTC+8
+- 案例：`CASE-0015`
+- 状态：`BreakoutRetestActive / NoChase`
+
+### 观察
+
+- 22:58：15m 为 `UP / TC-L`；5m 与 1m 为 `UP / L-ZONE HMR95`，Trigger 分别约 64086 与 64010。
+- 价格完成 Pullback Recovery 后重新测试 64000，但尚处在 64100-64250 压力区附近。
+- 23:07：30m 与 1H HUD 均显示 `Ctx=UP`，价格约 64177。
+
+### 对候选状态链的支持
+
+```text
+FLAT
+→ RECOVERY-L
+→ UP-PENDING
+→ UP-CONFIRMED
+```
+
+本次后续图说明此前的 1H `FLAT` 可以被视为恢复与确认之间的过渡状态候选，而不是永久停留状态。
+
+### 执行边界
+
+- `Ctx=UP` 解决方向确认问题，不自动解决高位执行质量问题。
+- 5m / 1m `L-ZONE HMR95` 是观察区，不是正式 `LONG`。
+- 突破测试阶段仍应输出 `NoChase`，等待 64010-64090 的有效接受或 63920-63850 回踩确认。

@@ -29,6 +29,8 @@
 - Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
 - Outcome50 Pullback Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
 - Outcome50 HTF State Lag：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
+- Post-Close Breakout Retest：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`
+- Post-Close HTF Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`
 
 ## Case Lifecycle
 
@@ -398,3 +400,52 @@ HTF UP
 - 案例状态：`Outcome50Recorded / Closed`。
 - 最终结果：`Success`。
 - Gold Case：Yes。
+
+## Post-Close Follow-up：Breakout Retest Active（2026-07-14 22:58 UTC+8）
+
+- 价格：约 `64030`。
+- 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`。
+- 案例生命周期保持：`Outcome50Recorded / Closed / Success`。
+- 跟踪状态：`BreakoutRetestActive`。
+
+### 多周期状态
+
+| 周期 | 状态 | 观察 |
+| --- | --- | --- |
+| 15m | `UP / TC-L` | RSI 约 `76.7`，趋势延续但已延伸 |
+| 5m | `UP / L-ZONE HMR95 / B95` | Trigger 约 `64086`，RSI 约 `63.8` |
+| 1m | `UP / L-ZONE HMR95 / B95 / S invalid` | Trigger 约 `64010`，RSI 约 `59` |
+
+### 路径
+
+```text
+64000 附近受阻
+→ LTF UP → FLAT → DN
+→ TC-S pullback
+→ 63550 附近支撑守住
+→ LTF 返回 UP
+→ 收复 63787
+→ 重新测试 64000
+→ Breakout Test Active
+```
+
+### 关键价位
+
+- Trigger 区：`64010-64090`
+- 压力区：`64100-64250`
+- 第一支撑：`63920-63850`
+- 核心恢复支撑：`63820-63780`
+
+### 分类与执行
+
+- Pullback 已恢复，当前进入突破测试阶段。
+- 5m / 1m `L-ZONE HMR95` 仍是观察区，不等同正式 `LONG`。
+- 当前分类：`BreakoutRetestActive / NoChase`。
+- 本段为关闭后的延伸跟踪，不改变主案例 `Success` 结果。
+
+## Post-Close HTF Extension（2026-07-14 23:07 UTC+8）
+
+- 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`。
+- 图上价格约 `64177`，30m 与 1H HUD 均显示 `Ctx=UP`。
+- 该截图为 22:58 Breakout Test 后的延伸证据，支持 HTF 从恢复阶段转向多头确认。
+- 位置已明显延伸，继续保留 `NoChase`，不把方向确认等同于当前执行质量。

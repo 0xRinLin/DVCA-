@@ -53,6 +53,8 @@
 - Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
 - Outcome50 Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
 - Outcome50 HTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
+- Post-Close Breakout Retest：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`
+- Post-Close HTF Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`
 
 ## 执行原则
 
@@ -70,3 +72,18 @@
 - HTF 是否同步转 `DN`；未同步前保持 `PULLBACK-S` 研究分类。
 - 本次 Outcome50 已确认主信号方向为 `Success`；1m `LATE-L` 单独记录为执行确认偏晚。
 - 继续将 1H `FLAT / A-S HMR100` 与已收复结构之间的差异作为 `HTF_STATE_LAG` 研究问题，不再阻止本案例关闭。
+
+## Post-Close Validation
+
+```text
+Pullback Recovery Confirmed
+→ retest 64000
+→ 5m / 1m L-ZONE HMR95
+→ Trigger 64010-64090 test
+→ 30m / 1H Ctx UP
+→ HTF Breakout Extension
+```
+
+- 22:58 跟踪状态：`BreakoutRetestActive / NoChase`。
+- 23:07 HTF 图显示 30m / 1H 均为 `Ctx=UP`，为此前 `HTF_STATE_LAG` 提供后续状态转换证据。
+- 该验证不改变案例已经关闭的生命周期，也不把单独 `L-ZONE` 解释为正式进场信号。
