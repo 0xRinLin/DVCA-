@@ -1,0 +1,283 @@
+# DVCA 案例复盘：CASE-0016
+
+## 基本信息
+
+- 案例编号：CASE-0016
+- 日期：2026-07-16
+- 截图时间：20:47 UTC+8
+- 交易品种：BTCUSDT
+- 交易所：Binance
+- 截图指标版本：DVCA 1.5.1
+- 当前项目基线：DVCA v1.5.4
+- 周期：1H / 30m / 15m / 5m / 1m
+- 方向观察：SHORT
+- 主信号：TC-S / Recovery Failure / Bearish Continuation Reactivated
+- 模式：BearishTransitionRecoveryFailure
+- 结果：Unknown
+- 暂定评级：Good Case candidate
+- 研究标签：HTF_DN_PENDING / TC_S_TREND_CONFIRMATION
+
+## 证据边界
+
+- 本案例截图右侧 HUD 明确显示 `DVCA 1.5.1`，因此属于历史版本研究证据。
+- 当前正式主版本是 `indicator/current/dvca_v1_5_4.pine`；本案例不能直接用于认定 v1.5.4 存在高周期状态滞后。
+- `DN-PENDING` 是基于本案例提出的候选研究状态，不是 DVCA v1.5.1 或 v1.5.4 已实现的正式状态。
+- 若要进入 v1.5.4 高周期专项数据库，必须使用 v1.5.4 在同类行情上重新截图并完成人工逐根 K 线复核。
+
+## 截图路径
+
+- 5m / 15m / 1m：`screenshots/BTCUSDT/2026-07-16/2026-07-16_BTCUSDT_MultiTF_TC-S_BearishTransition_2047.png`
+- 30m / 1H：`screenshots/BTCUSDT/2026-07-16/2026-07-16_BTCUSDT_30m_1H_DN-PENDING_2047.png`
+- 中间恢复分支 5m / 15m / 1m：`screenshots/BTCUSDT/2026-07-16/2026-07-16_BTCUSDT_BearishContinuationFailure_LTF_2229.png`
+- 中间恢复分支 30m / 1H：`screenshots/BTCUSDT/2026-07-16/2026-07-16_BTCUSDT_BearishContinuationFailure_HTF_2230.png`
+- Outcome10 5m / 15m / 1m：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_MultiTF_RecoveryFailure_TC-S_Outcome10_1228.png`
+- Outcome10 30m / 1H：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_30m_1H_BearishAlignment_Outcome10_1228.png`
+
+## Case Lifecycle
+
+- 当前状态：Outcome10Recorded
+- 下一步预期：Outcome20
+- 生命周期状态：Review10
+- Outcome10：Recovery Branch Failed / Bearish Continuation Active
+- Outcome20：Pending
+- Outcome50：Pending
+- 最终结果：Unknown
+- 最终评级：Pending，Outcome 未完成前不晋升为 Good Case
+
+## 初始多周期状态表（2026-07-16 20:47 UTC+8）
+
+| 周期 | 图上 Context | 最新信号 | 动能/位置 | 研究判断 |
+| --- | --- | --- | --- | --- |
+| 1H | FLAT | A-S HMR95 | RSI 约 35.6，动能偏空 | 高周期尚未正式转 DN；候选观察为 DN-PENDING |
+| 30m | DN / B100 | A-S HMR100 | RSI 约 30.8，MACD 为负 | 核心结构已经转弱 |
+| 15m | DN / B100 | TC-S | RSI 约 33.9 | 空头执行环境已形成 |
+| 5m | DN | TC-S | RSI 约 49.8 | 执行周期保持空头延续 |
+| 1m | DN / S95 | TC-S | RSI 约 36.7 | 精细周期跟随下跌，但正接近支撑 |
+
+## 当前市场结构
+
+```text
+延伸上涨
+→ S-ZONE / C-S / LATE-S 风险警告
+→ 高点降低
+→ 跌破 64500
+→ 跌破 64100 / 64000
+→ 30m / 15m / 5m / 1m 转为 DN
+→ 多周期 TC-S 延续
+→ 测试 63800-63780 支撑
+```
+
+- 30m 以下周期的空头转折已经一致，说明这不再只是 1m 的局部回踩。
+- 1H 仍显示 `FLAT`，因此“1H 趋势空确认”尚未完成。
+- 当前价格已接近支撑，方向判断偏空不等于此处具备良好追空盈亏比。
+
+## 信号链
+
+- 观察区/风险信号：S-ZONE / A-S HMR95-100。
+- Zone 确认提示：C-S。
+- 延迟补确认：LATE-S，只记录转弱补确认，不作为追单信号。
+- 趋势延续：30m 以下多个周期转 DN 后出现 TC-S。
+- 正式执行信号：截图未确认独立 `SHORT` 或 `PB-S`。
+- 当前分类：`MTF bearish transition below 1H / TC-S continuation / no chase into support`。
+
+## 关键价位与失效条件
+
+- 当前支撑：`63800-63780`。
+- 下一支撑观察区：`63500-63300`。
+- 第一反抽压力：`64050-64150`。
+- 核心压力区：`64300-64500`。
+- 空头延续失效观察：重新站回 `64150`，并在 5m / 15m 形成更高低点结构。
+- 更强失效证据：重新收复 `64300-64500`，且 30m 不再保持 DN。
+
+## 多头与空头交易计划
+
+### 空头计划
+
+- 当前动作：等待，不直接在 `63800-63780` 支撑附近追空。
+- 入场触发：反抽 `64050-64150` 后无法站稳，5m / 1m 形成更低高点，并重新出现 TC-S、SHORT 或 PB-S 之一。
+- 止损原则：放在反抽确认高点上方；仅凭当前截图无法可靠给出精确止损价。
+- 目标观察：先看 `63800-63780`，有效跌破并回抽不回后再看 `63500-63300`。
+- 无效条件：持续站回 `64150` 并形成更高低点；若进一步收复 `64300-64500`，空头转折假设明显减弱。
+
+### 多头计划
+
+- 当前动作：禁止仅因接近支撑或 RSI 偏低而逆势做多。
+- 入场触发：至少收复 `64150`，形成 5m 更高低点，并使 15m 空头延续结构失效。
+- 止损原则：放在确认后的更高低点下方；当前截图不足以确定精确位置。
+- 目标观察：`64300-64500` 压力区。
+- 无效条件：反抽无法站稳 `64050-64150`，随后再度跌破 `63800-63780`。
+
+## 评分
+
+- 信号方向评分：`8/10`。30m、15m、5m、1m 同向 DN，TC-S 延续一致。
+- 当前位置评分：`4/10`。价格正测试支撑，追空位置不佳。
+- 多周期一致性评分：`7/10`。30m 以下一致，但 1H 仍是 FLAT。
+- 当前交易评分：`5/10`。方向明确、执行位置欠佳，需等待反抽确认。
+- 研究价值评分：`8/10`。适合验证 1H `FLAT` 到潜在 `DN` 之间是否需要过渡状态。
+
+## Outcome 剧本
+
+### Outcome10
+
+- 空头延续：跌破 `63800-63780`，反抽不能收回，向 `63500-63300` 推进。
+- 反抽修复：守住 `63800-63780` 并收复 `64150`，但尚不足以确认高周期反转。
+- 震荡：价格在 `63780-64150` 内整理，保持 NoTrade。
+
+### Outcome20
+
+- 观察 30m 是否继续保持 DN。
+- 观察 1H 是否从 FLAT 进入正式 DN，或重新恢复到非空头结构。
+- 记录反抽是否产生 SHORT / PB-S，避免只统计 TC-S 标签数量。
+
+### Outcome50
+
+- 判断这次转弱属于完整趋势反转、有限回调还是假跌破。
+- 完成最大顺向空间、最大反向回撤和最终案例评级。
+- 只有 Outcome50 与人工复核完成后，才决定是否将本案例晋升为 Good Case。
+
+## 指标改进建议
+
+1. 研究 `FLAT → DN-PENDING → DN` 的过渡展示，但不得基于单一 v1.5.1 案例直接改代码。
+2. 分离 `HTF Context`、`Last Zone Event` 与 `LTF Execution Signal`，避免把 A-S 高分误读成正式追空授权。
+3. 在 TC-S 方向正确但贴近支撑时增加位置/延伸惩罚或 `No-Chase` 提示。
+4. 使用 v1.5.4 复现同类样本，核对 1H/30m 状态切换是否仍存在相同现象。
+
+## Follow-up 要求
+
+- 以 15m 为主计时，补充信号后 10、20、50 根 K 线截图。
+- Outcome10 截图必须覆盖 `63800-63780` 的最终处理结果。
+- Outcome20 需同时保留 1H / 30m / 15m，确认高周期状态是否切换。
+- 复现时使用 DVCA v1.5.4，并记录 Zone 的 pivot 位置与真实确认时间。
+
+## 中间 Follow-up（2026-07-16 22:30 UTC+8）
+
+- 价格：约 `64740`。
+- 截图：
+  - `screenshots/BTCUSDT/2026-07-16/2026-07-16_BTCUSDT_BearishContinuationFailure_LTF_2229.png`
+  - `screenshots/BTCUSDT/2026-07-16/2026-07-16_BTCUSDT_BearishContinuationFailure_HTF_2230.png`
+- 阶段状态：Bearish Continuation Failed。
+- Recovery Branch：SignalCaptured。
+- Result：Unknown。
+
+### Previous
+
+```text
+1H FLAT
+30m / 15m / 5m / 1m DN
+TC-S
+Price tested 63780 support
+```
+
+### 阶段路径
+
+```text
+63780 support held
+Price reclaimed 64150
+Price reclaimed 64500
+1m and 5m changed to UP
+15m, 30m and 1H returned/remained FLAT
+Bearish continuation failed
+```
+
+### Intermediate MTF
+
+| 周期 | 状态 |
+| --- | --- |
+| 1H | FLAT，A-S HMR95 |
+| 30m | FLAT，A-S HMR100 |
+| 15m | FLAT，latest TC-S |
+| 5m | UP，latest TC-L |
+| 1m | UP，latest TC-L，S invalid |
+
+### 阶段解释
+
+这是 `LTF bullish recovery inside HTF transition`，不是已经确认的 HTF uptrend。
+
+- 不追 `64850-65000` 阻力区。
+- 原 TC-S / Bearish Continuation 在本阶段失效。
+- Recovery Branch 进入 `SignalCaptured`，等待后续验证是否升级为 HTF recovery 或再次失败。
+
+### 阶段关键价位
+
+- Resistance：`64850-65000`
+- Support：`64600-64500`
+- Next：`64350-64250`
+- Core：`64150-64000`
+- Failure：below `63780`
+
+### 阶段结论
+
+63780 支撑守住并连续收复 64150 / 64500 后，1m 与 5m 切换为 UP，说明原 30m 以下的 Bearish Continuation 在这一阶段失败。但 15m、30m、1H 仍为 FLAT 或 transition，因此不能提前判定为 HTF 多头趋势确认；该恢复分支继续等待后续结果。
+
+## Outcome10 Resolution（2026-07-17 12:28 UTC+8）
+
+### 数据读取说明
+
+- 图表十字光标位于历史 K 线上，顶部 OHLC 属于光标选中的历史柱，不代表当前价格。
+- 当前价格约 `63341.4`，取自实时买卖报价与右侧价格轴标签。
+- 本节只使用用户提供并能在截图中核验的最新 HUD、MACD、RSI 和价位信息。
+
+### 最新多周期状态
+
+| 周期 | Context / 状态 | 最新信号 | MACD / Histogram | RSI / MA |
+| --- | --- | --- | --- | --- |
+| 1H | DN / B95 / Trig 60758.3 | A-S HMR95 | -269.9 / -194.3 / -75.6 | 32.65 / 41.25 |
+| 30m | DN / B100 / Trig 64438.9 | A-S HMR100 | -220.7 / -183.5 / -37.2 | 31.75 / 36.08 |
+| 15m | DN / B invalid | TC-S | -148.7 / -140.8 / -8.0 | 31.90 / 36.93 |
+| 5m | DN / S95 / Trig 63358.0 / B invalid | TC-S | -62.5 / -42.9 / -19.6 | 34.67 / 44.17 |
+| 1m | DN / S invalid | TC-S | -43.5 / -42.5 / -1.0 | 34.34 / 33.49 |
+
+### 实际路径
+
+```text
+63780 支撑初次守住
+→ 收复 64150
+→ 收复 64500
+→ 1m / 5m 转 UP
+→ 64750-64800 附近受阻
+→ 首次回踩 64500
+→ 64500-64430 支撑失败
+→ 跌破 64300
+→ 跌破 64150-64000
+→ 跌破 63780 核心支撑
+→ 30m / 1H 转 DN
+→ 五周期空头对齐
+→ 当前价格约 63341
+```
+
+### Outcome10 判定
+
+- Recovery Branch：`Failed`。短线收复 64150 和 64500 后，未能守住 64500-64430，最终跌破 63780。
+- Bearish Continuation：`Active`。确认依据为 63780 跌破，以及 30m / 1H 均转 DN。
+- 原始 CASE-0016 空头方向：Favorable / Direction Validated at Outcome10。
+- 最终 Result：仍为 Unknown，等待 Outcome20 和 Outcome50；不得把 Outcome10 方向验证提前写成最终 Good Case。
+
+### 最新关键价位
+
+- 第一压力：`63400-63500`。
+- 优先空头设置区：`63500-63620`。
+- 核心压力：`63770-63900`。
+- 强压力：`64050-64200`。
+- 当前支撑：`63300-63200`。
+- 下一观察：`63000`。
+- 延伸观察：`62800-62600`。
+
+### 最新执行计划
+
+- 不在约 `63341` 追空；15m、30m、1H RSI 已接近低位，位置风险高。
+- 优先等待反抽 `63500-63620` 或 `63770-63900` 后出现空头拒绝，再评估顺势空。
+- 破位空必须等待 `63200` 跌破并反抽失败，不能只凭瞬间下破执行。
+- 五个周期都保持 DN 时，多头尚未确认。
+- 逆势多至少需要 1m 转 UP，并出现 TC-L 或 PB-L，同时 5m 不再创出新低。
+- 精确止损应依据反抽确认高点或结构低点设置；当前截图不足以给出统一固定止损价。
+
+### 研究结论
+
+1. 2026-07-16 的 `DN-PENDING` 候选观察在 v1.5.1 后续图中最终演化为 1H `DN`，但这仍不是 v1.5.4 的验证结果。
+2. 恢复分支先转强再失败，说明单次 LTF 收复不能覆盖 30m / 1H 的后续确认；需要持续守住关键结构。
+3. TC-S 的方向确认与执行位置必须分开：五周期空头对齐不等于接近支撑时可以追空。
+4. Outcome20 应重点检查 `63200` 是否有效跌破，以及反抽 `63500-63620` 是否形成拒绝。
+
+## 当前结论
+
+Outcome10 已确认恢复分支失败，`1H/30m/15m/5m/1m` 全部转为 DN，CASE-0016 的空头方向得到阶段验证。当前价格约 63341，正靠近 `63300-63200` 支撑，执行仍是等待反抽拒绝或 63200 破位回测，禁止低位追空；最终结果与案例评级继续等待 Outcome20/50。

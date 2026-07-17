@@ -1,17 +1,18 @@
-# Gold Case：CASE-0015 BTC HTF Breakout Recovery
+# Gold Case Candidate：CASE-0015 BTC HTF Breakout Recovery
 
 ## 基本信息
 
-- Gold 类型：BTC / TC / HTF Recovery
+- 候选类型：BTC / TC / HTF Recovery
 - 对应案例：CASE-0015
 - 日期：2026-07-14
 - 品种：BTCUSDT.P
 - 交易所：Binance
 - 指标：DVCA 1.5.1
 - 主信号：15m / 5m TC-L
-- 当前结果：Success
-- 生命周期：Outcome50Recorded / Closed
-- 下一步：Completed
+- 当前结果：Unknown（Outcome10 Favorable）
+- 生命周期：Outcome10Recorded / Review10
+- 下一步：Outcome20 after 2026-07-15 00:27 UTC+8
+- 暂定评级：Good Case candidate / Gold Case candidate
 - 完整案例：`cases/CASE-0015_BTCUSDT.P_MultiTF_15m_TC-L_HTF_A-S-A-L_Conflict.md`
 
 ## 核心信号链
@@ -35,7 +36,7 @@
 → Pullback Recovery Confirmed
 ```
 
-## Gold 标记原因
+## Gold 候选原因
 
 - 完整记录了 HTF 偏空、低周期修复、结构收复、TC-L 同步、放量突破与过度延伸的演化。
 - 能清楚说明 `S-ZONE` 警告不等于反向执行，以及结构收复后 `TC-L` 的延续确认价值。
@@ -47,14 +48,16 @@
 - Initial LTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_15m_TC-L_LTF_1923.png`
 - Initial HTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_30m_AL_15m_TCL_1927.png`
 - Outcome10：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_TC-L_Outcome10_2027.png`
-- Outcome20 HTF Study：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_HTF_Breakout_Study_2048.png`
-- Outcome20 Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
-- Outcome50 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
-- Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
-- Outcome50 Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
-- Outcome50 HTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
-- Post-Close Breakout Retest：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`
-- Post-Close HTF Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`
+- Outcome10 HTF Study：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_HTF_Breakout_Study_2048.png`
+- Outcome10 Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
+- Outcome10 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
+- Outcome10 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
+- Outcome10 Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
+- Outcome10 HTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
+- Outcome10 Breakout Retest：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`
+- Outcome10 HTF Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`
+- Outcome10 Favorable LTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_Outcome10_Favorable_2346.png`
+- Outcome10 Context / Last Conflict：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_Outcome10_ContextLastConflict_2346.png`
 
 ## 执行原则
 
@@ -70,10 +73,10 @@
 - 1H `A-S HMR100` 是否仍覆盖 recovery state。
 - 深度回踩后，`63500-63450` 与 `63300-63200` 是否守住。
 - HTF 是否同步转 `DN`；未同步前保持 `PULLBACK-S` 研究分类。
-- 本次 Outcome50 已确认主信号方向为 `Success`；1m `LATE-L` 单独记录为执行确认偏晚。
+- Outcome10 已确认主信号方向 Favorable；1m `LATE-L` 单独记录为执行确认偏晚，最终 Result 仍为 Unknown。
 - 继续将 1H `FLAT / A-S HMR100` 与已收复结构之间的差异作为 `HTF_STATE_LAG` 研究问题，不再阻止本案例关闭。
 
-## Post-Close Validation
+## Outcome10 Validation
 
 ```text
 Pullback Recovery Confirmed
@@ -86,4 +89,6 @@ Pullback Recovery Confirmed
 
 - 22:58 跟踪状态：`BreakoutRetestActive / NoChase`。
 - 23:07 HTF 图显示 30m / 1H 均为 `Ctx=UP`，为此前 `HTF_STATE_LAG` 提供后续状态转换证据。
-- 该验证不改变案例已经关闭的生命周期，也不把单独 `L-ZONE` 解释为正式进场信号。
+- 23:46 最新观察价约 64770，62920-63160、63500 与 64400 均已突破并有量能确认。
+- 当前记录为 `Outcome10Recorded / Review10`，不能提前写成 Outcome20 / Outcome50 或最终 Success。
+- 单独 `L-ZONE` 仍不解释为正式进场信号；高位 `S-ZONE / C-S` 先作为风险警告。

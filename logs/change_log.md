@@ -262,3 +262,32 @@
 - 关键位：Trigger `64010-64090`；压力 `64100-64250`；支撑 `63920-63850`；核心恢复支撑 `63820-63780`。
 - 研究：23:07 图中 30m / 1H 均为 `Ctx=UP`，为 `FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED` 候选状态链提供后续证据。
 - 边界：5m / 1m `L-ZONE HMR95` 仍是观察区，不等于正式 `LONG`；未修改 Pine、Signal Manual 或 Line Patterns。
+
+## 2026-07-14 BTC CASE-0015 Lifecycle Correction / Outcome10
+
+- 原因：用户明确指定本轮应按 15m K 线计为 `Outcome10Recorded`，下一次 Outcome20 在 2026-07-15 00:27 UTC+8 后；因此纠正此前过早推进到 Outcome20 / Outcome50 的生命周期标记。
+- 编号：用户仍称 `CASE-0010`，但项目中的 `CASE-0010` 已属于 2026-07-08 BTC Context Shift；本轮继续更新实际对应的 `CASE-0015`，不覆盖旧案例。
+- 改动：`CASE-0015` 修正为 `Outcome10Recorded / Review10 / Unknown`，Outcome10 结果为 Favorable，Direction Validated=Yes。
+- 改动：初始区域约 62700-62900，最新观察价格约 64770；62920-63160、63500、64400 已突破并有量能确认。
+- 改动：归档 23:46 LTF 与 30m/1H 两张截图，记录 5m/15m 强势但延伸、30m/1H Context 与 Last 冲突。
+- 暂定评级：Good Case candidate / Gold Case candidate；当前执行 `NoChase`。
+- 改进标签：`HTFSignalLag`、`StaleLastSignal`、`ContextLastConflict`、`CounterSignalAsRiskWarning`。
+- 边界：未修改 Pine、Signal Manual 或 Line Patterns。
+
+## 2026-07-16 BTC CASE-0016 MTF Bearish Transition
+
+- 原因：根据 2026-07-16 20:47（UTC+8）BTCUSDT 多周期截图，记录 30m/15m/5m/1m 同步转 DN、1H 仍为 FLAT 的空头转折。
+- 改动：新增 `CASE-0016`，状态为 `SignalCaptured / Open / Outcome10`，Result 保持 Unknown，暂定为 Good Case candidate。
+- 改动：归档两张原始截图到 `screenshots/BTCUSDT/2026-07-16/`，记录支撑 `63800-63780`、下一支撑 `63500-63300`、压力 `64050-64150` 与核心压力 `64300-64500`。
+- 执行：不在支撑附近追空；优先等待反抽失败和 5m/1m 空头确认；无结构收复前不做逆势多。
+- 版本边界：截图运行 DVCA 1.5.1；`DN-PENDING` 是研究建议，不是代码现有状态。本案例不计入 v1.5.4 高周期正式样本，需复现。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-17 BTC CASE-0016 Outcome10 Recovery Failure
+
+- 原因：根据 2026-07-17 12:28（UTC+8）BTCUSDT 多周期截图，记录 63780 初次守住后的恢复最终失败，以及五周期重新转为空头对齐。
+- 路径：收复 64150/64500 → 64750-64800 受阻 → 64500-64430 失守 → 跌破 64300、64150-64000 与 63780 → 当前约 63341。
+- 生命周期：`Outcome10Recorded / Review10 / Outcome20`；Recovery Branch=Failed，Bearish Continuation=Active，Result 保持 Unknown。
+- 执行：不在 `63300-63200` 支撑附近追空；优先等待 `63500-63620` 或 `63770-63900` 反抽拒绝，或 63200 跌破后的失败回测。
+- 版本边界：截图继续运行 DVCA 1.5.1；本记录不计入 v1.5.4 正式专项样本，不据此修改代码。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。

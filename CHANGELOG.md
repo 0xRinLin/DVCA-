@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-07-17 — CASE-0016 Outcome10 恢复失败与空头延续
+
+- 归档 BTCUSDT 12:28（UTC+8）的 LTF 与 HTF 两张跟踪截图。
+- `CASE-0016` 推进为 `Outcome10Recorded / Review10 / Outcome20`；恢复分支为 Failed，原始空头方向阶段验证为 Favorable，最终 Result 仍为 Unknown。
+- 最新五周期均为 DN；63780 核心支撑已失守，30m / 1H 已完成空头对齐。
+- 执行仍为 NoChase：不在约 63341 和 `63300-63200` 支撑附近追空，等待反抽拒绝或 63200 破位回测。
+- 版本边界不变：截图为 DVCA 1.5.1，不计入 v1.5.4 正式高周期专项样本。
+- 未修改任何 Pine Script，未生成 v1.5.5 候选代码。
+
+## 2026-07-16 — BTC 多周期空头转折历史观察
+
+- 新增 `CASE-0016`，记录 BTCUSDT 在 30m/15m/5m/1m 同步转 DN、1H 仍为 FLAT 时的 TC-S 延续。
+- 归档 5m/15m/1m 与 30m/1H 两张原始截图，案例保持 `SignalCaptured / Open / Unknown`。
+- 当前评级只记录为 `Good Case candidate`，Outcome10/20/50 尚未完成，不提前给出最终评级。
+- 截图指标为 DVCA 1.5.1；新增高周期观察文档并标记 `ExcludedPendingReproduction`，不计入 v1.5.4 正式专项样本。
+- `DN-PENDING` 只作为研究建议；未修改任何 Pine Script，未生成 v1.5.5 候选代码。
+
 ## 2026-07-14 — 高周期专项验证框架
 
 - 将项目状态更新为迁移阶段完成、高周期专项验证进行中。

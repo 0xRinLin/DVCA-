@@ -92,3 +92,56 @@
 - `CASE-0015`：BTCUSDT.P，1H `DN / A-S HMR100`、30m `FLAT / A-L HMR100`、15m `UP / TC-L`。
 - 研究用途：验证 HTF 与 15m 冲突时，反趋势 TC 是否应降级执行评分。
 - 专项问题：`research/questions/2026-07-14_BTC_15m_TC-L_under_HTF_resistance.md`。
+
+
+## Evidence Update：CASE-0016 Bearish Continuation Failure（2026-07-16）
+
+- 案例：`CASE-0016`
+- 时间：2026-07-16 22:30 UTC+8
+- 类型：Failed Continuation / Recovery Branch SignalCaptured
+
+### 观察
+
+原路径为 `1H FLAT + 30m/15m/5m/1m DN + TC-S`，价格测试 `63780` 支撑。Outcome10 中，`63780` 支撑守住，价格收复 `64150` 与 `64500`，1m / 5m 转为 UP，而 15m / 30m / 1H 返回或保持 FLAT。
+
+### 对研究问题的意义
+
+该案例支持继续研究 HTF transition 中的双分支状态：
+
+```text
+Bearish Continuation Attempt -> Failed Continuation
+Recovery Branch -> SignalCaptured
+```
+
+它说明 1H / 30m 仍为 FLAT 时，低周期 DN / TC-S 可以快速失败；如果没有 Recovery Branch 状态，系统容易把短线空头延续误读为高周期趋势确认。
+
+### 后续观察
+
+等待 Outcome20 / Outcome50，重点观察：
+
+- 64850-65000 阻力区是否拒绝价格。
+- 64600-64500 是否转为有效支撑。
+- 64150-64000 核心区是否守住。
+- 跌回 63780 下方是否重新恢复空头延续。
+
+## Evidence Update：Recovery Branch Failed（2026-07-17）
+
+- 案例：`CASE-0016`
+- 时间：2026-07-17 12:28 UTC+8
+- 类型：Recovery Failure / Bearish Continuation Reactivated
+
+### 后续路径
+
+恢复分支收复 64150 与 64500 后，在 64750-64800 附近受阻；随后依次失守 64500-64430、64300、64150-64000 和 63780。最新截图中 1H、30m、15m、5m、1m 全部为 DN。
+
+### 对研究问题的意义
+
+1. 低周期从 DN 恢复到 UP 只能建立恢复分支，不能在高周期尚未确认时直接定义反转完成。
+2. 关键结构重新失守后，恢复分支应明确标记为 Failed，并恢复 Bearish Continuation 的活动状态。
+3. Context 的方向确认与执行位置仍须分离；五周期 DN 时若价格已靠近支撑且 RSI 偏低，依然应显示 No-Chase。
+4. 本证据来自 DVCA 1.5.1，只能用于形成 v1.5.4 复现问题，不能直接作为 v1.5.5 修改依据。
+
+### 下一步
+
+- Outcome20 检查 63200 是否有效跌破及 63500-63620 反抽是否被拒绝。
+- 使用 v1.5.4 复现同类 `FLAT → DN-PENDING → DN` 路径，记录真实确认时间。

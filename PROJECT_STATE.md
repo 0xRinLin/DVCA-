@@ -1,6 +1,6 @@
 # DVCA 项目状态
 
-最后更新：2026-07-14（Asia/Shanghai）
+最后更新：2026-07-17（Asia/Shanghai）
 
 ## 当前阶段
 
@@ -17,6 +17,12 @@
 - v1.5.4R Conservative 共 1506 行，是保守测试旁支，不替代主版本，归档于 `indicator/archive/v1_5_x/`。
 - v1.6.6 Visible Adaptive 共 944 行，按主版本说明属于不再继续的 1.6.x 历史实验路线，归档于 `indicator/archive/v1_6_x/`，不得自动恢复为主版本。
 - 当前不得直接编写或生成 v1.5.5 正式代码。
+
+### 最新研究观察
+
+- 普通历史案例 `CASE-0016` 已记录 Outcome10：恢复分支失败，随后 1H/30m/15m/5m/1m 全部转为 DN，空头延续阶段有效。
+- 截图运行 DVCA 1.5.1，不符合 v1.5.4 高周期专项准入条件；已标记为 `ExcludedPendingReproduction`。
+- `DN-PENDING` 仅作为待验证研究建议，不是当前代码已实现状态，也未触发 v1.5.5 开发。
 
 ## 当前研究任务
 
@@ -44,7 +50,7 @@
 
 - `data/case_database.csv`：现有正式研究数据库；高周期专项使用独立的 `data/high_timeframe_validation/htf_case_database.csv`，不修改或合并原数据库。
 - `legacy/crypto-structure-trading-assistant/data/case_database.csv`：1 条数据记录（加表头共 2 行），20 列，字段结构不同，不能直接覆盖或拼接。
-- 发现 15 个普通案例 Markdown、2 个 Gold 案例 Markdown（另有 1 个 Gold README）以及 32 张截图。
+- 发现 16 个普通案例 Markdown、3 个 Gold 案例 Markdown（另有 1 个 Gold README）以及 47 张截图。
 - 案例、截图和数据库尚未晋升到正式目录，必须先确定映射、字段规范和 Case ID 去重规则。
 
 ## 保护状态

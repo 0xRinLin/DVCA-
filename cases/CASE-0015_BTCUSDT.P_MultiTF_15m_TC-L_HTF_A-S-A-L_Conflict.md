@@ -13,7 +13,7 @@
 - 方向观察：LONG
 - 主信号：15m TC-L after L-ZONE
 - 模式：CounterTrendReversalAttempt
-- 结果：Success
+- 结果：Unknown（Outcome10 Favorable，等待 Outcome20）
 - 初始评级：Research A- / Trade C
 - 改进标签：CounterTrendSignalDowngrade
 
@@ -25,20 +25,22 @@
 - Outcome10：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_TC-L_Outcome10_2027.png`
 - Outcome20 HTF Study：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_HTF_Breakout_Study_2048.png`
 - Outcome20 High-Level Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`
-- Outcome50 Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
-- Outcome50 Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
-- Outcome50 Pullback Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
-- Outcome50 HTF State Lag：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
-- Post-Close Breakout Retest：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`
-- Post-Close HTF Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`
+- Outcome10 Sequence - Pullback Active：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`
+- Outcome10 Sequence - Deep Pullback：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`
+- Outcome10 Sequence - Pullback Recovery：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`
+- Outcome10 Sequence - HTF State Lag：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_HTF_StateLag_2218.png`
+- Outcome10 Sequence - Breakout Retest：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`
+- Outcome10 Sequence - HTF Extension：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`
+- Outcome10 Favorable LTF：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_Outcome10_Favorable_2346.png`
+- Outcome10 Context / Last Conflict：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_Outcome10_ContextLastConflict_2346.png`
 
 ## Case Lifecycle
 
-- 当前状态：Outcome50Recorded
-- 下一步预期：Closed
-- 生命周期状态：Closed
-- 执行状态：RecoveryConfirmed / NoChase
-- 当前评级：Gold Case
+- 当前状态：Outcome10Recorded
+- 下一步预期：Outcome20After2026-07-15_00:27_UTC+8
+- 生命周期状态：Review10
+- 执行状态：NoChase
+- 当前评级：Good Case candidate / Gold Case candidate
 
 ## 多周期背景
 
@@ -152,11 +154,11 @@ HTF bearish
 ## 结果
 
 - 信号后 10 根 K 线：回踩 62760 附近后支撑守住，1m 从临时 DN 恢复为 UP / TC-L，随后放量突破 62920 与 63000；LTF 多头延续确认，等待 Outcome20 验证 HTF 压力。
-- 信号后 20 根 K 线：Unknown
-- 信号后 50 根 K 线：22:02 记录 LTF Pullback Active，22:05 记录 1m `DN / TC-S` Deep Pullback；支撑在约 63550 守住，未跌破 63300/63250，随后 1m 收复约 63787 Trigger、恢复 `UP` 并出现 `LATE-L HR85`。低周期回踩恢复完成。
+- 信号后 20 根 K 线：等待 2026-07-15 00:27 UTC+8 后复盘。
+- 信号后 50 根 K 线：尚未达到。
 - 最大顺向空间：NA
 - 最大反向回撤：NA
-- 是否成功：Yes；主信号方向验证成功，1m `LATE-L` 执行确认偏晚。
+- 是否成功：Outcome10 方向验证为 Yes；最终 Result 保持 Unknown。
 
 ## 总结
 
@@ -166,12 +168,12 @@ HTF bearish
 - 当前决策：`Outcome20Active / NoChase_WaitRetest`。
 
 
-## Outcome20 Follow-up（2026-07-14 20:48 UTC+8）
+## Outcome10 形成过程：HTF Breakout Study（2026-07-14 20:48 UTC+8）
 
 - 价格：约 `63780`。
 - 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_HTF_Breakout_Study_2048.png`。
-- 案例评级：Gold Case。
-- 生命周期：Outcome50PendingHTFClose。
+- 案例评级：Gold Case candidate。
+- 生命周期：Outcome10Active。
 
 ### 多周期状态
 
@@ -207,18 +209,18 @@ FLAT
   - `63250-63000`
   - `62900-62700`
 
-### Outcome20 结论
+### 阶段结论
 
-15m / 30m 的多头恢复和突破已经成立，但 1H 仍处于 HTF close confirmation 的等待区。当前结果不能直接关闭为 Success，也不能把 `A-S HMR100` 解读为追空授权。本案例升级为 Gold Case，是因为它清楚暴露了 HTF recovery state、close-confirmation delay、反趋势 HMR100 评分与执行风险之间的关系。
+15m / 30m 的多头恢复和突破已经成立，但 1H 仍处于 HTF close confirmation 的等待区。当前结果不能直接关闭为 Success，也不能把 `A-S HMR100` 解读为追空授权。本阶段为 Outcome10 形成过程，研究价值在于暴露 HTF recovery state、close-confirmation delay、反趋势 HMR100 评分与执行风险之间的关系。
 
-## Outcome20 后当前状态
+## 20:48 阶段状态
 
-- 当前状态：Outcome20Recorded。
-- 下一步预期：Outcome50PendingHTFConfirmation。
-- 生命周期状态：Review20。
+- 当前状态：Outcome10Active。
+- 下一步预期：Outcome10 正式确认。
+- 生命周期状态：Open。
 - 结果：Unknown。
 
-## Outcome20 High-Level Extension（2026-07-14 21:00 UTC+8）
+## Outcome10 形成过程：High-Level Extension（2026-07-14 21:00 UTC+8）
 
 - 价格：约 `63803`。
 - 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_HighLevel_Extension_2100.png`。
@@ -259,9 +261,9 @@ FLAT
 
 - 等待 21:00 的 1H K 线收盘后确认 HTF 状态。
 - 当前保持 `Result=Unknown`，不在 HTF 收盘前提前关闭为 Success。
-- 下一生命周期节点：`Outcome50PendingHTFConfirmation`。
+- 下一生命周期节点：`Outcome10Recorded`。
 
-## Outcome50 Pullback Active（2026-07-14 22:02 UTC+8）
+## Outcome10 形成过程：Pullback Active（2026-07-14 22:02 UTC+8）
 
 - 价格：约 `63715`。
 - 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackActive_2202.png`。
@@ -304,9 +306,9 @@ Execution: WAIT
 
 - 1m 动能转弱，但尚未出现可执行的空头趋势确认。
 - 图中没有 `PB-L`，因此也没有形成回踩多头执行信号。
-- 该阶段记录为 `Outcome50PullbackActive / WAIT`，不因 1m 压力警告提前关闭案例。
+- 该阶段记录为 `Outcome10PullbackActive / WAIT`，不因 1m 压力警告提前关闭案例。
 
-## Outcome50 Deep Pullback（2026-07-14 22:05 UTC+8）
+## Outcome10 形成过程：Deep Pullback（2026-07-14 22:05 UTC+8）
 
 - 价格：约 `63590`。
 - 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_DeepPullback_2205.png`。
@@ -348,14 +350,14 @@ LTF TC-S + HTF DN = TREND-S
 - 下一支撑：`63390-63300`
 - 核心结构：`63250-63200`
 
-### Outcome50 当前结论
+### 回踩阶段结论
 
-- 低周期回踩已从 `FLAT` 升级为 `DN / TC-S`，状态记为 `Outcome50DeepPullback`。
+- 低周期回踩已从 `FLAT` 升级为 `DN / TC-S`，状态记为 `Outcome10DeepPullbackWatch`。
 - 高周期趋势空尚未确认；只有 HTF 同步转 `DN` 后，研究分类才可从 `PULLBACK-S` 升级为 `TREND-S`。
 - `Result` 保持 `Unknown`，等待回踩止稳或 HTF 结构破坏后再确定 `Success / Fail / Late / NoTrade`。
-- 生命周期保持 `Review20`，下一节点为 `Outcome50HTFResolution`。
+- 生命周期仍在 Outcome10 观察窗口内，不能提前推进到 Outcome20 / Outcome50。
 
-## Outcome50 Pullback Recovery（2026-07-14 22:18 UTC+8）
+## Outcome10 形成过程：Pullback Recovery（2026-07-14 22:18 UTC+8）
 
 - 价格：约 `63829`。
 - LTF 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_PullbackRecovery_LATE-L_2218.png`。
@@ -392,20 +394,20 @@ HTF UP
 3. 1H 在结构收复、价格站上主要均线且动能偏多时仍显示 `FLAT / A-S HMR100`，继续支持 HTF state lag 审计。
 4. 候选 HTF 状态链继续保留：`FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED`。
 
-### 最终判定
+### 恢复阶段判定
 
 - 主信号 `15m L-ZONE → TC-L`：方向验证成功。
 - Pullback 分类：`PULLBACK-S` 得到恢复路径验证，没有升级成 `TREND-S`。
 - `LATE-L`：方向正确、执行偏晚；按说明书边界不作为追单信号。
-- 案例状态：`Outcome50Recorded / Closed`。
-- 最终结果：`Success`。
-- Gold Case：Yes。
+- 案例状态：`Outcome10Active`。
+- 阶段结果：方向 Favorable，但最终 Result 保持 Unknown。
+- 评级：Good Case candidate / Gold Case candidate。
 
-## Post-Close Follow-up：Breakout Retest Active（2026-07-14 22:58 UTC+8）
+## Outcome10 形成过程：Breakout Retest Active（2026-07-14 22:58 UTC+8）
 
 - 价格：约 `64030`。
 - 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_BreakoutRetest_2258.png`。
-- 案例生命周期保持：`Outcome50Recorded / Closed / Success`。
+- 案例生命周期：`Outcome10Active`。
 - 跟踪状态：`BreakoutRetestActive`。
 
 ### 多周期状态
@@ -441,11 +443,60 @@ HTF UP
 - Pullback 已恢复，当前进入突破测试阶段。
 - 5m / 1m `L-ZONE HMR95` 仍是观察区，不等同正式 `LONG`。
 - 当前分类：`BreakoutRetestActive / NoChase`。
-- 本段为关闭后的延伸跟踪，不改变主案例 `Success` 结果。
+- 本段是 Outcome10 的突破测试过程，不提前写入最终 Success。
 
-## Post-Close HTF Extension（2026-07-14 23:07 UTC+8）
+## Outcome10 形成过程：HTF Extension（2026-07-14 23:07 UTC+8）
 
 - 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_BreakoutExtension_2307.png`。
 - 图上价格约 `64177`，30m 与 1H HUD 均显示 `Ctx=UP`。
 - 该截图为 22:58 Breakout Test 后的延伸证据，支持 HTF 从恢复阶段转向多头确认。
 - 位置已明显延伸，继续保留 `NoChase`，不把方向确认等同于当前执行质量。
+
+## Outcome10 Recorded（2026-07-14 23:46 UTC+8）
+
+- 用户请求编号：CASE-0010；项目实际编号：`CASE-0015`。`CASE-0010` 已被 2026-07-08 Context Shift 案例占用，不覆盖。
+- 初始价格区域：约 `62700-62900`。
+- 最新观察价格：约 `64770`。
+- 主信号：`15m L-ZONE → TC-L`。
+- Outcome10：Favorable。
+- Direction Validated：Yes。
+- Current Execution：`NoChase`。
+- LTF 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_MultiTF_Outcome10_Favorable_2346.png`。
+- HTF 截图：`screenshots/BTCUSDT/2026-07-14/2026-07-14_BTCUSDT_30m_1H_Outcome10_ContextLastConflict_2346.png`。
+
+### Breakout Confirmation
+
+- `62920-63160` 压力簇已突破。
+- `63500` 区域已突破。
+- `64400` 区域已突破。
+- Volume Confirmation：Yes。
+
+### MTF State
+
+| 周期 | 当前状态 |
+| --- | --- |
+| 5m | 强势 `UP`，但已过度延伸 |
+| 15m | `UP / TC-L`，RSI 超买 |
+| 30m | 结构突破，`Last` 仍为 `A-L HMR100` |
+| 1H | `Ctx=UP`，`Last` 仍为 `A-S HMR100` |
+
+### 顶部风险提示
+
+- 低周期出现 `S-ZONE` 与 `C-S`。
+- 在当前高位，它们先作为风险警告，不直接构成反向执行授权。
+- 当前执行保持 `NoChase`。
+
+### 改进标签
+
+- `HTFSignalLag`
+- `StaleLastSignal`
+- `ContextLastConflict`
+- `CounterSignalAsRiskWarning`
+
+### Lifecycle
+
+- 当前状态：`Outcome10Recorded`。
+- 生命周期状态：`Review10`。
+- 结果：`Unknown`，Outcome10 为 Favorable。
+- 暂定评级：Good Case candidate / Gold Case candidate。
+- 下一次复盘：2026-07-15 00:27 UTC+8 之后记录 Outcome20。

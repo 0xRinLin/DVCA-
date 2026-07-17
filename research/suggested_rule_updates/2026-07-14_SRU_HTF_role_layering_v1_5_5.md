@@ -108,7 +108,7 @@ WATCH -> CANDIDATE -> CONFIRMED -> EXECUTABLE -> INVALID / EXPIRED
 
 - 日期：2026-07-14 20:48 UTC+8
 - 案例：`CASE-0015`
-- 类型：Gold Case / Outcome50PendingHTFClose
+- 类型：Gold Case candidate / Outcome10Active
 
 ### 观察
 
@@ -126,13 +126,13 @@ WATCH -> CANDIDATE -> CONFIRMED -> EXECUTABLE -> INVALID / EXPIRED
 
 ### 状态
 
-仍为 Pending Evidence，等待更多案例和 CASE-0015 Outcome50。
+仍为 Pending Evidence，等待更多案例和 CASE-0015 Outcome20。
 
 ## Evidence Update：CASE-0015 Pullback Role Classification
 
 - 日期：2026-07-14 22:02-22:05 UTC+8
 - 案例：`CASE-0015`
-- 状态：`Outcome50DeepPullback / HTFResolutionPending`
+- 状态：`Outcome10DeepPullbackWatch`
 
 ### 观察
 
@@ -167,9 +167,9 @@ Execution: WAIT
 
 - `PULLBACK-S / TREND-S` 是 v1.5.5 研究候选分类，不是 DVCA v1.5.1 的现有标签。
 - 不改变 `TC-S` 的代码触发逻辑，只建议增加 HTF 角色解释层。
-- 当前证据只有单个 Gold Case，仍不足以进入正式规则或 Pine 实现。
+- 当前证据只有单个 Gold Case candidate，仍不足以进入正式规则或 Pine 实现。
 
-## Outcome50 Validation：Pullback Recovery / HTF State Lag
+## Outcome10 形成过程：Pullback Recovery / HTF State Lag
 
 - 日期：2026-07-14 22:18 UTC+8
 - 案例：`CASE-0015`
@@ -210,9 +210,9 @@ FLAT → RECOVERY-L → UP-PENDING → UP-CONFIRMED
 
 ### 状态
 
-本条由 Pending Observation 升级为 Single Gold Case Validation；仍需达到最少案例门槛后，才能修改 Pine。
+本条为 Single Gold Case Candidate Evidence；仍需等待 Outcome20 并达到最少案例门槛后，才能修改 Pine。
 
-## Post-Close Validation：Breakout Retest / HTF Transition
+## Outcome10 形成过程：Breakout Retest / HTF Transition
 
 - 日期：2026-07-14 22:58-23:07 UTC+8
 - 案例：`CASE-0015`
@@ -240,3 +240,27 @@ FLAT
 - `Ctx=UP` 解决方向确认问题，不自动解决高位执行质量问题。
 - 5m / 1m `L-ZONE HMR95` 是观察区，不是正式 `LONG`。
 - 突破测试阶段仍应输出 `NoChase`，等待 64010-64090 的有效接受或 63920-63850 回踩确认。
+
+## Outcome10 Recorded：Context / Last Conflict
+
+- 日期：2026-07-14 23:46 UTC+8
+- 最新价格：约 64770
+- 状态：`Outcome10Recorded / Review10 / Favorable`
+
+### 新证据
+
+- 62920-63160、63500 与 64400 均已突破，并有量能确认。
+- 30m 已结构突破，但 `Last` 仍是 `A-L HMR100`。
+- 1H 已为 `Ctx=UP`，但 `Last` 仍是 `A-S HMR100`。
+- 低周期 `S-ZONE / C-S` 在高位更适合作为风险警告，而不是立即反向执行。
+
+### 新增改进标签
+
+- `HTFSignalLag`
+- `StaleLastSignal`
+- `ContextLastConflict`
+- `CounterSignalAsRiskWarning`
+
+### 下一步
+
+2026-07-15 00:27 UTC+8 后记录 Outcome20；当前不把 Favorable Outcome10 提前写成最终 Success。

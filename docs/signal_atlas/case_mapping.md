@@ -151,19 +151,20 @@ LATE-L / LATE-S 是 Pivot 延迟确认后的补确认，不是追单信号。
 - `Unknown`：截图后续不足，暂时无法判断。
 
 
-## HTF Breakout / Recovery Pending Gold Case
+## HTF Breakout / Recovery Pending Gold Case Candidate
 
 以下案例用于 Signal Atlas 中说明高周期恢复状态、反趋势 HMR100 评分和执行风险分离：
 
-- `CASE-0015`：BTCUSDT.P HTF Breakout Recovery，Gold Case。路径：`gold_cases/BTC/TC/CASE-0015_BTC_HTF_Breakout_Recovery.md`。
+- `CASE-0015`：BTCUSDT.P HTF Breakout Recovery，Good Case candidate / Gold Case candidate。路径：`gold_cases/BTC/TC/CASE-0015_BTC_HTF_Breakout_Recovery.md`。
   - 完整案例：`cases/CASE-0015_BTCUSDT.P_MultiTF_15m_TC-L_HTF_A-S-A-L_Conflict.md`。
   - 重点：15m / 30m 恢复并突破，21:00 前 1H 仍等待收盘确认；1m 高位动能减速不等于反向执行。
   - 候选状态链：`FLAT -> RECOVERY-L -> UP-PENDING -> UP-CONFIRMED`。
   - 执行原则：不追 `63800-64000`；未跌破 `63250` 并完成 bearish retest 前不做空；HMR100 不等于执行授权。
-  - Outcome50 路径：`LTF UP -> FLAT -> DN / TC-S`，但 15m / 5m 仍为 `UP / TC-L`，因此暂归类为 `PULLBACK-S`，不是 `TREND-S`。
+  - Outcome10 形成路径：`LTF UP -> FLAT -> DN / TC-S`，但 15m / 5m 仍为 `UP / TC-L`，因此暂归类为 `PULLBACK-S`，不是 `TREND-S`。
   - 候选角色规则：`LTF TC-S + HTF UP = PULLBACK-S`；`LTF TC-S + HTF DN = TREND-S`。
-  - Outcome50 Final：63550 附近支撑守住，未跌破 63300 / 63250；1m 收复约 63787 Trigger 后恢复 `UP / LATE-L HR85`，验证此前 `TC-S` 属于 `PULLBACK-S`。
-  - 最终结果：`Success / Outcome50Recorded / Closed`；标签：`MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG`。
-  - Post-Close：价格重新测试 64000，5m / 1m 进入 `L-ZONE HMR95 / BreakoutRetestActive`；随后 30m / 1H 均显示 `Ctx=UP`。执行仍为 `NoChase`。
+  - Outcome10：63550 附近支撑守住，未跌破 63300 / 63250；1m 收复约 63787 Trigger 后恢复 `UP / LATE-L HR85`，验证此前 `TC-S` 属于 `PULLBACK-S`。
+  - 当前结果：`Unknown / Outcome10Recorded / Review10 / Favorable`；标签：`MTF_PULLBACK_RECOVERY`、`HTF_STATE_LAG`。
+  - 形成过程：价格重新测试 64000，5m / 1m 进入 `L-ZONE HMR95 / BreakoutRetestActive`；随后 30m / 1H 均显示 `Ctx=UP`。执行仍为 `NoChase`。
+  - 下一步：2026-07-15 00:27 UTC+8 后记录 Outcome20。
 
 该引用只用于 Atlas 研究映射，不改变 Signal Manual 原则。

@@ -7,7 +7,7 @@
 - 指标：DVCA 1.5.1
 - 关联案例：`CASE-0015`
 - 关联主题：`research/questions/2026-07-14_DVCA_HTF_execution_signal_lag.md`
-- 状态：Outcome50Recorded / Closed / Success
+- 状态：Outcome10Recorded / Review10 / Favorable
 - 改进标签：CounterTrendSignalDowngrade
 
 ## 问题
@@ -60,13 +60,13 @@ Pattern 可以保留
 - 案例状态：Outcome10Recorded。
 - Outcome10：1m 临时转 DN 后支撑守住，重新收复 62800 并恢复 `UP / TC-L`；随后放量突破 62920 和 63000。
 - Finding：`S-ZONE` 的局部延伸警告有效，但没有结构跟随的趋势空已失效；结构收复后的 `TC-L` 是更可靠的延续确认。
-- 执行状态：Outcome20Active / NoChase_WaitRetest。
+- 执行状态：NoChase。
 - 优先观察：62920-62850 回测；持续运行在 62800 下方视为失效。
 - 下一步：Outcome20。
 - 本文只建立研究假设与验证标准，不修改 Pine、Signal Manual 或 Line Patterns。
 
 
-## Outcome20 / HTF Breakout Study（2026-07-14 20:48 UTC+8）
+## Outcome10 形成过程：HTF Breakout Study（2026-07-14 20:48 UTC+8）
 
 - 关联案例：`CASE-0015`。
 - 价格：约 `63780`。
@@ -94,7 +94,7 @@ FLAT -> RECOVERY-L -> UP-PENDING -> UP-CONFIRMED
 
 ### 研究评级
 
-升级为 Gold Case。Outcome50 需要等待 HTF close 后确认。
+升级为 Gold Case candidate。该观察属于 Outcome10 形成过程。
 
 ## 21:00 High-Level Extension
 
@@ -102,9 +102,9 @@ FLAT -> RECOVERY-L -> UP-PENDING -> UP-CONFIRMED
 - 15m / 5m 仍为 `UP / TC-L`，但 RSI 约 `79.4 / 75.8`，进入强势但过度延伸阶段。
 - 1m 仍为 `UP`，最新 `S-ZONE HMR100 / S invalid`，RSI 约 `70.6`，MACD Histogram 转负，只确认短线动能减速。
 - 当前不追多，也不在多头结构未破坏时仅凭 1m 警告做空。
-- 下一步：等待 21:00 的 1H K 线收盘后确认 HTF 状态，再记录 Outcome50。
+- 下一步：继续等待 Outcome10 正式确认。
 
-## Outcome50 Pullback Study（2026-07-14 22:02-22:05 UTC+8）
+## Outcome10 形成过程：Pullback Study（2026-07-14 22:02-22:05 UTC+8）
 
 ### 22:02 Pullback Active
 
@@ -131,18 +131,18 @@ LTF TC-S + HTF DN = TREND-S
 - `63500-63450` 是否止稳并恢复多头结构。
 - `63390-63300` 与 `63250-63200` 是否被有效跌破。
 - HTF 是否同步转为 `DN`，从而使 `PULLBACK-S` 升级为 `TREND-S`。
-- 在 22:05 深度回踩阶段结果保持 `Unknown`；最终结果由 22:18 的恢复证据确认。
+- 在 22:05 深度回踩阶段结果保持 `Unknown`；22:18 的恢复证据属于 Outcome10 形成过程。
 
-## Outcome50 Final：MTF Pullback Recovery（2026-07-14 22:18 UTC+8）
+## Outcome10 形成过程：MTF Pullback Recovery（2026-07-14 22:18 UTC+8）
 
 - 63550 附近支撑守住，价格没有跌破 63300 / 63250 核心结构。
 - 1m 收复约 63787 Trigger，从 `DN / TC-S` 恢复为 `UP`，并出现 `LATE-L HR85`。
 - 5m / 15m 继续保持 `UP / TC-L`，30m 为 `UP / A-L HMR100`。
 - 1H 仍为 `FLAT / A-S HMR100 / B95`，但价格已在主要均线上方，形成独立的 `HTF_STATE_LAG` 研究证据。
 
-### 最终回答
+### 阶段回答
 
-本次 15m `L-ZONE → TC-L` 没有在 HTF 压力下失败，而是完成突破、深度回踩和低周期结构恢复。主信号结果记为 `Success`。
+本次 15m `L-ZONE → TC-L` 在当前观察窗口内没有在 HTF 压力下失败，并完成突破、深度回踩和低周期结构恢复。方向验证为 Favorable，但最终 Result 保持 Unknown。
 
 同时，1m `LATE-L` 虽然方向正确，但确认发生在结构已经收复之后，仍应按照现有说明解释为延迟补确认，而不是追单信号。
 
@@ -152,9 +152,21 @@ LTF TC-S + HTF DN = TREND-S
 - `HTF_STATE_LAG`
 - `CounterTrendSignalDowngrade`
 
-## Post-Close Breakout Retest（2026-07-14 22:58-23:07 UTC+8）
+## Outcome10 形成过程：Breakout Retest（2026-07-14 22:58-23:07 UTC+8）
 
 - 22:58 价格重新测试 64000，15m 保持 `UP / TC-L`，5m 与 1m 出现 `L-ZONE HMR95`，Trigger 分别约为 64086 与 64010。
 - Pullback Recovery 已确认，但当前只是 Breakout Test，执行分类保持 `NoChase`。
 - 23:07 HTF 截图中 30m 与 1H 均显示 `Ctx=UP`，为此前 `FLAT / HTF_STATE_LAG` 提供了后续转换证据。
-- 本段作为已关闭 Gold Case 的延伸验证，不改变 `Outcome50Recorded / Closed / Success`。
+- 本段属于 Outcome10 形成过程，不提前关闭为 Success。
+
+## Outcome10 Recorded（2026-07-14 23:46 UTC+8）
+
+- 初始区域约 `62700-62900`，最新观察价格约 `64770`。
+- `62920-63160`、`63500` 与 `64400` 均已突破，且有量能确认。
+- 5m 强势 UP 但过度延伸；15m `UP / TC-L` 且 RSI 超买。
+- 30m 已结构突破，但 `Last` 仍为 `A-L HMR100`。
+- 1H 已为 `Ctx=UP`，但 `Last` 仍为 `A-S HMR100`。
+- 低周期 `S-ZONE / C-S` 当前作为顶部风险警告，不作为反向执行授权。
+- Outcome10：Favorable；Direction Validated：Yes；Result：Unknown。
+- 下一次复盘：2026-07-15 00:27 UTC+8 后记录 Outcome20。
+- 新增标签：`HTFSignalLag`、`StaleLastSignal`、`ContextLastConflict`、`CounterSignalAsRiskWarning`。
