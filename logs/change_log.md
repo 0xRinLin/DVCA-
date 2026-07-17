@@ -291,3 +291,13 @@
 - 执行：不在 `63300-63200` 支撑附近追空；优先等待 `63500-63620` 或 `63770-63900` 反抽拒绝，或 63200 跌破后的失败回测。
 - 版本边界：截图继续运行 DVCA 1.5.1；本记录不计入 v1.5.4 正式专项样本，不据此修改代码。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-17 BTC CASE-0016 Failed Low-Level Repair
+
+- 原因：根据 2026-07-17 16:07-16:08（UTC+8）BTCUSDT 跟踪截图，记录价格进入 62800-62600 延伸区后的低周期修复失败。
+- 路径：跌破 63200/63000 → 1m/5m L-ZONE HMR100 → 1m DN 转 FLAT → 未收复 62950-63080 → 1m TC-S → FLAT 返回 DN。
+- 分支：Low-Level Repair=Failed；Bearish Continuation=Active；Current Execution Branch=Bearish Reconfirmation above Core Low。
+- 生命周期：保持 `Outcome10Recorded / Review10 / Outcome20`，本次只标记 Outcome20 Active，Result 继续为 Unknown。
+- 执行：不在 62800 附近追空；等待反抽拒绝或 62600 跌破后的失败回测。
+- 版本边界：截图运行 DVCA 1.5.1，不计入 v1.5.4 正式专项样本。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。

@@ -24,7 +24,7 @@
 - D 过滤过严：0
 - E 震荡保护有效：0
 - PENDING：0
-- 因版本不匹配暂不准入的历史观察：1（BTCUSDT，DVCA 1.5.1，`CASE-0016`；Outcome10 已记录）
+- 因版本不匹配暂不准入的历史观察：1（BTCUSDT，DVCA 1.5.1，`CASE-0016`；Outcome10 已记录，Outcome20 跟踪中）
 
 ## 证据充分性
 

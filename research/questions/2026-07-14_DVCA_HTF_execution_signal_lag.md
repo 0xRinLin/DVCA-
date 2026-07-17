@@ -145,3 +145,17 @@ Recovery Branch -> SignalCaptured
 
 - Outcome20 检查 63200 是否有效跌破及 63500-63620 反抽是否被拒绝。
 - 使用 v1.5.4 复现同类 `FLAT → DN-PENDING → DN` 路径，记录真实确认时间。
+
+## Evidence Update：Failed Low-Level Repair（2026-07-17 16:07）
+
+- 案例：`CASE-0016`
+- 类型：Low-Level Repair Failed / Bearish Reconfirmation
+
+价格跌破 63200 与 63000 后进入 `62800-62600` 区域，1m / 5m 出现 L-ZONE HMR100。1m 一度进入 FLAT，但未能收复 `62950-63080`，随后重新出现 TC-S 并返回 DN。
+
+该路径进一步说明：
+
+1. 空头背景中的高分 L-ZONE 只能建立修复观察分支，不能自动覆盖 HTF DN。
+2. 低周期修复失败应由结构收复失败与 Context 返回 DN 共同确认，不能只看单个 TC-S 标签。
+3. Bearish Reconfirmation 与追空授权必须分离；接近 62800 支撑时仍应维持 No-Chase。
+4. 本记录尚未达到完整 Outcome20，继续等待后续 K 线。

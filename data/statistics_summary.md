@@ -27,7 +27,7 @@
 - TC-S: 4
 - TC-S / A-L HMR95-100: 1
 - TC-S / Failed Breakout: 1
-- TC-S / Recovery Failure / Bearish Continuation Reactivated: 1
+- TC-S / Failed Repair / Bearish Reconfirmation: 1
 - TC-S / S-ZONE HMR95: 1
 
 ## 各 lifecycle_status 案例数量
@@ -54,7 +54,7 @@
 - TC-S: NA (0 judged / 4 total)
 - TC-S / A-L HMR95-100: NA (0 judged / 1 total)
 - TC-S / Failed Breakout: 0/1 (0.0%, 1 total)
-- TC-S / Recovery Failure / Bearish Continuation Reactivated: NA (0 judged / 1 total)
+- TC-S / Failed Repair / Bearish Reconfirmation: NA (0 judged / 1 total)
 - TC-S / S-ZONE HMR95: NA (0 judged / 1 total)
 
 ## 各 symbol + main_signal 成功率
@@ -64,7 +64,7 @@
 - BTCUSDT + TC-L: NA (0 judged / 5 total)
 - BTCUSDT + TC-S: NA (0 judged / 3 total)
 - BTCUSDT + TC-S / Failed Breakout: 0/1 (0.0%, 1 total)
-- BTCUSDT + TC-S / Recovery Failure / Bearish Continuation Reactivated: NA (0 judged / 1 total)
+- BTCUSDT + TC-S / Failed Repair / Bearish Reconfirmation: NA (0 judged / 1 total)
 - BTCUSDT + TC-S / S-ZONE HMR95: NA (0 judged / 1 total)
 - BTCUSDT.P + 15m L-ZONE -> TC-L: NA (0 judged / 1 total)
 - SKYHYNIXUSDT + TC-S / A-L HMR95-100: NA (0 judged / 1 total)
