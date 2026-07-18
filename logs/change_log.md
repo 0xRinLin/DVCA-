@@ -328,3 +328,13 @@
 - 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
 - 执行：结构确认但不在 64130-64150 压力附近追多；等待回踩或突破回测。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-18 BTC CASE-0016 64150 Breakout Attempt
+
+- 原因：根据 2026-07-18 22:31（UTC+8）BTCUSDT 两张近同步五周期截图，记录首次回踩守住后的突破尝试。
+- 路径：Full MTF UP → First Pullback Held → 1m TC-L → 5m/15m/30m 动能扩张 → 价格交易至 64150 上方。
+- 分类：`64150 Breakout Attempt / Breakout Confirmation Pending`；尚无收盘、站稳或成功回测确认。
+- 分支：`Outcome10Active / Strong Recovery / Full MTF UP / First Pullback Held / LTF Reconfirmation Completed`。
+- 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 执行：No-Chase；等待 64120-64095 回测确认，或 64237.7 突破后的成功回测。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。

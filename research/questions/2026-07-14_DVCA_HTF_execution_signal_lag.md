@@ -183,3 +183,11 @@ Recovery Branch -> SignalCaptured
 - 候选状态链补全为 `HTF Upgrade Confirmed → First Pullback Held → LTF Reconfirmation Completed`。
 - 1H/30m Last 仍停留在 A-S HMR95/100，继续保留 `Stale Last / Context-Last Conflict` 研究标签。
 - 本记录不触发代码修改，仍需 v1.5.4 同类样本验证。
+
+## Evidence Update：64150 Breakout Attempt（2026-07-18 22:31）
+
+- 五周期保持 UP，首次回踩守住后的 1m TC-L 与 5m/15m 动能扩张推动价格交易至 64150 上方。
+- 盘中越过阻力不等于正式突破；需要明确区分 `Breakout Attempt`、`Close/Hold` 与 `Retest Confirmed`。
+- 1H/30m Last 仍停留在 A-S HMR95/100，说明反向 Warning 的陈旧显示不应覆盖当前 UP Context 或突破阶段。
+- 候选状态链扩展为 `First Pullback Held → LTF Reconfirmation Completed → Breakout Attempt → Breakout Confirmed/Failed`。
+- 当前保持 No-Chase 与 Breakout Confirmation Pending，不触发代码修改，等待 v1.5.4 同类样本。

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-07-18 — CASE-0016 64150 Breakout Attempt
+
+- 归档 BTCUSDT 22:31 的 5m/15m/1m 与 30m/1H 两张近同步截图。
+- 五周期保持 UP；首次回踩守住后的 1m TC-L、5m/15m L-ZONE 与多周期动能扩张推动价格交易至 64150 上方。
+- 当前仅记录为 `64150 Breakout Attempt / Breakout Confirmation Pending`，尚未满足收盘、站稳或成功回测确认，不认定为正式突破。
+- Current Recovery Branch 保持 `Outcome10Active / Strong Recovery`，主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 执行保持 No-Chase；优先等待 64120-64095 回测确认，或 64237.7 突破后的成功回测。
+- 未修改 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-18 — CASE-0016 First Pullback Held / LTF Reconfirmation
 
 - 归档 BTCUSDT 22:04 的 5m/15m/1m 与 30m/1H 两张同步截图。

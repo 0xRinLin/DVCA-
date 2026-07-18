@@ -77,3 +77,11 @@
 - 该路径支持 `HTF Upgrade Confirmed → First Pullback → LTF Reconfirmation` 的研究状态链，但当前仍不等于允许在 64130-64150 压力区追多。
 - 1H/30m Context 为 UP 而 Last 仍为 A-S HMR95/100，陈旧 Last 信号与当前方向的分栏需求继续存在。
 - 恢复分支保持 Outcome10Active，主案例继续等待 Outcome50；版本准入限制不变。
+
+## 64150 Breakout Attempt 历史版本跟踪（2026-07-18 22:31 UTC+8）
+
+- 五周期继续保持 UP，1m 最新 TC-L，5m/15m 分别保留 L-ZONE HMR95/100，30m 以下动能同步扩张。
+- 价格在截图时交易至 64150 上方，但尚未提供收盘站稳或成功回测证据，因此只记录为 Breakout Attempt。
+- 1H/30m Context 已为 UP，而 Last 仍为 A-S HMR95/100；该陈旧 Last 继续只作为风险警告，不覆盖当前 Context。
+- 执行保持 No-Chase；优先等待 64120-64095 回测确认，或 64237.7 突破后的成功回测。
+- 恢复分支仍为 Outcome10Active，Breakout Confirmation 为 Pending；本证据仍不计入 v1.5.4 正式专项样本。

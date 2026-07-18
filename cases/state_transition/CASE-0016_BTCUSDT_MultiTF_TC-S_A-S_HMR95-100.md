@@ -11,7 +11,7 @@
 - 当前项目基线：DVCA v1.5.4
 - 周期：1H / 30m / 15m / 5m / 1m
 - 方向观察：SHORT
-- 主信号：TC-S / Full MTF Recovery / First Pullback Held
+- 主信号：TC-S / Full MTF Recovery / 64150 Breakout Attempt
 - 模式：BearishTransitionRecoveryFailure
 - 结果：Unknown
 - 暂定评级：Good Case candidate
@@ -41,6 +41,8 @@
 - Full MTF Recovery 30m / 1H（21:12）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_30m_1H_FullRecovery_HTF_2112.png`
 - First Pullback Held 5m / 15m / 1m（22:04）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_MultiTF_FirstPullbackHeld_LTFReconfirmation_2204.png`
 - Full MTF Recovery 30m / 1H（22:04）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_30m_1H_FullMTFRecovery_2204.png`
+- 64150 Breakout Attempt 5m / 15m / 1m（22:31）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_MultiTF_64150_BreakoutAttempt_2231.png`
+- 64150 Breakout Attempt 30m / 1H（22:31）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_30m_1H_64150_BreakoutAttempt_2231.png`
 
 ## Case Lifecycle
 
@@ -629,3 +631,89 @@ Full MTF Bullish Alignment
 - First Pullback：`Held`。
 - LTF Reconfirmation：`Completed`，信号为 `1m TC-L`。
 - 主案例仍保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`，等待后续 Outcome50，不提前关闭。
+
+## Current Recovery Branch Follow-up：64150 Breakout Attempt（2026-07-18 22:31 UTC+8）
+
+### 数据完整性
+
+- 22:30:59 与 22:31:05 两张截图相隔约 6 秒，作为同一市场快照使用。
+- 当前价格约 `64159.9-64160.0`，读取自实时报价与右侧价格轴；历史十字光标 OHLC 不作为当前数据。
+- 本次只记录突破尝试，不把盘中越过 64150 解释为已经收盘、站稳或回测确认。
+
+### 当前多周期状态
+
+| 周期 | Context / DVCA | 最新信号 | 当前解释 |
+| --- | --- | --- | --- |
+| 1H | UP / B95 / Trig 60758.3 | A-S HMR95 | 高周期保持 UP，Last 仍是历史反向警告 |
+| 30m | UP / B100 / Trig 64438.9 | A-S HMR100 | 动能扩张，但 64438.9 仍是上方触发参考 |
+| 15m | UP / B100 / Trig 64237.7 | L-ZONE HMR100 | 回踩观察区后恢复推进，尚未突破触发线 |
+| 5m | UP / B95 / Trig 64237.7 | L-ZONE HMR95 | 首次回踩守住后的推进延续 |
+| 1m | UP / B expired | TC-L | 低周期多头再确认仍有效 |
+
+### 当前可见指标
+
+| 周期 | MACD / Signal / Histogram | RSI / MA |
+| --- | --- | --- |
+| 1H | 96.8 / 80.8 / +16.1 | 61.16 / 56.99 |
+| 30m | 63.6 / 54.8 / +8.8 | 62.52 / 58.26 |
+| 15m | 42.2 / 32.9 / +9.2 | 62.52 / 60.59 |
+| 5m | 23.8 / 13.6 / +10.2 | 63.03 / 54.08 |
+| 1m | 14.5 / 12.8 / +1.7 | 66.83 / 57.39 |
+
+### 当前可见均线
+
+- 1H：`63959.0 / 63915.1 / 63911.7 / 63724.6`。
+- 30m：`64028.8 / 63921.6 / 63908.9 / 63908.2`。
+- 15m：`64059.9 / 63992.9 / 63909.5 / 63899.8`。
+- 5m：`64088.5 / 64054.5 / 64018.0 / 63949.1`。
+- 1m：`64121.6 / 64097.1 / 64080.5 / 64059.6`。
+
+### 新增状态路径
+
+```text
+Full MTF UP
+→ First Pullback Held
+→ 5m L-ZONE HMR95
+→ 15m L-ZONE HMR100
+→ 1m TC-L
+→ 5m / 15m / 30m 动能扩张
+→ 价格交易至 64150 上方
+→ 64150 Breakout Attempt
+→ Breakout Confirmation Pending
+```
+
+### 突破分类
+
+- 截图时价格位于 `64150` 上方。
+- 尚未确认该周期收盘站稳、后续持续接受或成功回测。
+- 因此只能记录为 `Breakout Attempt`，不能记录为 `Confirmed Breakout`。
+
+### 关键价位
+
+- 突破观察区：`64130-64160`。
+- 即时压力：`64180-64220`。
+- 5m / 15m Trigger：`64237.7`。
+- 下一压力：`64280-64320`。
+- 30m Trigger：`64438.9`。
+- 即时支撑：`64120-64095`。
+- 次级支撑：`64080-64055`。
+- 核心支撑：`64030-64000`。
+- HTF 均线支撑：`63960-63900`。
+- 趋势防守：`63780-63720`。
+
+### 执行计划
+
+- 当前不追多，也不把突破尝试提前判定为正式突破。
+- 优先多头观察：回测 `64120-64095` 守住，且 1m 保持 UP 或再次出现 TC-L / PB-L。
+- 备选多头观察：突破 `64237.7` 后成功回测，再观察 `64300 / 64438.9`。
+- 五周期仍为 UP 时不确认空头；假突破空头至少需要跌破 `64095`、回测 `64120-64150` 失败、1m 转 DN，并出现 TC-S / PB-S。
+
+### 分支结论
+
+- Current Recovery Branch：`Outcome10Active / Strong Recovery / HTF Upgrade Confirmed`。
+- Full MTF Bullish Alignment：`Confirmed`。
+- First Pullback：`Held`。
+- LTF Reconfirmation：`Completed`。
+- Current Event：`64150 Breakout Attempt`。
+- Breakout Confirmation：`Pending`。
+- 主案例仍保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
