@@ -11,7 +11,7 @@
 - 当前项目基线：DVCA v1.5.4
 - 周期：1H / 30m / 15m / 5m / 1m
 - 方向观察：SHORT
-- 主信号：TC-S / Failed Repair / Bearish Reconfirmation
+- 主信号：TC-S / Full MTF Recovery / First Pullback
 - 模式：BearishTransitionRecoveryFailure
 - 结果：Unknown
 - 暂定评级：Good Case candidate
@@ -34,15 +34,21 @@
 - Outcome10 30m / 1H：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_30m_1H_BearishAlignment_Outcome10_1228.png`
 - Outcome20 Active 30m / 1H（16:07）：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_30m_1H_BearishReconfirmation_1607.png`
 - Outcome20 Active 30m / 1H（16:08）：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_30m_1H_ExtensionZoneReached_1608.png`
+- Outcome20 5m / 15m / 1m（19:10）：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_MultiTF_FirstPullbackAfter5mUP_1910.png`
+- Outcome20 30m / 1H（19:10）：`screenshots/BTCUSDT/2026-07-17/2026-07-17_BTCUSDT_30m_1H_SecondRepair_HTF_1910.png`
+- Full MTF Recovery 5m / 15m / 1m（21:07）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_MultiTF_FullRecovery_FirstPullback_2107.png`
+- First Pullback LTF Detail（21:07）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_MultiTF_FirstPullback_LTF_Detail_2107.png`
+- Full MTF Recovery 30m / 1H（21:12）：`screenshots/BTCUSDT/2026-07-18/2026-07-18_BTCUSDT_30m_1H_FullRecovery_HTF_2112.png`
 
 ## Case Lifecycle
 
-- 当前状态：Outcome10Recorded
-- 下一步预期：Outcome20
-- 生命周期状态：Review10
+- 当前状态：Outcome20Recorded
+- 下一步预期：Outcome50
+- 生命周期状态：Review20
 - Outcome10：Recovery Branch Failed / Bearish Continuation Active
-- Outcome20：Pending
+- Outcome20：Favorable for original SHORT direction / 62800-62600 extension reached / Second Low-Level Repair Active
 - Outcome50：Pending
+- Current Recovery Branch：Outcome10Active / Strong Recovery / HTF Upgrade Confirmed
 - 最终结果：Unknown
 - 最终评级：Pending，Outcome 未完成前不晋升为 Good Case
 
@@ -373,3 +379,184 @@ Outcome10 已确认恢复分支失败，`1H/30m/15m/5m/1m` 全部转为 DN，CAS
 ### 本阶段结论
 
 价格已经跌破 63200 和 63000，并到达 `62800-62600` 延伸观察区。1m / 5m 的 L-ZONE HMR100 只形成短暂低位修复，未能收复 `62950-63080`，随后 1m 重新出现 TC-S 并从 FLAT 返回 DN。当前属于核心低点上方的空头再确认，但位置已贴近支撑，方向有效不等于可以追空；继续等待完整 Outcome20。
+
+## Outcome20 Resolution：5m 转 UP 后首次回踩（2026-07-17 19:10 UTC+8）
+
+### 数据读取说明
+
+- 截图时间范围：2026-07-17 19:10:02-19:10:12 UTC+8；当前参考价约 `63075`。
+- 图表十字光标位于历史 K 线上，顶部 OHLC 属于选中的历史柱；当前价格取自实时买卖报价与右侧价格轴。
+- 本次截图覆盖 1H、30m、15m、5m、1m；30m 一条 MACD 数值被水平标记遮挡，不作估算。
+- 从 Outcome10 的 2026-07-17 12:28 到本次截图已超过 20 根 15m K 线，因此本次正式记录 Outcome20。
+
+### Outcome20 多周期状态
+
+| 周期 | Context / 状态 | 最新信号 | 结构解释 |
+| --- | --- | --- | --- |
+| 1H | DN / B95 / Trig 60758.3 | A-S HMR95 | 高周期空头背景未改变 |
+| 30m | DN / B100 / Trig 64438.9 | A-S HMR100 | 核心空头结构未改变 |
+| 15m | DN / B invalid | TC-S | 恢复尚未升级到 15m |
+| 5m | UP / S expired | TC-L | 第二次低周期修复已进入执行周期 |
+| 1m | FLAT / S100 / Trig 63133.2 / S invalid | S-ZONE HMR100 | 5m 转 UP 后的首次回踩，等待方向确认 |
+
+### 最新可见指标
+
+| 周期 | MACD / Signal / Histogram | RSI / MA |
+| --- | --- | --- |
+| 1H | -372.1 / -342.0 / -30.1 | 36.82 / 31.95 |
+| 30m | 主线被水平标记遮挡 / -320.1 / +47.9 | 41.11 / 32.52 |
+| 15m | -51.6 / -111.5 / +59.6 | 49.23 / 41.75 |
+| 5m | 51.9 / 57.1 / -5.2 | 55.23 / 61.72 |
+| 1m | -10.9 / -10.3 / -0.6 | 34.37 / 47.80 |
+
+### 最新可见均线
+
+- 1H：`63912.4 / 63873.9 / 63671.2 / 63465.2`。
+- 30m：`63928.0 / 63904.6 / 63621.9 / 63186.6`。
+- 15m：`63914.6 / 63639.3 / 63298.8 / 63041.2`。
+- 5m：`63424.0 / 63056.9 / 63016.4`。
+- 1m：`63114.7 / 63103.0 / 63057.0 / 63011.7`。
+
+### Outcome20 路径
+
+```text
+跌破 63200 / 63000
+→ 进入 62800-62600 延伸区
+→ 第一次低周期修复失败
+→ 62800 再次守住
+→ 第二次低周期修复
+→ 1m 转 UP
+→ 收复 62900 / 63000
+→ 5m DN → FLAT → UP
+→ 5m 最新 TC-L
+→ 反弹至 63150 附近
+→ 1m S-ZONE / C-S
+→ 1m UP → FLAT
+→ 当前首次回踩约 63075
+```
+
+### 分支与生命周期判定
+
+- Recovery Branch：`Outcome10Failed`，历史判定保持不变。
+- Bearish Continuation：`Active at HTF / Execution Timeframe Paused`。1H、30m、15m 仍为 DN，但 5m 已转 UP，不允许把高周期空头背景直接转换成当前追空授权。
+- First Low-Level Repair：`Failed`。
+- Second Low-Level Repair：`Active / Countertrend Recovery`。
+- 当前事件：`First Pullback after 5m UP`。
+- Outcome20：原始 SHORT 方向为 Favorable，价格已经到达 `62800-62600` 延伸区；当前第二次低周期修复尚未完成，不能据此关闭案例。
+- Lifecycle：`Outcome20Recorded / Review20 / Outcome50`。
+- 最终 Result：`Unknown`。
+
+### 关键价位
+
+- 即时支撑：`63060-63040`。
+- 第二支撑：`63020-63000`。
+- 深回踩支撑：`62950-62900`。
+- 恢复核心支撑：`62825-62800`。
+- 低位核心支撑：`62650-62600`。
+- 即时压力：`63103-63115`。
+- Trigger 压力：`63133-63150`。
+- 下一压力：`63186-63205`。
+- 核心压力：`63298-63350`。
+- 强压力：`63420-63470`。
+
+### 当前执行计划
+
+- 1m 保持 FLAT 时不进场。
+- 多头只在 `63060-63040` 或 `63020-63000` 守住，且 1m 返回 UP 并出现 TC-L / PB-L 后评估。
+- 突破多必须收复 `63150` 并完成成功回测；恢复升级还需收复 `63205`，同时 15m 退出 DN。
+- 5m 保持 UP 时不主动做空；1m 的 S-ZONE 只作为压力警告，不是 SHORT。
+- 空头执行至少需要跌破 `63000`、回测失败，并由 1m TC-S / PB-S 确认。
+- HTF 在图上确认 Context 改变前仍按 DN 记录。
+
+### Outcome20 结论
+
+原始空头方向在 Outcome20 阶段得到进一步验证，价格到达 `62800-62600` 延伸区；但 62800 再次守住后，第二次低周期修复使 5m 从 DN 经 FLAT 转为 UP，并出现 TC-L。当前 1m 在 63150 附近出现 S-ZONE / C-S 后回到 FLAT，属于 5m 转 UP 后的首次回踩。此时最合理的执行是等待 1m 确认，而不是在高周期 DN 与 5m UP 冲突时追空或追多。案例继续等待 Outcome50。
+
+## Current Recovery Branch：Full MTF Recovery First Pullback（2026-07-18 21:07-21:12 UTC+8）
+
+### 数据完整性
+
+- 1m / 5m / 15m 数据取自 21:07 截图，当前价格约 `64109.5`。
+- 30m / 1H 数据取自 21:12 补充截图，当前价格约 `64020.9`。
+- 历史十字光标 OHLC 不作为当前价格；两次截图之间不反推任何指标数值。
+- 1H 慢速蓝色均线标签被重叠遮挡，不作估算。
+
+### 当前多周期状态
+
+| 周期 | Context / DVCA | 最新信号 | 当前解释 |
+| --- | --- | --- | --- |
+| 1H | UP / B95 / Trig 60758.3 | A-S HMR95 | HTF 已升级为 UP，但 Last 仍保留历史反向警告 |
+| 30m | UP / B100 / Trig 64438.9 | A-S HMR100 | 结构已转 UP，Last 与 Context 存在陈旧信号冲突 |
+| 15m | UP / B expired | TC-L | 多头恢复已扩展到执行环境 |
+| 5m | UP / S invalid | TC-L | 主要执行周期保持多头 |
+| 1m | FLAT / B expired | TC-L | 全周期转强后的首次回踩，暂不执行 |
+
+### 当前可见指标
+
+| 周期 | MACD / Signal / Histogram | RSI / MA |
+| --- | --- | --- |
+| 1H | 86.1 / 75.8 / +10.3 | 55.32 / 56.25 |
+| 30m | 52.6 / 50.2 / +2.4 | 54.22 / 57.30 |
+| 15m | 45.1 / 28.3 / +16.7 | 61.41 / 60.04 |
+| 5m | 41.3 / 39.3 / +2.0 | 56.63 / 72.79 |
+| 1m | -5.7 / 5.4 / -11.1 | 38.32 / 50.77 |
+
+### 当前可见均线
+
+- 1H：`63932.1 / 63905.5 / 63902.7 / 慢速蓝线不可独立读取`。
+- 30m：`63992.1 / 63901.4 / 63895.2 / 63894.8`。
+- 15m：`64034.7 / 63968.8 / 63888.9 / 63888.0`。
+- 5m：`64094.6 / 64039.4 / 63999.5 / 63928.4`。
+- 1m：`64146.8 / 64130.3 / 64094.5 / 64051.2`。
+
+### 状态路径
+
+```text
+62850 附近形成支撑
+→ 收复 63000
+→ 收复 63500
+→ 收复 63780
+→ 收复 64000
+→ 5m 转 UP
+→ 15m 转 UP
+→ 30m 转 UP
+→ 1H 转 UP
+→ 推进至 64180-64220
+→ 1m 转 FLAT
+→ 首次回踩 64050-64000
+```
+
+### 分支状态
+
+- Historical Recovery：`Outcome10Failed`，保留历史结论。
+- First Low-Level Repair：`Failed`。
+- Second Low-Level Repair：此前 Active，本次后续升级为 Full MTF Recovery。
+- Previous Bearish Continuation：`Invalidated at 5m / 15m / 30m / 1H directional layers`。
+- Current Recovery Branch：`Outcome10Active / Strong Recovery / HTF Upgrade Confirmed`。
+- 当前事件：`First Pullback after Full MTF Bullish Alignment`。
+- 主案例生命周期仍为 `Outcome20Recorded / Review20 / Outcome50`；分支 Outcome10 不覆盖主案例生命周期。
+- 最终 Result：`Unknown`。
+
+### 关键价位
+
+- 即时压力：`64095-64150`。
+- 第一压力：`64180-64220`。
+- 下一压力：`64300`。
+- 30m HUD Trigger 参考：`64438.9`。
+- 即时支撑：`64050-64000`。
+- 核心均线支撑：`63930-63890`。
+- 趋势防守：`63780-63730`。
+- 深层支撑：`63565`。
+- HTF 结构参考：`62970.3`。
+
+### 执行计划
+
+- 1m 保持 FLAT 时不直接入场。
+- 多头只在 1m 重新确认 UP，并出现 TC-L 或 PB-L 后评估。
+- 优先多头观察区为 `64050-64000` 与 `63930-63890`。
+- 1H / 30m / 15m / 5m 同为 UP 时，不主动逆势做空。
+- 空头至少需要跌破 `63890`、在 `64000` 附近回测失败、1m 转 DN，并出现 TC-S 或 PB-S。
+
+### 当前结论
+
+这次恢复已经从低周期修复升级为 1H、30m、15m、5m 的方向一致转强，原 Bearish Continuation 在这些方向层被否定。1m 当前转为 FLAT，属于 Full MTF Bullish Alignment 后的首次回踩；因此恢复方向得到明显强化，但执行必须等待 1m 再确认。Current Recovery Branch 先记为 Outcome10Active，主案例继续等待 Outcome50，最终结果不提前判定。

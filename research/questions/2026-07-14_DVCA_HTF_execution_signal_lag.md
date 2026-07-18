@@ -159,3 +159,19 @@ Recovery Branch -> SignalCaptured
 2. 低周期修复失败应由结构收复失败与 Context 返回 DN 共同确认，不能只看单个 TC-S 标签。
 3. Bearish Reconfirmation 与追空授权必须分离；接近 62800 支撑时仍应维持 No-Chase。
 4. 本记录尚未达到完整 Outcome20，继续等待后续 K 线。
+
+## Evidence Update：Second Repair / First Pullback after 5m UP（2026-07-17 19:10）
+
+- `CASE-0016` 已达到 Outcome20；原始空头方向有利，价格到达 `62800-62600` 延伸区。
+- 62800 再次守住后，1m 与 5m 形成第二次低周期修复，5m 最终转为 UP 并出现 TC-L。
+- 1m 在 63150 附近出现 S-ZONE / C-S 后返回 FLAT，只能定义为 5m 转 UP 后的首次回踩，不能直接解释为 SHORT。
+- 该路径支持把 `HTF Direction` 与 `Execution Timeframe State` 分开显示：HTF 仍 DN，但 5m 执行空头应暂停。
+- 待验证展示：`HTF Bearish / LTF Countertrend Recovery / Execution Wait`，而不是由单一高分 Zone 覆盖全部状态。
+
+## Evidence Update：Full MTF Recovery / HTF Upgrade Confirmed（2026-07-18）
+
+- 第二次低周期修复随后依次推动 15m、30m、1H 转为 UP，说明 Countertrend Recovery 可以升级为 Full MTF Recovery。
+- 1H/30m Context 已经为 UP，但 Last 仍保留 A-S HMR95/100，进一步支持把 `Current Context` 与 `Last Countertrend Warning` 分栏显示。
+- 1m 在多周期转强后进入 FLAT 首次回踩，应显示 `Execution Wait`，不能因 HTF UP 直接追多，也不能因 1m 动能转弱直接做空。
+- 候选状态链：`LTF Recovery → HTF Upgrade Pending → HTF Upgrade Confirmed → First Pullback → Reconfirmation`。
+- 本证据仍来自 v1.5.1，需用 v1.5.4 复现后才能进入正式修改判断。

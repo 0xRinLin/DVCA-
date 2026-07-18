@@ -301,3 +301,21 @@
 - 执行：不在 62800 附近追空；等待反抽拒绝或 62600 跌破后的失败回测。
 - 版本边界：截图运行 DVCA 1.5.1，不计入 v1.5.4 正式专项样本。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-17 BTC CASE-0016 Outcome20 / Second Low-Level Repair
+
+- 原因：根据 2026-07-17 19:10（UTC+8）BTCUSDT 全周期截图，记录 62800 再次守住后的第二次低周期修复，以及 5m 转 UP 后的首次回踩。
+- 生命周期：`Outcome20Recorded / Review20 / Outcome50`；原始 SHORT 方向 Favorable，最终 Result 继续为 Unknown。
+- 路径：第二次修复 → 1m UP → 收复 62900/63000 → 5m DN→FLAT→UP / TC-L → 63150 附近 1m S-ZONE/C-S → 1m FLAT。
+- 执行：高周期仍 DN，但 5m 空头执行暂停；等待 1m 回踩确认，不把 S-ZONE 当作 SHORT。
+- 版本边界：截图运行 DVCA 1.5.1，不计入 v1.5.4 正式专项样本。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-18 BTC CASE-0016 Full MTF Recovery First Pullback
+
+- 原因：根据 2026-07-18 21:07-21:12（UTC+8）BTCUSDT 五周期截图，记录第二次修复升级为 Full MTF Recovery。
+- 路径：62850 支撑 → 收复 63000/63500/63780/64000 → 5m/15m/30m/1H 转 UP → 1m FLAT 首次回踩。
+- 分支：Previous Bearish Continuation 在方向层失效；Current Recovery Branch=`Outcome10Active / Strong Recovery / HTF Upgrade Confirmed`。
+- 生命周期：主案例仍为 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 执行：1m FLAT 时等待，不追多；四个较高周期 UP 时不主动逆势做空。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。

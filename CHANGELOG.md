@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-07-18 — CASE-0016 Full MTF Recovery First Pullback
+
+- 归档 BTCUSDT 21:07 的两张 LTF 截图与 21:12 的 30m/1H 补充截图。
+- 62850 附近支撑后，价格收复 63000、63500、63780、64000，5m/15m/30m/1H 依次转 UP。
+- Previous Bearish Continuation 在方向层失效；Current Recovery Branch 记录为 `Outcome10Active / Strong Recovery / HTF Upgrade Confirmed`。
+- 1m 当前为 FLAT，分类为 `First Pullback after Full MTF Bullish Alignment`，执行继续等待 TC-L/PB-L 再确认。
+- 主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`，不被分支 Outcome10 覆盖。
+- 截图运行 DVCA 1.5.1，不计入 v1.5.4 正式高周期专项样本；未修改任何 Pine Script。
+
+## 2026-07-17 — CASE-0016 Outcome20 与第二次低周期修复
+
+- 归档 BTCUSDT 19:10（UTC+8）的 5m/15m/1m 与 30m/1H 两张截图。
+- `CASE-0016` 推进为 `Outcome20Recorded / Review20 / Outcome50`；原始空头方向有利并到达 62800-62600 延伸区，最终 Result 仍为 Unknown。
+- 62800 再次守住后，第二次低周期修复使 1m 转 UP、5m 从 DN 经 FLAT 转 UP，并出现 TC-L。
+- 当前 1m 在 63150 附近出现 S-ZONE/C-S 后为 FLAT，分类为 `First Pullback after 5m UP / Countertrend Recovery`。
+- 高周期仍为 DN，但 5m 空头执行暂停；S-ZONE 只记录为压力警告，不作为 SHORT。
+- 截图运行 DVCA 1.5.1，不计入 v1.5.4 正式高周期专项样本；未修改任何 Pine Script。
+
 ## 2026-07-17 — CASE-0016 低周期修复失败与空头再确认
 
 - 归档 BTCUSDT 16:07-16:08（UTC+8）的两张 30m / 1H 跟踪截图。

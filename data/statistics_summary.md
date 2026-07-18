@@ -27,23 +27,22 @@
 - TC-S: 4
 - TC-S / A-L HMR95-100: 1
 - TC-S / Failed Breakout: 1
-- TC-S / Failed Repair / Bearish Reconfirmation: 1
+- TC-S / Full MTF Recovery / First Pullback: 1
 - TC-S / S-ZONE HMR95: 1
 
 ## 各 lifecycle_status 案例数量
 
 - Closed: 1
 - Open: 11
-- Review10: 2
-- Review20: 2
+- Review10: 1
+- Review20: 3
 
 ## 各 next_expected_state 案例数量
 
 - None: 1
 - Outcome10: 11
-- Outcome20: 1
 - Outcome20After2026-07-15_00:27_UTC+8: 1
-- Outcome50: 2
+- Outcome50: 3
 
 ## 各 main_signal 成功率
 
@@ -54,7 +53,7 @@
 - TC-S: NA (0 judged / 4 total)
 - TC-S / A-L HMR95-100: NA (0 judged / 1 total)
 - TC-S / Failed Breakout: 0/1 (0.0%, 1 total)
-- TC-S / Failed Repair / Bearish Reconfirmation: NA (0 judged / 1 total)
+- TC-S / Full MTF Recovery / First Pullback: NA (0 judged / 1 total)
 - TC-S / S-ZONE HMR95: NA (0 judged / 1 total)
 
 ## 各 symbol + main_signal 成功率
@@ -64,7 +63,7 @@
 - BTCUSDT + TC-L: NA (0 judged / 5 total)
 - BTCUSDT + TC-S: NA (0 judged / 3 total)
 - BTCUSDT + TC-S / Failed Breakout: 0/1 (0.0%, 1 total)
-- BTCUSDT + TC-S / Failed Repair / Bearish Reconfirmation: NA (0 judged / 1 total)
+- BTCUSDT + TC-S / Full MTF Recovery / First Pullback: NA (0 judged / 1 total)
 - BTCUSDT + TC-S / S-ZONE HMR95: NA (0 judged / 1 total)
 - BTCUSDT.P + 15m L-ZONE -> TC-L: NA (0 judged / 1 total)
 - SKYHYNIXUSDT + TC-S / A-L HMR95-100: NA (0 judged / 1 total)
