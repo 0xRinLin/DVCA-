@@ -1,6 +1,6 @@
 # DVCA 项目状态
 
-最后更新：2026-07-17（Asia/Shanghai）
+最后更新：2026-07-18（Asia/Shanghai）
 
 ## 当前阶段
 
@@ -23,6 +23,7 @@
 - 普通历史案例 `CASE-0016` 已记录 Outcome10：恢复分支失败，随后 1H/30m/15m/5m/1m 全部转为 DN，空头延续阶段有效。
 - `CASE-0016` 已记录 Outcome20：原始空头方向有利并到达 62800-62600 延伸区；第二次低周期修复使 5m 转 UP/TC-L，当前 1m 在首次回踩中为 FLAT，案例进入 Review20 并等待 Outcome50。
 - `CASE-0016` 的 Current Recovery Branch 已升级为 Strong Recovery：1H/30m/15m/5m 全部转 UP，原 Bearish Continuation 在方向层失效；1m 处于 Full MTF Bullish Alignment 后的首次 FLAT 回踩，分支状态为 Outcome10Active。
+- `CASE-0016` 的首次回踩随后守住 64000：5m 出现 L-ZONE HMR95，1m 以 TC-L 从 FLAT 返回 UP，五周期多头对齐恢复；分支仍为 Outcome10Active，主案例继续等待 Outcome50。
 - 截图运行 DVCA 1.5.1，不符合 v1.5.4 高周期专项准入条件；已标记为 `ExcludedPendingReproduction`。
 - `DN-PENDING` 仅作为待验证研究建议，不是当前代码已实现状态，也未触发 v1.5.5 开发。
 
@@ -52,7 +53,7 @@
 
 - `data/case_database.csv`：现有正式研究数据库；高周期专项使用独立的 `data/high_timeframe_validation/htf_case_database.csv`，不修改或合并原数据库。
 - `legacy/crypto-structure-trading-assistant/data/case_database.csv`：1 条数据记录（加表头共 2 行），20 列，字段结构不同，不能直接覆盖或拼接。
-- 发现 16 个普通案例 Markdown、3 个 Gold 案例 Markdown（另有 1 个 Gold README）以及 54 张截图。
+- 发现 16 个普通案例 Markdown、3 个 Gold 案例 Markdown（另有 1 个 Gold README）以及 56 张截图。
 - 案例、截图和数据库尚未晋升到正式目录，必须先确定映射、字段规范和 Case ID 去重规则。
 
 ## 保护状态

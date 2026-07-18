@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-18 — CASE-0016 First Pullback Held / LTF Reconfirmation
+
+- 归档 BTCUSDT 22:04 的 5m/15m/1m 与 30m/1H 两张同步截图。
+- 64000 首次回踩守住，5m 出现 L-ZONE HMR95，1m 以 TC-L 从 FLAT 返回 UP，五周期多头对齐恢复。
+- Current Recovery Branch 保持 `Outcome10Active / Strong Recovery / HTF Upgrade Confirmed`；新增 `First Pullback Held / LTF Reconfirmation Completed`。
+- 主案例继续保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`，不提前关闭。
+- 截图运行 DVCA 1.5.1，不计入 v1.5.4 正式专项样本；未修改 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-18 — CASE-0016 Full MTF Recovery First Pullback
 
 - 归档 BTCUSDT 21:07 的两张 LTF 截图与 21:12 的 30m/1H 补充截图。

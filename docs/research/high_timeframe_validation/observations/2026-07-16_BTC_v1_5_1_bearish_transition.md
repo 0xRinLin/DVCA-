@@ -69,3 +69,11 @@
 - 1m 当前为 FLAT、Last TC-L，属于 Full MTF Bullish Alignment 后的首次回踩；恢复分支先记为 Outcome10Active，不提前判定成功。
 - 原 Bearish Continuation 在 5m/15m/30m/1H 方向层失效，但主案例仍等待 Outcome50 才能形成最终结论。
 - 版本限制不变：这是 DVCA 1.5.1 历史证据，不计入 v1.5.4 正式专项样本。
+
+## First Pullback Held 历史版本跟踪（2026-07-18 22:04 UTC+8）
+
+- 64000 回踩支撑守住，5m 出现 L-ZONE HMR95，1m 以 TC-L 从 FLAT 返回 UP。
+- 1H、30m、15m、5m、1m 已重新形成完整 UP 对齐，低周期再确认完成。
+- 该路径支持 `HTF Upgrade Confirmed → First Pullback → LTF Reconfirmation` 的研究状态链，但当前仍不等于允许在 64130-64150 压力区追多。
+- 1H/30m Context 为 UP 而 Last 仍为 A-S HMR95/100，陈旧 Last 信号与当前方向的分栏需求继续存在。
+- 恢复分支保持 Outcome10Active，主案例继续等待 Outcome50；版本准入限制不变。

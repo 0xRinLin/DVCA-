@@ -175,3 +175,11 @@ Recovery Branch -> SignalCaptured
 - 1m 在多周期转强后进入 FLAT 首次回踩，应显示 `Execution Wait`，不能因 HTF UP 直接追多，也不能因 1m 动能转弱直接做空。
 - 候选状态链：`LTF Recovery → HTF Upgrade Pending → HTF Upgrade Confirmed → First Pullback → Reconfirmation`。
 - 本证据仍来自 v1.5.1，需用 v1.5.4 复现后才能进入正式修改判断。
+
+## Evidence Update：First Pullback Held / LTF Reconfirmation（2026-07-18 22:04）
+
+- Full MTF UP 后的首次回踩守住 64000，5m L-ZONE HMR95 只承担观察作用，1m TC-L 才完成低周期方向再确认。
+- 该顺序支持把 `Zone Warning` 与 `Execution Reconfirmation` 分开：L-ZONE 本身不是入场，Context 返回 UP 与 TC-L 才构成当前确认。
+- 候选状态链补全为 `HTF Upgrade Confirmed → First Pullback Held → LTF Reconfirmation Completed`。
+- 1H/30m Last 仍停留在 A-S HMR95/100，继续保留 `Stale Last / Context-Last Conflict` 研究标签。
+- 本记录不触发代码修改，仍需 v1.5.4 同类样本验证。

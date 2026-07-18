@@ -319,3 +319,12 @@
 - 生命周期：主案例仍为 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
 - 执行：1m FLAT 时等待，不追多；四个较高周期 UP 时不主动逆势做空。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-18 BTC CASE-0016 First Pullback Held / LTF Reconfirmation
+
+- 原因：根据 2026-07-18 22:04（UTC+8）BTCUSDT 同步五周期截图，记录 Full MTF Recovery 后的首次回踩结果。
+- 路径：回踩 64000 守住 → 5m L-ZONE HMR95 → 1m TC-L → 1m FLAT 返回 UP → 五周期多头对齐恢复。
+- 分支：`Outcome10Active / Strong Recovery / HTF Upgrade Confirmed / First Pullback Held / LTF Reconfirmation Completed`。
+- 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 执行：结构确认但不在 64130-64150 压力附近追多；等待回踩或突破回测。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
