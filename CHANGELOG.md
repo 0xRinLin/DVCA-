@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-19 — BTC 30m 常规多头背离漏报观察
+
+- 归档 BTCUSDT 30m / 1H 截图，记录 DVCA 1.5.1 未打印人工可见常规多头背离的 False Negative。
+- 新增 Divergence Detection Accuracy 观察文档，明确 Pivot 配对、振荡器位移容差、阈值、门控和回填确认的诊断要求。
+- 预期语义为 `DIV-L-WARN → DIV-L-CONFIRMED`；背离事件不等于 LONG，Context 只应限制执行资格。
+- 根因仍为 `NeedsCodeTrace`，必须先在 v1.5.4 复现；本样本不计入正式专项统计或交易案例胜率。
+- 未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-18 — CASE-0016 64150 Breakout Attempt
 
 - 归档 BTCUSDT 22:31 的 5m/15m/1m 与 30m/1H 两张近同步截图。

@@ -338,3 +338,12 @@
 - 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
 - 执行：No-Chase；等待 64120-64095 回测确认，或 64237.7 突破后的成功回测。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
+## 2026-07-19 BTC 30m 常规多头背离漏报观察
+
+- 原因：记录 30m 价格 Lower Low、MACD Higher Low 但 DVCA 1.5.1 未打印背离事件的历史样本。
+- 分类：`False Negative / NeedsCodeTrace / ExcludedPendingReproduction`。
+- 归因边界：视觉背离已人工确认；Pivot 配对、容差、阈值或门控中的具体根因尚未确认。
+- 预期事件：候选 `DIV-L-WARN`，右侧 Pivot 确认后 `DIV-L-CONFIRMED`；不自动生成 LONG。
+- 验证：先在 v1.5.4 重放并记录全部 Pivot、配对、阈值和 suppression reason。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns；未写入正式案例数据库。

@@ -1,6 +1,6 @@
 # DVCA 项目状态
 
-最后更新：2026-07-18（Asia/Shanghai）
+最后更新：2026-07-19（Asia/Shanghai）
 
 ## 当前阶段
 
@@ -20,6 +20,9 @@
 
 ### 最新研究观察
 
+- 新增 BTCUSDT 30m 常规多头背离漏报观察：DVCA 1.5.1 截图中人工可见价格 Lower Low 与 MACD Higher Low，但未打印背离事件。
+- 该样本分类为 `False Negative / NeedsCodeTrace / ExcludedPendingReproduction`；当前只确认视觉事件与指标输出不一致，Pivot 配对错误仍是待验证假设。
+- 已建立 Divergence Detection Accuracy 核查要求：记录全部价格/MACD Pivot、位移容差、多历史 Pivot 配对、阈值结果和精确 suppression reason；检测事件必须与 Context/交易门控分离。
 - 普通历史案例 `CASE-0016` 已记录 Outcome10：恢复分支失败，随后 1H/30m/15m/5m/1m 全部转为 DN，空头延续阶段有效。
 - `CASE-0016` 已记录 Outcome20：原始空头方向有利并到达 62800-62600 延伸区；第二次低周期修复使 5m 转 UP/TC-L，当前 1m 在首次回踩中为 FLAT，案例进入 Review20 并等待 Outcome50。
 - `CASE-0016` 的 Current Recovery Branch 已升级为 Strong Recovery：1H/30m/15m/5m 全部转 UP，原 Bearish Continuation 在方向层失效；1m 处于 Full MTF Bullish Alignment 后的首次 FLAT 回踩，分支状态为 Outcome10Active。
@@ -37,6 +40,7 @@
 3. 高周期与低周期信号的一致性。
 4. RANGE、TRANSITION 对趋势信号的压制是否正确。
 5. 在不引入 v1.6.x 式噪音的前提下，是否有必要形成 v1.5.5 Accuracy Patch。
+6. 复现 30m 常规背离漏报，确认是 Pivot 配对、位移容差、阈值拒绝、事件门控还是显示优先级造成。
 
 ### 高周期专项框架状态
 

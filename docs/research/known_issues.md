@@ -1,6 +1,6 @@
 # 已知问题
 
-最后更新：2026-07-14
+最后更新：2026-07-19
 
 ## KI-001：v1.5.4 完整源码曾遗漏于初始迁移范围（已解决）
 
@@ -49,3 +49,11 @@
 - 现象：数据库中大量 Outcome 字段仍为 Unknown/Pending，但已有 Gold/Good 等目录和评级材料。
 - 影响：可能违反“Outcome 未完成不得提前认定最终评级”的新规则。
 - 当前措施：迁移到正式 `cases/` 前逐案复核 Outcome10/20/50 和最终评级。
+
+## KI-008：常规背离可能因 Pivot 配对或门控发生漏报
+
+- 严重度：高（研究中）
+- 现象：2026-07-19 BTCUSDT 30m 的 DVCA 1.5.1 截图中，人工可识别价格更低低点与 MACD 更高低点，但未打印多头背离事件。
+- 风险：多低点簇若只比较相邻微型 Pivot，或背离事件被 Context/趋势门控直接抑制，可能产生 False Negative。
+- 当前措施：记录为 `NeedsCodeTrace`，要求输出完整 Pivot、配对、阈值和 suppression reason；先用 v1.5.4 复现，不直接修改代码。
+- 研究记录：`docs/research/divergence_validation/observations/2026-07-19_BTC_30m_regular_bullish_divergence_false_negative.md`
