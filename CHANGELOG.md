@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-19 — CASE-0016 15m Bearish Downgrade
+
+- 归档 BTCUSDT 20:52 的 1m/5m/15m 截图；未将缺失的 30m/1H 旧状态复用为当前状态。
+- 当前可验证状态为 `15m DN / 5m DN / 1m FLAT`，1m L-ZONE HMR100 仅分类为 Countertrend Repair。
+- Current Recovery Branch 更新为 `Outcome10AtRisk`；主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 执行保持等待：不在 15m/5m DN 时直接做多，也不把 1m 正柱解释为反转确认。
+- 未修改 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-19 — CASE-0016 HTF UP / LTF Pullback Follow-up
 
 - 归档 BTCUSDT 15:10 的 1m/5m/15m 与 30m/1H 两张截图；明确排除同批 SOL/ETH 截图。

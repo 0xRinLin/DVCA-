@@ -283,6 +283,14 @@
 - 版本边界：截图运行 DVCA 1.5.1；`DN-PENDING` 是研究建议，不是代码现有状态。本案例不计入 v1.5.4 高周期正式样本，需复现。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
 
+## 2026-07-19 BTC CASE-0016 15m Bearish Downgrade
+
+- 原因：记录 20:52 截图中的 15m 降级、5m 空头延续与 1m 逆势修复。
+- 数据边界：当前仅有 1m/5m/15m；30m/1H 的 15:10 状态标记为 `STALE / NOT CURRENT`。
+- 状态：`15m DN / 5m DN / 1m FLAT`；Current Recovery Branch=`Outcome10AtRisk`。
+- 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-17 BTC CASE-0016 Outcome10 Recovery Failure
 
 - 原因：根据 2026-07-17 12:28（UTC+8）BTCUSDT 多周期截图，记录 63780 初次守住后的恢复最终失败，以及五周期重新转为空头对齐。

@@ -781,3 +781,54 @@ Full MTF UP
 - Current Recovery Branch：`Outcome10Active / LTF Pullback inside HTF UP`。
 - 30m 背离检测：`False Negative / Visual Divergence Confirmed / Bullish Follow-Through Confirmed / Regression Test Required`。
 - 主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`，不因本次分支观察提前关闭。
+
+## 2026-07-19 20:52 Follow-up：15m Bearish Downgrade / 1m Countertrend Repair
+
+### 数据边界
+
+- 当前截图只包含 1m、5m、15m；实时报价 Bid `64400.7`、Ask `64400.8`。
+- 30m 与 1H 未出现在当前截图中。其最后观察时间为 15:10，只保留为 `STALE / NOT CURRENT`，不参与当前多周期确认。
+- 历史十字光标 OHLC 不作为当前 K 线数据。
+
+### 当前可验证状态
+
+| 周期 | Context / DVCA | 最新信号 | 当前解释 |
+| --- | --- | --- | --- |
+| 15m | DN / B expired | TC-S | 由此前状态降级为 DN，执行环境转空 |
+| 5m | DN / S invalid | TC-S | 空头状态延续，但短线动能有所修复 |
+| 1m | FLAT / B invalid | L-ZONE HMR100 | 约 64280-64300 反弹后的逆势修复，不是多头反转确认 |
+
+### 当前可见指标
+
+| 周期 | MACD / Signal / Histogram | RSI / MA |
+| --- | --- | --- |
+| 15m | -77.2 / -58.5 / -18.7 | 38.69 / 28.45 |
+| 5m | -50.5 / -53.2 / +2.7 | 46.08 / 35.14 |
+| 1m | +6.3 / +4.7 / +1.6 | 58.55 / 51.98 |
+
+### 状态路径
+
+```text
+15m previous state
+-> 15m DN / TC-S
+-> 5m remains DN / TC-S
+-> break 64520-64480 and 64453-64438
+-> rebound from 64280-64300
+-> 1m FLAT / L-ZONE HMR100
+-> bearish context with countertrend repair
+```
+
+### 关键价位
+
+- 压力：`64417-64480`、`64498-64507`、`64550-64580`、`64628`。
+- 支撑：`64376-64365`、`64307-64280`、`64255-64238`、`64170-64078`、约 `63966`。
+
+### 执行与分支结论
+
+- 15m 与 5m 同为 DN 时不直接做多；1m FLAT 或 MACD 柱转正不构成反转确认。
+- 优先空头观察：价格在 `64417-64507` 内受阻，随后 1m 转 DN，并出现 TC-S 或 PB-S。
+- 延续空头观察：跌破 `64307` 后，回测 `64307-64365` 失败。
+- 多头修复至少需要收复 `64480-64507`、1m 转 UP 并出现 TC-L；更高质量确认还要求 5m 脱离 DN 并收复 `64550-64580`。
+- Current Recovery Branch：`Outcome10AtRisk / 15m FLAT-to-DN / 1m Countertrend Repair`。
+- 30m 背离漏报案例保持 `False Negative / Bullish Follow-Through Confirmed / Regression Test Required`。
+- 主案例仍保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
