@@ -717,3 +717,67 @@ Full MTF UP
 - Current Event：`64150 Breakout Attempt`。
 - Breakout Confirmation：`Pending`。
 - 主案例仍保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+
+## 2026-07-19 15:10 Follow-up：HTF UP / LTF Pullback
+
+### 数据完整性
+
+- `15:10:33` 截图用于 1m / 5m / 15m，`15:10:39` 截图用于 30m / 1H。
+- 实时报价为 Bid `64662.4`、Ask `64662.5`；历史十字光标 OHLC 不作为当前价格。
+- `15:10:45` 截图只包含 SOL / ETH，未纳入本案例。
+
+### 当前多周期状态
+
+| 周期 | Context / DVCA | 最新信号 | 当前解释 |
+| --- | --- | --- | --- |
+| 1H | UP / B95 / Trig 60758.3 | A-S HMR95 | 高周期多头结构仍在，但 MACD 柱转负、动能减弱 |
+| 30m | UP / B100 / Trig 64438.9 | A-S HMR95 | 已确认历史背离后的多头跟随，当前动能回落 |
+| 15m | UP / B100 / Trig 64237.7 | L-ZONE HMR100 | 执行环境仍为 UP，回踩尚未升级为结构转空 |
+| 5m | DN / S invalid | TC-S | 低周期回调已确认，尚无多头再进入信号 |
+| 1m | DN / B invalid | TC-S | 短线空头回调持续，不能单独据此定义 HTF 反转 |
+
+### 当前可见指标
+
+| 周期 | MACD / Signal / Histogram | RSI / MA |
+| --- | --- | --- |
+| 1H | 184.8 / 204.6 / -19.8 | 64.81 / 72.12 |
+| 30m | 69.1 / 101.1 / -32.1 | 55.70 / 64.25 |
+| 15m | -0.9 / 7.1 / -8.0 | 46.52 / 49.59 |
+| 5m | -7.2 / -3.5 / -3.7 | 42.48 / 48.33 |
+| 1m | -7.5 / -5.5 / -1.9 | 32.24 / 41.29 |
+
+### 当前可见均线
+
+- 1H：`64536.7 / 64271.9 / 64117.7 / 63864.6`。
+- 30m：`64660.7 / 64453.2 / 64254.6 / 64105.7`。
+- 15m：`64699.3 / 64627.8 / 64446.8 / 64245.5`。
+- 5m：`64689.2 / 64699.2 / 64680.6 / 64562.7`。
+- 1m：`64681.0 / 64689.6 / 64694.1 / 64700.2`。
+
+### 新增状态路径
+
+```text
+30m visual DIV-L false negative
+-> bullish follow-through confirmed
+-> reclaim 64078 / 64170 / 64438
+-> extension toward 64800-64900
+-> 5m S-ZONE / C-S
+-> 1m and 5m TC-S
+-> 1m and 5m changed to DN
+-> LTF Pullback inside HTF UP
+```
+
+### 关键价位
+
+- 即时压力：`64680-64700`；恢复确认参考：`64700-64730`；主要压力：`64800-64900`。
+- 第一支撑：`64628-64560`；第二支撑：`64453-64438`；核心支撑：`64255-64238`。
+- HTF 防守：`64170-64078`；深层防守约 `63865`。
+
+### 执行与分支结论
+
+- 1m 与 5m 同为 DN 时不执行多头；多头再进入至少需要 1m / 5m 返回 UP，并出现 TC-L 或 PB-L。
+- 不在 `64628-64560` 支撑区直接追空；回调空头只有在支撑跌破并回测失败后才具备继续观察资格。
+- 结构性空头升级需要跌破 `64238`、15m 转为 FLAT 或 DN，并且回收失败。
+- Current Recovery Branch：`Outcome10Active / LTF Pullback inside HTF UP`。
+- 30m 背离检测：`False Negative / Visual Divergence Confirmed / Bullish Follow-Through Confirmed / Regression Test Required`。
+- 主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`，不因本次分支观察提前关闭。

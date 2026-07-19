@@ -20,6 +20,8 @@
 
 ### 最新研究观察
 
+- `CASE-0016` 在 2026-07-19 15:10 更新为 `HTF UP / LTF Pullback`：1H/30m/15m 保持 UP，1m/5m 转 DN 并出现 TC-S；Current Recovery Branch 保持 `Outcome10Active`，等待低周期 UP + TC-L/PB-L 再确认。
+- BTCUSDT 30m 人工常规多头背离的后续方向已验证：价格依次收复 64078、64170、64438，并扩展至 64800-64900；研究状态更新为 `False Negative / Bullish Follow-Through Confirmed / Regression Test Required`，具体根因仍需 v1.5.4 复现。
 - 新增 BTCUSDT 30m 常规多头背离漏报观察：DVCA 1.5.1 截图中人工可见价格 Lower Low 与 MACD Higher Low，但未打印背离事件。
 - 该样本分类为 `False Negative / NeedsCodeTrace / ExcludedPendingReproduction`；当前只确认视觉事件与指标输出不一致，Pivot 配对错误仍是待验证假设。
 - 已建立 Divergence Detection Accuracy 核查要求：记录全部价格/MACD Pivot、位移容差、多历史 Pivot 配对、阈值结果和精确 suppression reason；检测事件必须与 Context/交易门控分离。

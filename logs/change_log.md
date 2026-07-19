@@ -347,3 +347,11 @@
 - 预期事件：候选 `DIV-L-WARN`，右侧 Pivot 确认后 `DIV-L-CONFIRMED`；不自动生成 LONG。
 - 验证：先在 v1.5.4 重放并记录全部 Pivot、配对、阈值和 suppression reason。
 - 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns；未写入正式案例数据库。
+
+## 2026-07-19 BTC CASE-0016 HTF UP / LTF Pullback Follow-up
+
+- 原因：记录 15:10 五周期截图中的高周期多头结构与低周期空头回调。
+- 状态：1H/30m/15m UP，1m/5m DN；分支为 `Outcome10Active / LTF Pullback inside HTF UP`。
+- 背离：30m 视觉多头背离后续已收复 64078、64170、64438 并扩展至 64800-64900，更新为 `Bullish Follow-Through Confirmed / Regression Test Required`。
+- 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。

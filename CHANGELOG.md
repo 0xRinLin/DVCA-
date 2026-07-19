@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-19 — CASE-0016 HTF UP / LTF Pullback Follow-up
+
+- 归档 BTCUSDT 15:10 的 1m/5m/15m 与 30m/1H 两张截图；明确排除同批 SOL/ETH 截图。
+- 1H/30m/15m 保持 UP，1m/5m 转 DN 并出现 TC-S，分类为 `LTF Pullback inside HTF UP`。
+- Current Recovery Branch 保持 `Outcome10Active`；主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 30m 视觉多头背离的后续方向得到验证，状态更新为 `False Negative / Bullish Follow-Through Confirmed / Regression Test Required`。
+- 未修改 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-19 — BTC 30m 常规多头背离漏报观察
 
 - 归档 BTCUSDT 30m / 1H 截图，记录 DVCA 1.5.1 未打印人工可见常规多头背离的 False Negative。

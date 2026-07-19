@@ -75,3 +75,11 @@
 ## 当前结论
 
 该截图是 DVCA 1.5.1 的高价值背离漏报观察，支持建立独立的 Divergence Detection Accuracy 专项。当前只确认“视觉事件与指标输出不一致”，根因仍为待验证假设；不修改正式 Pine，不自动生成 LONG，也不计入 v1.5.4 正式样本或交易案例胜率。
+
+## Bullish Follow-Through（2026-07-19 15:10 UTC+8）
+
+- 后续价格依次收复 `64078`、`64170` 与 `64438`，并扩展至 `64800-64900` 区域。
+- 人工识别的 30m 常规多头背离方向得到后续价格行为验证，Bullish Follow-Through 记为 `Confirmed`。
+- DVCA 1.5.1 仍未对该历史结构打印背离事件，因此检测结果保持 `False Negative`，验证状态升级为 `Regression Test Required`。
+- 当前 1H / 30m / 15m 为 UP，1m / 5m 为 DN，属于 HTF 多头结构中的 LTF 回调；这不等于自动 LONG，也不改变背离事件与执行门控必须分离的要求。
+- 本次后续走势不能单独证明 Pivot 配对就是根因；v1.5.4 的固定区间复现、逐 Pivot 日志和 suppression reason 仍是进入修改提案前的必要步骤。
