@@ -274,6 +274,15 @@
 - 改进标签：`HTFSignalLag`、`StaleLastSignal`、`ContextLastConflict`、`CounterSignalAsRiskWarning`。
 - 边界：未修改 Pine、Signal Manual 或 Line Patterns。
 
+## 2026-07-20 BTC CASE-0016 Multi-Level Support Failure
+
+- 原因：根据 2026-07-20 13:13（UTC+8）BTCUSDT 五周期截图，记录多级支撑失守及 1H 从 UP 降为 FLAT。
+- 路径：64539-64584 收复失败 → 跌破 64439-64406 → 5m DN/TC-S → 跌破 64239-64170 → 测试 64013-63996。
+- 分支：`Outcome11BearishBreakdown`；新增 `Outcome12Active / Multi-Level Support Failure`。
+- 生命周期：主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 执行：方向偏空但 1m/5m 超卖，不在约 64080 追空；等待 64170-64266 或 64380-64445 反弹拒绝，或 63996 跌破后的失败回测。
+- 保护：未修改任何 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-16 BTC CASE-0016 MTF Bearish Transition
 
 - 原因：根据 2026-07-16 20:47（UTC+8）BTCUSDT 多周期截图，记录 30m/15m/5m/1m 同步转 DN、1H 仍为 FLAT 的空头转折。

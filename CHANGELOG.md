@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-20 — CASE-0016 Multi-Level Support Failure
+
+- 归档 BTCUSDT 13:13 的 1m/5m/15m 与 30m/1H 两张近同步截图，并采用较晚截图的约 64080 作为最新价格参考。
+- 当前状态更新为 `1H FLAT / 30m FLAT / 15m FLAT / 5m DN / 1m DN`；确认失守 64439-64406 与 64239-64170。
+- Outcome11 更新为 `Outcome11BearishBreakdown`，新增 `Outcome12Active / Multi-Level Support Failure`；主案例保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
+- 方向偏空但位置超卖：1m RSI 13.70、5m RSI 22.43，因此保持 No-Chase，等待反弹拒绝或 63996 跌破后的失败回测。
+- 未修改 Pine Script、Signal Manual 或 Line Patterns。
+
 ## 2026-07-19 — CASE-0016 15m Bearish Downgrade
 
 - 归档 BTCUSDT 20:52 的 1m/5m/15m 截图；未将缺失的 30m/1H 旧状态复用为当前状态。
