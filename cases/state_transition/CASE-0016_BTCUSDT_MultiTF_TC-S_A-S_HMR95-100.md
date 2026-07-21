@@ -718,6 +718,68 @@ Full MTF UP
 - Breakout Confirmation：`Pending`。
 - 主案例仍保持 `Outcome20Recorded / Review20 / Outcome50 / Unknown`。
 
+## 2026-07-21 00:50 Follow-up：Outcome13 Recovery Continuation / Breakout Extension Attempt
+
+### 数据完整性
+
+- 标的：BTCUSDT Perpetual Contract / Binance。
+- LTF 截图时间：2026-07-21 00:50:44 UTC+8；HTF 截图时间：2026-07-21 00:50:57 UTC+8。
+- 当前报价约为 `65417.2 / 65417.3`；顶部 OHLC 属于历史十字光标，不作为当前价格。
+- 1H 有一个 MACD 数值被浮层遮挡，因此仅记录可辨认值，不进行反推。
+
+### 当前多周期状态
+
+| 周期 | DVCA 状态 | 最近信号 | 关键读数 |
+| --- | --- | --- | --- |
+| 1H | `UP / B95 / Trigger 65589.7` | `A-L HMR95` | RSI `62.34 / 49.72`；MACD 一项遮挡，其余约 `182.8 / 23.7` |
+| 30m | `UP / B95 / Trigger 65084.6` | `A-L HMR95` | MACD `214.3 / 126.8 / +87.5`；RSI `65.27 / 55.68` |
+| 15m | `UP` | `TC-L / S invalid` | MACD `190.1 / 212.7 / -22.6`；RSI `62.61 / 69.67` |
+| 5m | `UP` | `TC-L / B invalid` | MACD `269.7 / 190.5 / +79.2`；RSI `66.54 / 59.43` |
+| 1m | `UP` | `TC-L / B invalid` | MACD `-0.7 / -1.7 / +1.0`；RSI `48.88 / 50.13` |
+
+### 可见价位与结构路径
+
+- 1H 可见价位：`64626.7 / 64484.1 / 64324.3 / 64229.7 / 64054.1`。
+- 30m 可见价位：`64727.9 / 64575.3 / 64473.1 / 64317.2 / 64229.7`。
+- 15m 可见价位：`65259.4 / 64958.5 / 64741.5 / 64610.4 / 64229.7`。
+- 5m 可见价位：`64933.6 / 64672.4 / 64475.4 / 64229.7`。
+- 1m 可见价位：`65420.5 / 65386.2 / 65235.8 / 65006.7 / 64229.7`。
+
+```text
+63818 support sweep
+-> reclaim 64013 / 64170 / 64445
+-> rejection from 64955-65085
+-> deep pullback to 64229.7 and hold
+-> LTF TC-L recovery
+-> reclaim 64445 / 64583 / 64687
+-> 30m reclaim of 65084.6 trigger
+-> push to 65409-65417
+-> consolidation below 1H trigger 65589.7
+```
+
+### 关键价位
+
+- 阻力：`65420-65435`、`65589.7`、`65600`。
+- 浅回踩支撑：`65386-65236`，其中 `65259.4` 为重点。
+- 核心确认区：`65084.6-64958.5`，并关注 `65006.7` 与 `64933.6`。
+- 次级支撑：`64727.9-64672.4`、`64475.4-64473.1`。
+- 分支防守：`64324.3-64317.2`、`64229.7`；历史失败参考为 `63818`。
+
+### 执行与生命周期
+
+- 当前五周期均为 UP，恢复已升级为多周期延续，但执行位置已经不早。
+- 不在 `65409-65417` 附近直接追多；优先等待 `65386-65259` 或 `65084.6-64958.5` 守住并由 1m/5m 再确认。
+- 突破交易必须等待 `65589.7` 上方站稳并成功回测。
+- 支撑完整时不逆势做空；空头至少需要 `65259` 失守，或 `64958-64933` 跌破后回测失败。
+- Outcome12 在 `63818` 扫低后被 V 型恢复取代；新分支记录为 `Outcome13Active / Upgraded`。
+- 主案例生命周期保持 `Review20`，Outcome50 与最终 Result 继续为 `Unknown`。
+- 截图运行 DVCA 1.5.1，本次观察继续标记为 `ExcludedPendingReproduction`，需在 v1.5.4 上复现后才能纳入正式高周期验证。
+
+### 截图
+
+- `screenshots/BTCUSDT/2026-07-21/2026-07-21_BTCUSDT_1m_5m_15m_Outcome13_RecoveryContinuation_0050.png`
+- `screenshots/BTCUSDT/2026-07-21/2026-07-21_BTCUSDT_30m_1H_Outcome13_BreakoutExtensionAttempt_0050.png`
+
 ## 2026-07-20 13:13 Follow-up：Multi-Level Support Failure
 
 ### 数据完整性

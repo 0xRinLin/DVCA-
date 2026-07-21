@@ -1,5 +1,12 @@
 # DVCA Change Log
 
+## 2026-07-21
+
+- 原因：记录 `CASE-0016` 在 63818 扫低后的 V 型恢复与多周期延续，建立 Outcome13 分支。
+- 改动：归档 BTCUSDT 00:50 的 LTF 与 HTF 截图；同批 SOL/ETH 截图未归档。
+- 改动：更新案例正文、案例数据库、项目状态与 Changelog，状态为 `Outcome13Active / Upgraded / Breakout Extension Attempt`。
+- 约束：主案例仍为 `Review20 / Outcome50 / Unknown`；不修改任何 Pine、Signal Manual 或 Line Patterns。
+
 ## 2026-07-08
 
 - 原因：升级 Case Database，新增 Case Lifecycle 机制，避免案例入库后长期停留在 `Unknown`，并让每个案例都有明确的 10 / 20 / 50 根 K 线复盘节点。
